@@ -97,9 +97,25 @@
         <div id="user2">
             <img src="그림2.png" alt="My Image">
         </div>
-        <div id="block1">협업하기</div>
-        <div id="block2">협업하기</div>
-        <div id="text1">12명이 기여하였습니다.</div>
-        <div id="text2">15명이 기여하였습니다.</div>
+        <script>
+            var count1 = 0;
+            var count2 = 0;
+
+            function OnClick1(){
+                count1 += 1;
+                var text1 = document.getElementById("text1");
+                text1.innerHTML = count1 + "명이 기여하였습니다.";
+            }
+
+            function OnClick2(){
+                count2 += 1;
+                var text2 = document.getElementById("text2");
+                text2.innerHTML = count2 + "명이 기여하였습니다.";
+            }
+        </script>
+        <div id="block1" onclick="OnClick1()">협업하기</div>
+        <div id="block2" onclick="OnClick2()">협업하기</div>
+        <div id="text1">0명이 기여하였습니다.</div>
+        <div id="text2">0명이 기여하였습니다.</div>
     </body>
 </html>
