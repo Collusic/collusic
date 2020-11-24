@@ -40,7 +40,7 @@
         right: 450px;
         top: 300px;
       }
-      div#block1 {
+      input#block1 {
         font-size: 30px;
         width: 120px;
         height: 50px;
@@ -49,7 +49,7 @@
         top: 200px;
         background-color: turquoise;
       }
-      div#block2 {
+      input#block2 {
         font-size: 30px;
         width: 120px;
         height: 50px;
@@ -97,33 +97,32 @@
     <div id="user2">
       <img src="그림2.png" alt="My Image" />
     </div>
-    
-    <input id="block1" type="button" value="협업하기" onclick="
-      if(document.querySelector('#block1').value === '협업하기'){
-        document.querySelector('#block1').value = '참여완료';} ">
-
-    <input id="block2" type="button" value="협업하기" onclick="
-      if(document.querySelector('#block2').value === '협업하기'){
-        document.querySelector('#block2').value = '참여완료';} ">
         
         <script>
           var count1 = 0;
           var count2 = 0;
 
           function OnClick1(){
-              count1 += 1;
-              var text1 = document.getElementById("text1");
-              text1.innerHTML = count1 + "명이 기여하였습니다.";
-          }
+            if(document.querySelector('#block1').value === '협업하기'){
+               document.querySelector('#block1').value = '참여완료';} 
+            count1 += 1;
+            var text1 = document.getElementById("text1");
+            text1.innerHTML = count1 + "명이 기여하였습니다.";              
+             }
+          
+          
 
           function OnClick2(){
-              count2 += 1;
-              var text2 = document.getElementById("text2");
-              text2.innerHTML = count2 + "명이 기여하였습니다.";
+            if(document.querySelector('#block2').value === '협업하기'){
+               document.querySelector('#block2').value = '참여완료';}
+            count2 += 1;
+            var text2 = document.getElementById("text2");
+            text2.innerHTML = count2 + "명이 기여하였습니다.";
           }
       </script>
-      <div id="block1" onclick="OnClick1()">협업하기</div>
-      <div id="block2" onclick="OnClick2()">협업하기</div>
+
+      <input id="block1" type="botton" value="협업하기" onclick="OnClick1()">
+      <input id="block2" type="botton" value="협업하기" onclick="OnClick2()">
       <div id="text1">0명이 기여하였습니다.</div>
       <div id="text2">0명이 기여하였습니다.</div>
   </body>
