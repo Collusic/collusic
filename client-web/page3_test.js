@@ -2,22 +2,22 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 
-var app = http.createServer(function(request,response){
-    
+var app = http.createServer(function (request, response) {
+
     // localhost:3000/?id = ~~ (queryData.id)
     var url = request.url;
     var queryData = url.parse(_url, true).query;
 
     // if url의 경로가 /
-    // if(request.url == '/'){
-      
-    // }
+    if(request.url == '/'){
 
-    if(request.url == '/favicon.ico'){
-      return response.writeHead(404);
+    }
+
+    if (request.url == '/favicon.ico') {
+        return response.writeHead(404);
     }
     response.writeHead(200);
-    
+
     var most_title = 'Love sick boy';
     var active_title = '2020.06.03';
     var template = `
@@ -138,6 +138,6 @@ var app = http.createServer(function(request,response){
 </html>
     `;
     response.end(template);
-    });
- 
+});
+
 app.listen(3000);
