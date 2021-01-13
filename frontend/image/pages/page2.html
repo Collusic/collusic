@@ -19,7 +19,8 @@
     <![endif]-->
     <style>
         body {
-            background-color: #f6e58d;
+            background-image: url("sky-clouds-summer.jpg");
+            background-size: cover;
         }
 
         .row {
@@ -30,14 +31,14 @@
         .row .col-md-4 {
             font-size: 50px;
             font-weight: bold;
-            background-color: #e9c3f5;
+            background-color: whitesmoke;
             padding-bottom: 50%;
             flex: 1;
             text-align: center;
             width: 33%;
             height: 100%;
             margin-top: 100px;
-            
+
 
             -webkit-transform: scale(1);
             -moz-transform: scale(1);
@@ -54,19 +55,20 @@
         .row .col-md-4:hover {
             font-size: 50px;
             font-weight: bold;
-            background-color: #e9c3f5;
+            background-color: mediumseagreen;
             padding-bottom: 45%;
             flex: 1;
             text-align: center;
             width: 33%;
             height: 100%;
             margin-top: 100px;
+            color: white;
 
-            -webkit-transform: scale(1.1);
-            -moz-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            -o-transform: scale(1.1);
-            transform: scale(1.1);
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            -o-transform: scale(1.05);
+            transform: scale(1.05);
         }
 
         .left {
@@ -77,7 +79,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            box-shadow: 5px 5px 10px black;
+            box-shadow: 5px 5px 5px black;
         }
 
         .center {
@@ -88,7 +90,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            box-shadow: 5px 5px 10px black;
+            box-shadow: 5px 5px 5px black;
         }
 
         .right {
@@ -99,36 +101,73 @@
             position: relative;
             width: 100%;
             height: 100%;
-            box-shadow: 5px 5px 10px black;
+            box-shadow: 5px 5px 5px black;
         }
 
-        .left-text{
-            color:white;
+        .left-text {
+            color: darkslategrey;
             margin-top: 50px;
-            text-shadow: 3px 3px 10px black;
+            text-shadow: 1px 1px 1px grey;
         }
-        .center-text{
-            color:white;
+
+        .center-text {
+            color: darkslategrey;
             margin-top: 50px;
-            text-shadow: 3px 3px 10px black;
+            text-shadow: 1px 1px 1px grey;
         }
-        .right-text{
-            color:white;
+
+        .right-text {
+            color: darkslategrey;
             margin-top: 50px;
-            text-shadow: 3px 3px 10px black;
+            text-shadow: 3px 3px 5px grey;
         }
-        .img{
+
+        img {
             display: table;
             margin-left: auto;
-            margin-right:auto;
-            max-width:max-content;
+            margin-right: auto;
             margin-top: 30px;
-            border-radius: 70%;
+            border-radius: 30%;
             overflow: hidden;
+            max-width: 50%;
         }
-        .imformation{
-            font-size:large;
+
+        .imformation {
+            font-size: large;
         }
+
+        .left:hover {
+            color: white;
+        }
+
+        .img2 {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+            border-radius: 30%;
+            overflow: hidden;
+            max-width: 50%;
+        }
+
+        .imformation2 {
+            font-size: large;
+        }
+
+        .img3 {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 30px;
+            border-radius: 30%;
+            overflow: hidden;
+            max-width: 50%;
+        }
+
+        .imformation3 {
+            font-size: large;
+        }
+
     </style>
 </head>
 
@@ -144,7 +183,7 @@
                 Portfolio
             </div>
             <div class="img">
-                <img src="image/그림1.png">
+                <img src="그림1.png">
             </div>
             <div class="imformation">
                 <p>
@@ -160,12 +199,29 @@
         </div>
         <div class="col-md-4 center">
             <div class="center-text">
-                In Collaboration
+                Collaboration
+            </div>
+            <div class="img2">
+                <img src="band.png">
+            </div>
+            <div class="imformation2">
+                <p>
+                    .....
+                </p>
+                
             </div>
         </div>
         <div class="col-md-4 right">
             <div class="right-text">
                 Seeking collaboration
+            </div>
+            <div class="img3">
+                <img src="united.png">
+            </div>
+            <div class="imformation3">
+                <p>
+                    .....
+                </p>
             </div>
         </div>
     </div>
