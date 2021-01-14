@@ -57,3 +57,22 @@ CREATE TABLE `active` (
 INSERT INTO `active` VALUES (1,'1','2020-02-18','JYP 아이돌 연습생');
 INSERT INTO `active` VALUES (2,'2','2020-03-20','JYP 작곡 커뮤니티');
 INSERT INTO `active` VALUES (3,'3','2021-01-15','매니저 인턴');
+
+--
+-- Table structure for table `project`
+--
+ 
+CREATE TABLE `project` (
+  `key` int(11) NOT NULL AUTO_INCREMENT,
+  `u_key` int(11) NOT NULL,
+  `path` varchar(50) NOT NULL,
+  PRIMARY KEY (`key`)
+);
+ 
+--
+-- Dumping data for table `project`
+--
+ 
+INSERT INTO `project` VALUES (1,'1','./project/학선_우리만남이.mp3');
+INSERT INTO `project` VALUES (2,'2','./project/audio1.mp3');
+INSERT INTO `project` VALUES (3,'3','./project/audio2.mp3');
