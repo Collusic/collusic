@@ -315,7 +315,90 @@ app.get("/page2", (req, res) => {
 
 app.get("/page3", (req, res) => {
   var html = `
-        
+  <!DOCTYPE html>
+  <html lang="ko">
+  
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>부트스트랩 101 템플릿</title>
+  
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+  
+      <style>
+          body {
+              margin: 0;
+          }
+  
+          .nav-container {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              margin: 0;
+              padding: 0;
+              background-color: darkslategray;
+              list-style-type: none;
+              position: fixed;
+              top: 0;
+          }
+  
+          .nav-item {
+              padding: 15px;
+              cursor: pointer;
+          }
+  
+          .nav-item a {
+              text-align: center;
+              text-decoration: none;
+              color: white;
+          }
+  
+          .nav-item:nth-child(1) {
+              background-color: lightseagreen;
+          }
+  
+          .nav-item:hover {
+              background-color: grey;
+          }
+  
+          .left-box {
+              background: red;
+              float: left;
+              width: 30%;
+          }
+  
+          .right-box {
+              background: blue;
+              float: right;
+              width: 70%;
+          }
+      </style>
+  </head>
+  
+  <body>
+  
+      <nav>
+          <ul class="nav-container">
+              <li class="nav-item"><a href="">Portfolio</a></li>
+              <li class="nav-item"><a href="">In Collaboration</a></li>
+              <li class="nav-item"><a href="">Seeking Collaboration</a></li>
+          </ul>
+      </nav>
+  
+      <section>
+        <div class="left-box">
+    
+        </div>
+        <div class="right-box">
+    
+        </div>
+      </section>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+  </body>
+  
+  </html>
     `;
   res.send(html);
 });
