@@ -66,6 +66,8 @@ CREATE TABLE `project` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
   `u_key` int(11) NOT NULL,
   `path` varchar(50) NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `description` text,
   PRIMARY KEY (`key`)
 );
  
@@ -73,6 +75,6 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
  
-INSERT INTO `project` VALUES (1,'1','./project/학선_우리만남이.mp3');
-INSERT INTO `project` VALUES (2,'2','./project/audio1.mp3');
-INSERT INTO `project` VALUES (3,'3','./project/audio2.mp3');
+INSERT INTO `project` VALUES (1,'1','./project/학선_우리만남이.mp3','우리만남이','1절은 완성했는데 2절을 못하겠어요 좋은 아이디어 부탁드려요');
+INSERT INTO `project` VALUES (2,'3','./project/music1.mp3','내가 살아있는 건','곡이 너무 무난해서 악기 추천해 주세요');
+INSERT INTO `project` VALUES (3,'2','./project/music2.mp3','falling','edm 쪽으로 멜로디 추천 부탁드려요');
