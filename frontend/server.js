@@ -368,7 +368,7 @@ app.get("/page5", function (req, res) {
         <style>
             body{
                 background-image: linear-gradient(.25turn, white, 10%, blue);
-                background-image: url("image/sky-clouds-summer.jpg");
+                background-image: url("sky-clouds-summer.jpg");
                 background-repeat: no-repeat;
                 background-size: cover;
             }
