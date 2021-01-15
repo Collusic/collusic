@@ -1,80 +1,84 @@
 const express = require("express");
 const app = express();
+var fs = require("fs");
 const port = 3000;
-
+var bodyParser = require("body-parser");
+app.use(express.static("Follow"));
+app.use(express.static("image"));
+app.use(express.static("Unfollow"));
 app.get("/", (req, res) => {
-  var html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>로그인</title>
-      <meta charset="utf-8">
-      <link rel="stylesheet" href="css/styles.css">
-      <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+  var page1 = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>로그인</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
+  </head>
+  <body>
+    <div style="height: auto; width: 100%;">
+     <h1>COLLUSIC</h1>
+     <style>
+        h1{
+          position: relative;  
+          font-size : 100px;
+            left: 70px;
+            top: 150px;
+            color:bisque;
+        }
+  
+        fieldset{
+          padding-top: 0.85em;
+          margin-left: 90px;
+          margin-top: 160px;
+          color:aliceblue;
+          
+          
+        }
+        img{
+          float: right;
+          margin-right: 60px;
+          margin-top: 100px;
+        }
+        body {
+          background-image: linear-gradient(.25turn, white, 10%, blue);
+          background-image: url("sky-clouds-summer.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+     </style>
+      <img src="drum-set.png" alt="drum" width="150" height="150">
+      <img src="guitar.png" alt="guitar" width="150" height="150">
+      <img src="piano.png" alt="piano" width="150" height="150">
+      <img src="singer.png" alt="singer" width="150" height="150">
+      <html>
+        <title>login</title>
+        <style>
+        </style>
     </head>
     <body>
-      <div style="height: auto; width: 100%;">
-       <h1>COLLUSIC</h1>
-       <style>
-          h1{
-            position: relative;  
-            font-size : 100px;
-              left: 70px;
-              top: 150px;
-              color:bisque;
-          }
-    
-          fieldset{
-            padding-top: 0.85em;
-            margin-left: 90px;
-            margin-top: 160px;
-            color:aliceblue;
-            
-            
-          }
-          img{
-            float: right;
-            margin-right: 60px;
-            margin-top: 100px;
-          }
-          body {
-            background-image: linear-gradient(.25turn, white, 10%, blue);
-            background-image: url("sky-clouds-summer.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-          }
-       </style>
-        <img src="drum-set.png" alt="drum" width="150" height="150">
-        <img src="guitar.png" alt="guitar" width="150" height="150">
-        <img src="piano.png" alt="piano" width="150" height="150">
-        <img src="singer.png" alt="singer" width="150" height="150">
-        <html>
-          <title>login</title>
-          <style>
-          </style>
-      </head>
-      <body>
-          <fieldset style="width:250px;">
-              <legend>login</legend>
-                  <form method='post' action='login_ck.php'>
-                      <p>id : <input name='id' type='text'> </p>
-                      <p>pw : <input name='pw' type='password'> </p>
-                      <input type='submit' value='login'> 
-                      <input type='reset' value='google'>
-                      <input type='reset' value='Facebook'>
-                      
-                  </form>
-          </fieldset>
-          
+        <fieldset style="width:250px;">
+            <legend>login</legend>
+                <form method='post' action='login_ck.php'>
+                    <p>id : <input name='id' type='text'> </p>
+                    <p>pw : <input name='pw' type='password'> </p>
+                    <input type='submit' value='login'> 
+                    <input type='reset' value='google'>
+                    <input type='reset' value='Facebook'>
+                    
+                </form>
+        </fieldset>
         
-    
-      </body>
-        </html>
-        
+      
+  
     </body>
-    </html>
-    `;
-  res.send(html);
+      </html>
+      
+  </body>
+  </html>
+  `;
+  res.send(page1);
 });
 
 app.get("/page2", (req, res) => {
@@ -315,90 +319,7 @@ app.get("/page2", (req, res) => {
 
 app.get("/page3", (req, res) => {
   var html = `
-  <!DOCTYPE html>
-  <html lang="ko">
-  
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>부트스트랩 101 템플릿</title>
-  
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-  
-      <style>
-          body {
-              margin: 0;
-          }
-  
-          .nav-container {
-              display: flex;
-              flex-direction: row;
-              width: 100%;
-              margin: 0;
-              padding: 0;
-              background-color: darkslategray;
-              list-style-type: none;
-              position: fixed;
-              top: 0;
-          }
-  
-          .nav-item {
-              padding: 15px;
-              cursor: pointer;
-          }
-  
-          .nav-item a {
-              text-align: center;
-              text-decoration: none;
-              color: white;
-          }
-  
-          .nav-item:nth-child(1) {
-              background-color: lightseagreen;
-          }
-  
-          .nav-item:hover {
-              background-color: grey;
-          }
-  
-          .left-box {
-              background: red;
-              float: left;
-              width: 30%;
-          }
-  
-          .right-box {
-              background: blue;
-              float: right;
-              width: 70%;
-          }
-      </style>
-  </head>
-  
-  <body>
-  
-      <nav>
-          <ul class="nav-container">
-              <li class="nav-item"><a href="">Portfolio</a></li>
-              <li class="nav-item"><a href="">In Collaboration</a></li>
-              <li class="nav-item"><a href="">Seeking Collaboration</a></li>
-          </ul>
-      </nav>
-  
-      <section>
-        <div class="left-box">
-    
-        </div>
-        <div class="right-box">
-    
-        </div>
-      </section>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-  </body>
-  
-  </html>
+        
     `;
   res.send(html);
 });
@@ -410,8 +331,30 @@ app.get("/page4", (req, res) => {
   res.send(html);
 });
 
-app.get("/page5", (req, res) => {
-  var html = `
+app.get("/page5", function (req, res) {
+  var files = fs.readdirSync("Follow"); //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
+  var list = "<tr>";
+  var i = 0;
+  while (i < files.length) {
+    list =
+      list +
+      `<th><p>${files[i]}<audio src="./Follow/${files[i]}" controls></audio></p></th>`;
+    list = list + `</tr>`;
+    i++;
+  }
+
+  var files2 = fs.readdirSync("Unfollow"); //Unfollow파일 -->사용자가 팔로우하지 않은 사람들의 곡이 들어있는 파일.
+  var list2 = "<tr>";
+  var s = 0;
+  while (s < files2.length) {
+    list2 =
+      list2 +
+      `<th><p>${files2[s]}<audio src="./Unfollow/${files2[s]}" controls></audio></p></th>`;
+    list2 = list2 + `</tr>`;
+    s++;
+  }
+
+  var page5 = `
     <!DOCTYPE html>
     <html lang="en">
     
@@ -423,6 +366,13 @@ app.get("/page5", (req, res) => {
     <body>
     
         <style>
+            body{
+                background-image: linear-gradient(.25turn, white, 10%, blue);
+                background-image: url("image/sky-clouds-summer.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
             .audio {
                 border-right: none;
                 border-left: none;
@@ -445,27 +395,7 @@ app.get("/page5", (req, res) => {
                 <tr>
                     <th>팔로우한 프로젝트</th>
                 </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
+                ${list}
             </table>
         </div>
     
@@ -474,27 +404,7 @@ app.get("/page5", (req, res) => {
                 <tr>
                     <th>팔로우 하지 않은 프로젝트</th>
                 </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
-                <tr>
-                    <th><audio src="./학선_우리만남이.mp3" controls></audio></th>
-                </tr>
+                ${list2}
             </table>
     
         </div>
@@ -502,9 +412,9 @@ app.get("/page5", (req, res) => {
     
     </html>
     `;
-  res.send(html);
+  res.send(page5);
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(3000, function () {
+  console.log("Example app listening on port 3000!");
 });
