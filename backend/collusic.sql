@@ -25,6 +25,7 @@ INSERT INTO `user` VALUES (3,'taeho','taeho@gmail.com');
 CREATE TABLE `portfolio` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
   `u_key` int(11) NOT NULL,
+  `photoPath` varchar(20),
   `introduction` text,
   `phone`  varchar(15),
   PRIMARY KEY (`key`)
@@ -34,9 +35,9 @@ CREATE TABLE `portfolio` (
 -- Dumping data for table `portfolio`
 --
  
-INSERT INTO `portfolio` VALUES (1,'1','MySQL is...','010-1234-5678');
-INSERT INTO `portfolio` VALUES (2,'2','Oracle is ...','010-3423-3212');
-INSERT INTO `portfolio` VALUES (3,'3','SQL Server is ...','010-1223-1125');
+INSERT INTO `portfolio` VALUES (1,'1','그림1.png', 'MySQL is...','010-1234-5678');
+INSERT INTO `portfolio` VALUES (2,'2','', 'Oracle is ...','010-3423-3212');
+INSERT INTO `portfolio` VALUES (3,'3','', 'SQL Server is ...','010-1223-1125');
 
 --
 -- Table structure for table `active`
