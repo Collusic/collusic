@@ -330,8 +330,17 @@ app.get("/page2", (req, res) => {
 });
 
 app.get("/page3", (req, res) => {
+    
+    var id = 'egoing';
 
-    db.query(`SELECT * FROM portfolio WHERE`)
+    db.query(`SELECT * FROM portfolio JOIN user ON portfolio.u_key=user.key WHERE user.key IN (select key from user where id=?);`,[id] , (error, result) => {
+        if(error){
+            throw error;
+        }
+
+        var results = result[0].photoPath;
+        console.log(results);
+    
 
   var html = `
   <!DOCTYPE html>
@@ -438,7 +447,7 @@ app.get("/page3", (req, res) => {
       <section>
           <div class="left-box">
               <div class="profile">
-                  <img src="그림2.png">
+                  <img src="${results}">
               </div>
               <div>
                   <button type="button" class="btn-follow">팔로우</button>
@@ -463,6 +472,7 @@ app.get("/page4", (req, res) => {
         
     `;
   res.send(html);
+})
 });
 
 app.get("/page5", function (req, res) {
