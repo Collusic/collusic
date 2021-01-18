@@ -525,12 +525,7 @@ app.get("/page4", (req, res) => {
     <input type="submit" value="delete">
   </form>
     `;
-<<<<<<< HEAD
   res.send(page4);
-=======
-  res.send(html);
-})
->>>>>>> a4705d11fbff65b33dc994abd11ec654013cf0a4
 });
 
 app.get("/page5", function (req, res) {
