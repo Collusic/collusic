@@ -2,30 +2,14 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 var bodyParser = require("body-parser");
-<<<<<<< HEAD
-
-var mysql = require("mysql");
-var db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "pagenew",
-});
-db.connect();
-app.use(express.static("Active"));
-app.use(bodyParser.urlencoded({ extended: false }));
-=======
 const mysql = require("mysql");
 
 const port = 3000;
 
->>>>>>> a4705d11fbff65b33dc994abd11ec654013cf0a4
 app.use(express.static("Follow"));
 app.use(express.static("image"));
 app.use(express.static("Unfollow"));
 
-<<<<<<< HEAD
-=======
 var db = mysql.createConnection({
     host:'localhost',
     user:'root',
@@ -34,7 +18,6 @@ var db = mysql.createConnection({
 });
 db.connect();
 
->>>>>>> a4705d11fbff65b33dc994abd11ec654013cf0a4
 app.get("/", (req, res) => {
   var page1 = `
   <!DOCTYPE html>
