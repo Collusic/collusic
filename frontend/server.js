@@ -341,154 +341,162 @@ app.get("/page3", (req, res) => {
         var introduction = result[0].introduction;
         var phone = result[0].phone;
 
-    
+    db,query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
+        if(error){
+            throw error;
+        }
+        var audioPath = result[0].audioPath;
 
-  var html = `
-  <!DOCTYPE html>
-  <html lang="ko">
-  
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>부트스트랩 101 템플릿</title>
-  
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-  
-      <style>
-          body {
-              margin: 0;
-          }
-  
-          .nav-container {
-              display: flex;
-              flex-direction: row;
-              width: 100%;
-              margin: 0;
-              padding: 0;
-              background-color: darkslategray;
-              list-style-type: none;
-              position: fixed;
-              top: 0;
-              z-index: 1;
-          }
-  
-          .nav-item {
-              padding: 15px;
-              cursor: pointer;
-          }
-  
-          .nav-item a {
-              text-align: center;
-              text-decoration: none;
-              color: white;
-          }
-  
-          .nav-item:nth-child(1) {
-              background-color: lightseagreen;
-          }
-  
-          .nav-item:hover {
-              background-color: grey;
-          }
-  
-          section{
-              position: absolute;
-              display: block;
-              top: 60px;
-              width: 100%;
-              height: 100%;
-          }
-  
-          .left-box {
-              position: relative;
-              top: 20px;
-              background: red;
-              display: block;
-              height: 100%;
-              float: left;
-              width: 30%;
-          }
-  
-          .right-box {
-              position: relative;
-              top: 20px;
-              background: rgb(86, 86, 228);
-              display: block;
-              height: 100%;
-              float: right;
-              width: 70%;
-          }
-  
-          div.profile > img{
-              margin-top: 50px;
-              width: 300px;
-              display: block;
-              margin-left:auto;
-              margin-right: auto;
-          }
-
-          .btn-follow{
-              position: relative;
-              top: 10px;
-              right: 30px;
-              display: inline-block;
-              margin-left: 70%;
-              width: 70px;
-          }
-
-          h3{
-            text-align: center;
-          }
-
-          .intro{
-              text-align: center;
-              margin: 30px;
-          }
-
-          .phone{
-              margin-top: 30px;
-              text-align: center;
-          }
-      </style>
-  </head>
-  
-  <body>
-      <nav>
-          <ul class="nav-container">
-              <li class="nav-item"><a href="">Portfolio</a></li>
-              <li class="nav-item"><a href="">In Collaboration</a></li>
-              <li class="nav-item"><a href="">Seeking Collaboration</a></li>
-          </ul>
-      </nav>
-      <section>
-          <div class="left-box">
-              <div class="profile">
-                  <img src="${photoPath}">
-              </div>
-              <div>
-                  <button type="button" class="btn-follow">팔로우</button>
-              </div>
-              <div class="phone">
-                phone : ${phone}
-              </div>
-              <h3>자신을 소개합니다!</h3>
-              <div class="intro">
-                ${introduction}
-              </div>
-          </div>
-          <div class="right-box">
-              right-box
-          </div>
-      </section>
+        var html = `
+        <!DOCTYPE html>
+        <html lang="ko">
+        
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>부트스트랩 101 템플릿</title>
+        
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+            <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+            <style>
+                body {
+                    margin: 0;
+                }
+        
+                .nav-container {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    background-color: darkslategray;
+                    list-style-type: none;
+                    position: fixed;
+                    top: 0;
+                    z-index: 1;
+                }
+        
+                .nav-item {
+                    padding: 15px;
+                    cursor: pointer;
+                }
+        
+                .nav-item a {
+                    text-align: center;
+                    text-decoration: none;
+                    color: white;
+                }
+        
+                .nav-item:nth-child(1) {
+                    background-color: lightseagreen;
+                }
+        
+                .nav-item:hover {
+                    background-color: grey;
+                }
+        
+                section{
+                    position: absolute;
+                    display: block;
+                    top: 60px;
+                    width: 100%;
+                    height: 100%;
+                }
+        
+                .left-box {
+                    position: relative;
+                    top: 20px;
+                    background: red;
+                    display: block;
+                    height: 100%;
+                    float: left;
+                    width: 30%;
+                }
+        
+                .right-box {
+                    position: relative;
+                    top: 20px;
+                    background: rgb(86, 86, 228);
+                    display: block;
+                    height: 100%;
+                    float: right;
+                    width: 70%;
+                }
+        
+                div.profile > img{
+                    margin-top: 50px;
+                    width: 300px;
+                    display: block;
+                    margin-left:auto;
+                    margin-right: auto;
+                }
       
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-  </body>
-  </html>
-    `;
-  res.send(html);
+                .btn-follow{
+                    position: relative;
+                    top: 10px;
+                    right: 30px;
+                    display: inline-block;
+                    margin-left: 70%;
+                    width: 70px;
+                }
+      
+                h3{
+                  text-align: center;
+                }
+      
+                .intro{
+                    text-align: center;
+                    margin: 30px;
+                }
+      
+                .phone{
+                    margin-top: 30px;
+                    text-align: center;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <nav>
+                <ul class="nav-container">
+                    <li class="nav-item"><a href="">Portfolio</a></li>
+                    <li class="nav-item"><a href="">In Collaboration</a></li>
+                    <li class="nav-item"><a href="">Seeking Collaboration</a></li>
+                </ul>
+            </nav>
+            <section>
+                <div class="left-box">
+                    <div class="profile">
+                        <img src="${photoPath}">
+                    </div>
+                    <div>
+                        <button type="button" class="btn-follow">팔로우</button>
+                    </div>
+                    <div class="phone">
+                      phone : ${phone}
+                    </div>
+                    <h3>자신을 소개합니다!</h3>
+                    <div class="intro">
+                      ${introduction}
+                    </div>
+                </div>
+                <div class="right-box">
+                  <h3>대표작품</h3>
+                    <div>
+                      <audio src="${audioPath}">
+                    </div>
+                </div>
+            </section>
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+        </body>
+        </html>
+          `;
+        res.send(html);
+    })
 });
 
 app.get("/page4", (req, res) => {
