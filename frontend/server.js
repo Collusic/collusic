@@ -333,7 +333,7 @@ app.get("/page3", (req, res) => {
     
     var id = 'egoing';
 
-    db.query(`SELECT * FROM portfolio JOIN user ON portfolio.u_key=user.key WHERE user.key IN (select key from user where id=?);`,[id] , (error, result) => {
+    db.query(`select * from portfolio as p  join user as u on p.u_id=u.id where u.id=?;`,[id] , (error, result) => {
         if(error){
             throw error;
         }
