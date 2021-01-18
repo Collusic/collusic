@@ -333,13 +333,14 @@ app.get("/page3", (req, res) => {
     
     var id = 'egoing';
 
-    db.query(`select * from portfolio as p  join user as u on p.u_id=u.id where u.id=?;`,[id] , (error, result) => {
+    db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error, result) => {
         if(error){
             throw error;
         }
+        var photoPath = result[0].photoPath;
+        var introduction = result[0].introduction;
+        var phone = result[0].phone;
 
-        var results = result[0].photoPath;
-        console.log(results);
     
 
   var html = `
@@ -426,12 +427,29 @@ app.get("/page3", (req, res) => {
               display: block;
               margin-left:auto;
               margin-right: auto;
-  
           }
+
           .btn-follow{
+              position: relative;
+              top: 10px;
+              right: 30px;
               display: inline-block;
               margin-left: 70%;
-              width: 20px;
+              width: 70px;
+          }
+
+          h3{
+            text-align: center;
+          }
+
+          .intro{
+              text-align: center;
+              margin: 30px;
+          }
+
+          .phone{
+              margin-top: 30px;
+              text-align: center;
           }
       </style>
   </head>
@@ -447,10 +465,17 @@ app.get("/page3", (req, res) => {
       <section>
           <div class="left-box">
               <div class="profile">
-                  <img src="${results}">
+                  <img src="${photoPath}">
               </div>
               <div>
                   <button type="button" class="btn-follow">팔로우</button>
+              </div>
+              <div class="phone">
+                phone : ${phone}
+              </div>
+              <h3>자신을 소개합니다!</h3>
+              <div class="intro">
+                ${introduction}
               </div>
           </div>
           <div class="right-box">
@@ -461,7 +486,6 @@ app.get("/page3", (req, res) => {
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
   </body>
-  
   </html>
     `;
   res.send(html);
