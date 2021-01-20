@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   <!DOCTYPE html>
   <html>
   <head>
-    <title>로그인</title>
+    <title>Collusic</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -105,7 +105,7 @@ app.get("/choose", (req, res) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-        <title>부트스트랩 101 템플릿</title>
+        <title>Collusic</title>
     
         <!-- 부트스트랩 -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -301,7 +301,7 @@ app.get("/choose", (req, res) => {
             <a href="/collaborating">
             <div class="col-md-4 center">
                 <div class="center-text">
-                    Collaboration
+                    Collaborating
                 </div>
                 <div class="img2">
                     <img src="band.png">
@@ -314,10 +314,10 @@ app.get("/choose", (req, res) => {
                 </div>
             </div>
             </a>
-            <a href="/waitingCollaboration>
+            <a href="/waitingCollaboration">
             <div class="col-md-4 right">
                 <div class="right-text">
-                    Seeking collaboration
+                    Waiting collaboration
                 </div>
                 <div class="img3">
                     <img src="united.png">
@@ -444,19 +444,21 @@ app.get("/portfolio", (req, res) => {
                 .left-box {
                     position: relative;
                     top: 20px;
-                    display: block;
+                    display: inline;
                     height: 100%;
                     float: left;
-                    width: 30%;
+                    width: 28%;
+                    border-right-style: dashed;
+                    border-right-width: 3px;
                 }
         
                 .right-box {
                     position: relative;
                     top: 20px;
-                    display: block;
+                    display: inline;
                     height: 100%;
                     float: right;
-                    width: 70%;
+                    width: 68%;
                 }
         
                 div.profile > img{
@@ -576,13 +578,133 @@ app.get("/portfolio", (req, res) => {
   })
 });
 
-app.get("/collaobrating"), (req, res)  => {
-
-  var html = `
+app.get("/collaborating", (req, res)  => {
   
-  `;
-  res.send(html);
-}
+  var id = 'egoing';
+
+  db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
+    if(error){
+        throw error;
+    }
+
+    var active = '<table>'
+      
+    var i = 0;
+    
+      while(i < result.length){
+        active += `<tr><th><audio src="${result[i].audioPath}" width="100px" controls autoplay></th></tr></table>`
+        i++;
+      }
+
+      active += '</table>'
+    var html = `
+    <!DOCTYPE html>
+    <html lang="ko">
+    
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Collaborating</title>
+  
+      <style>
+        body {
+          background-image: url("sky-clouds-summer.jpg");
+          background-size: cover;
+        }
+  
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: darkslategray;
+            list-style-type: none;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+  
+        .nav-item {
+            padding: 15px;
+            cursor: pointer;
+        }
+  
+        .nav-item a {
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+  
+        .nav-item:nth-child(2) {
+            background-color: lightseagreen;
+        }
+  
+        .nav-item:hover {
+            background-color: grey;
+        }
+  
+        section{
+          position: absolute;
+          display: block;
+          top: 60px;
+          width: 100%;
+          height: 100%;
+        }
+  
+        .left-box {
+            position: relative;
+            top: 20px;
+            display: block;
+            height: 100%;
+            float: left;
+            width: 28%;
+            border-right-width: 3px;
+            border-right-style: dashed;
+        }
+  
+        .right-box {
+            position: relative;
+            top: 20px;
+            display: block;
+            height: 100%;
+            float: right;
+            width: 68%;
+        }
+      </style>
+    </head>
+    <body>
+      <nav>
+          <ul class="nav-container">
+              <li class="nav-item"><a href="portfolio">Portfolio</a></li>
+              <li class="nav-item"><a href="collaborating">Collaborating</a></li>
+              <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
+          </ul>
+      </nav>
+      <section>
+        <div class="left-box">
+            <table class="audio">
+                <tr>
+                    <th>진행 중인 프로젝트</th>
+                </tr>
+                ${active}
+            </table>
+        </div>
+        <div class="right-box">
+            <table class="audio">
+                <tr>
+                    <th>팔로우 하지 않은 프로젝트</th>
+                </tr>
+                
+            </table>
+        </div>
+    </body>
+    </html>
+    `;
+    res.send(html);
+  });
+});
 
 app.get("/waitingCollaboration", function (req, res) {
   var files = fs.readdirSync("Follow"); //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
@@ -650,7 +772,7 @@ app.get("/waitingCollaboration", function (req, res) {
               color: white;
           }
   
-          .nav-item:nth-child(1) {
+          .nav-item:nth-child(3) {
               background-color: lightseagreen;
           }
   
