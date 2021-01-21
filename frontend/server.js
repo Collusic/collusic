@@ -593,8 +593,15 @@ app.get("/collaborating", (req, res)  => {
     var i = 0;
     
       while(i < result.length){
-        active += `<p onclick="project()">${result[i].audioPath}</p>`
+        active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
         i++;
+      }
+
+      var j = 0;
+      var contri=``;
+      while(j < 5){
+        contri += `<audio src=${j+1} controls>`;
+        j++;
       }
 
     var html = `
@@ -673,6 +680,10 @@ app.get("/collaborating", (req, res)  => {
             width: 68%;
         }
 
+        .audioPath{
+          float: left;
+        }
+
         #contri{
           position: relative;
           top: 100px;
@@ -691,6 +702,8 @@ app.get("/collaborating", (req, res)  => {
         <div class="left-box">
               <h3>진행 중인 프로젝트</h3>
                 ${active}
+              
+              <button>create</button>
             
         </div>
         <div class="right-box">
@@ -702,12 +715,14 @@ app.get("/collaborating", (req, res)  => {
     <script>
     function project(){
       var content = document.getElementById("right-text");
-      content.innerHTML = "<audio src='${1+1}' controls>";
+      content.innerHTML = "<audio src='${req.query.id}' controls>";
       content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
+      content.innerHTML += "${contri}";
     }
     </script>
     </html>
     `;
+
     res.send(html);
   });
 });
