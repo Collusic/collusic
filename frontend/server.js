@@ -366,7 +366,7 @@ app.get("/portfolio", (req, res) => {
         if(result2.legnth % 2 + 1) // 활동프로젝트 수가 짝수면
         {
           while(i*2 < result2.length){
-            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls autoplay></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls autoplay></th></tr>`;
+            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
             i++;
           }
           active += '</table>'
@@ -375,10 +375,10 @@ app.get("/portfolio", (req, res) => {
         else if(result2.length % 2) // 활동프로젝트 수가 홀수면
         {
           while(i*2 < result2.length - 1){
-            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls autoplay></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls autoplay></th></tr>`;
+            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
             i++;
           }
-          active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls autoplay></th></tr></table>`
+          active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th></tr></table>`
         }
         
 
@@ -554,7 +554,7 @@ app.get("/portfolio", (req, res) => {
                 <div class="right-box">
                   <h3>대표작품</h3>
                     <div class="most">
-                      <audio src="${audioPath}" width="300px" controls autoplay>
+                      <audio src="${audioPath}" width="300px" controls>
                     </div>
                     <div class="status">
                       <p id="contribute">기여 수 ${contribute}</p><p id="selection">채택 수 ${selection}</p>
@@ -579,7 +579,8 @@ app.get("/portfolio", (req, res) => {
 });
 
 app.get("/collaborating", (req, res)  => {
-  
+
+
   var id = 'egoing';
 
   db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
@@ -587,16 +588,15 @@ app.get("/collaborating", (req, res)  => {
         throw error;
     }
 
-    var active = '<table>'
+    var active = ''
       
     var i = 0;
     
       while(i < result.length){
-        active += `<tr><th><audio src="${result[i].audioPath}" width="100px" controls autoplay></th></tr></table>`
+        active += `<p onclick="project()">${result[i].audioPath}</p>`
         i++;
       }
 
-      active += '</table>'
     var html = `
     <!DOCTYPE html>
     <html lang="ko">
@@ -672,6 +672,11 @@ app.get("/collaborating", (req, res)  => {
             float: right;
             width: 68%;
         }
+
+        #contri{
+          position: relative;
+          top: 100px;
+        }
       </style>
     </head>
     <body>
@@ -684,22 +689,23 @@ app.get("/collaborating", (req, res)  => {
       </nav>
       <section>
         <div class="left-box">
-            <table class="audio">
-                <tr>
-                    <th>진행 중인 프로젝트</th>
-                </tr>
+              <h3>진행 중인 프로젝트</h3>
                 ${active}
-            </table>
+            
         </div>
         <div class="right-box">
-            <table class="audio">
-                <tr>
-                    <th>팔로우 하지 않은 프로젝트</th>
-                </tr>
-                
-            </table>
+          <h3>현재 선택된 프로젝트 </h3>
+          <div id="right-text">
+          </div>
         </div>
     </body>
+    <script>
+    function project(){
+      var content = document.getElementById("right-text");
+      content.innerHTML = "<audio src='${1+1}' controls>";
+      content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
+    }
+    </script>
     </html>
     `;
     res.send(html);
