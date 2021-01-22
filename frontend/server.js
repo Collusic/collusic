@@ -9,6 +9,7 @@ const port = 3000;
 app.use(express.static("Follow"));
 app.use(express.static("image"));
 app.use(express.static("Unfollow"));
+app.use(express.static("project"));
 
 var db = mysql.createConnection({
     host:'localhost',
@@ -23,7 +24,7 @@ app.get("/", (req, res) => {
   <!DOCTYPE html>
   <html>
   <head>
-    <title>로그인</title>
+    <title>Collusic</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
@@ -69,22 +70,23 @@ app.get("/", (req, res) => {
         <style>
         </style>
     </head>
+    <a href="/choose">
     <body>
         <fieldset style="width:250px;">
             <legend>login</legend>
                 <form method='post' action='login_ck.php'>
                     <p>id : <input name='id' type='text'> </p>
                     <p>pw : <input name='pw' type='password'> </p>
-                    <input type='submit' value='login'> 
-                    <input type='reset' value='google'>
+                    <input type='submit' value='login'>
+                    <input type='reset' value='google'> 
                     <input type='reset' value='Facebook'>
-                    
                 </form>
         </fieldset>
         
       
   
     </body>
+    </a>
       </html>
       
   </body>
@@ -93,7 +95,7 @@ app.get("/", (req, res) => {
   res.send(page1);
 });
 
-app.get("/page2", (req, res) => {
+app.get("/choose", (req, res) => {
   var html = `
     <!DOCTYPE html>
     <html lang="ko">
@@ -103,7 +105,7 @@ app.get("/page2", (req, res) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
-        <title>부트스트랩 101 템플릿</title>
+        <title>Collusic</title>
     
         <!-- 부트스트랩 -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -275,6 +277,7 @@ app.get("/page2", (req, res) => {
         <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
         <script src="js/bootstrap.min.js"></script>
         <div class="row">
+        <a href="/portfolio">
             <div class="col-md-4 left">
                 <div class="left-text">
                     Portfolio
@@ -292,11 +295,13 @@ app.get("/page2", (req, res) => {
                     <p>
                         대표곡 : Music is my Life
                     </p>
-                </div>
+                </div>  
             </div>
+            </a>
+            <a href="/collaborating">
             <div class="col-md-4 center">
                 <div class="center-text">
-                    Collaboration
+                    Collaborating
                 </div>
                 <div class="img2">
                     <img src="band.png">
@@ -308,9 +313,11 @@ app.get("/page2", (req, res) => {
                     
                 </div>
             </div>
+            </a>
+            <a href="/waitingCollaboration">
             <div class="col-md-4 right">
                 <div class="right-text">
-                    Seeking collaboration
+                    Waiting collaboration
                 </div>
                 <div class="img3">
                     <img src="united.png">
@@ -321,6 +328,7 @@ app.get("/page2", (req, res) => {
                     </p>
                 </div>
             </div>
+            </a>
         </div>
     </body>
     
@@ -329,23 +337,50 @@ app.get("/page2", (req, res) => {
   res.send(html);
 });
 
-app.get("/page3", (req, res) => {
+app.get("/portfolio", (req, res) => {
     
     var id = 'egoing';
 
-    db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error, result) => {
-        if(error){
+    db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error1, result1) => {
+        if(error1){
             throw error;
         }
-        var photoPath = result[0].photoPath;
-        var introduction = result[0].introduction;
-        var phone = result[0].phone;
+    db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error2, result2)=> {
+        if(error2){
+            throw error;
+        }
+        var photoPath = result1[0].photoPath;
+        var introduction = result1[0].introduction;
+        var phone = result1[0].phone;
+        var audioPath = result2[0].audioPath;
 
-    db,query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
-        if(error){
-            throw error;
+        var contribute = 15;
+        var selection = 10;
+
+        console.log(result2.length);
+
+        var active = '<table>'
+        
+
+        var i = 0;
+        if(result2.legnth % 2 + 1) // 활동프로젝트 수가 짝수면
+        {
+          while(i*2 < result2.length){
+            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
+            i++;
+          }
+          active += '</table>'
         }
-        var audioPath = result[0].audioPath;
+
+        else if(result2.length % 2) // 활동프로젝트 수가 홀수면
+        {
+          while(i*2 < result2.length - 1){
+            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
+            i++;
+          }
+          active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th></tr></table>`
+        }
+        
 
         var html = `
         <!DOCTYPE html>
@@ -355,14 +390,15 @@ app.get("/page3", (req, res) => {
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>부트스트랩 101 템플릿</title>
+            <title>Portfolio</title>
         
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
             <link href="css/bootstrap.min.css" rel="stylesheet">
         
             <style>
                 body {
-                    margin: 0;
+                  background-image: url("sky-clouds-summer.jpg");
+                  background-size: cover;
                 }
         
                 .nav-container {
@@ -408,21 +444,21 @@ app.get("/page3", (req, res) => {
                 .left-box {
                     position: relative;
                     top: 20px;
-                    background: red;
-                    display: block;
+                    display: inline;
                     height: 100%;
                     float: left;
-                    width: 30%;
+                    width: 28%;
+                    border-right-style: dashed;
+                    border-right-width: 3px;
                 }
         
                 .right-box {
                     position: relative;
                     top: 20px;
-                    background: rgb(86, 86, 228);
-                    display: block;
+                    display: inline;
                     height: 100%;
                     float: right;
-                    width: 70%;
+                    width: 68%;
                 }
         
                 div.profile > img{
@@ -455,15 +491,48 @@ app.get("/page3", (req, res) => {
                     margin-top: 30px;
                     text-align: center;
                 }
+
+                .most{
+                  position: relative;
+                  top: 30px;
+                  width: 100%;
+                  height: 100px;
+                }
+
+                .most audio{
+                  position: absolute;
+                  left: 50%;
+                  transform: translateX(-50%);
+                }
+
+                .status p{
+                  position: relative;
+                  top: 30px;
+                  margin-left: 28%;
+                  display: inline;
+                }
+
+                .active-log{
+                  position: relative;
+                  top: 100px;
+                  width: 100%;
+                  text-align: center;
+                }
+
+                .active{
+                  position: relative;
+                  left: 20%;
+                  top: 100px;
+                }
             </style>
         </head>
         
         <body>
             <nav>
                 <ul class="nav-container">
-                    <li class="nav-item"><a href="">Portfolio</a></li>
-                    <li class="nav-item"><a href="">In Collaboration</a></li>
-                    <li class="nav-item"><a href="">Seeking Collaboration</a></li>
+                    <li class="nav-item"><a href="portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a href="collaborating">Collaborating</a></li>
+                    <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
                 </ul>
             </nav>
             <section>
@@ -484,8 +553,17 @@ app.get("/page3", (req, res) => {
                 </div>
                 <div class="right-box">
                   <h3>대표작품</h3>
-                    <div>
-                      <audio src="${audioPath}">
+                    <div class="most">
+                      <audio src="${audioPath}" width="300px" controls>
+                    </div>
+                    <div class="status">
+                      <p id="contribute">기여 수 ${contribute}</p><p id="selection">채택 수 ${selection}</p>
+                    </div>
+                    <h3 class="active-log">
+                      활동기록
+                    </h3>
+                    <div class="active">
+                    ${active}
                     </div>
                 </div>
             </section>
@@ -496,22 +574,160 @@ app.get("/page3", (req, res) => {
         </html>
           `;
         res.send(html);
-    })
+    });
+  })
 });
 
-app.get("/page4", (req, res) => {
-  var title = req.query.id;
-  var page4 = `
-  <a href="/create">create</a> <a href="/update?id=${req.query.id}">update</a>
-  <form action="/delete_process" method="post">
-    <input type="hidden" name="id" value="${title}">
-    <input type="submit" value="delete">
-  </form>
+app.get("/collaborating", (req, res)  => {
+
+
+  var id = 'egoing';
+
+  db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
+    if(error){
+        throw error;
+    }
+
+    var active = ''
+      
+    var i = 0;
+    
+      while(i < result.length){
+        active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
+        i++;
+      }
+
+      var j = 0;
+      var contri=``;
+      while(j < 5){
+        contri += `<audio src=${j+1} controls>`;
+        j++;
+      }
+
+    var html = `
+    <!DOCTYPE html>
+    <html lang="ko">
+    
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Collaborating</title>
+  
+      <style>
+        body {
+          background-image: url("sky-clouds-summer.jpg");
+          background-size: cover;
+        }
+  
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: darkslategray;
+            list-style-type: none;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+  
+        .nav-item {
+            padding: 15px;
+            cursor: pointer;
+        }
+  
+        .nav-item a {
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+  
+        .nav-item:nth-child(2) {
+            background-color: lightseagreen;
+        }
+  
+        .nav-item:hover {
+            background-color: grey;
+        }
+  
+        section{
+          position: absolute;
+          display: block;
+          top: 60px;
+          width: 100%;
+          height: 100%;
+        }
+  
+        .left-box {
+            position: relative;
+            top: 20px;
+            display: block;
+            height: 100%;
+            float: left;
+            width: 28%;
+            border-right-width: 3px;
+            border-right-style: dashed;
+        }
+  
+        .right-box {
+            position: relative;
+            top: 20px;
+            display: block;
+            height: 100%;
+            float: right;
+            width: 68%;
+        }
+
+        .audioPath{
+          float: left;
+        }
+
+        #contri{
+          position: relative;
+          top: 100px;
+        }
+      </style>
+    </head>
+    <body>
+      <nav>
+          <ul class="nav-container">
+              <li class="nav-item"><a href="portfolio">Portfolio</a></li>
+              <li class="nav-item"><a href="collaborating">Collaborating</a></li>
+              <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
+          </ul>
+      </nav>
+      <section>
+        <div class="left-box">
+              <h3>진행 중인 프로젝트</h3>
+                ${active}
+              
+              <button>create</button>
+            
+        </div>
+        <div class="right-box">
+          <h3>현재 선택된 프로젝트 </h3>
+          <div id="right-text">
+          </div>
+        </div>
+    </body>
+    <script>
+    function project(){
+      var content = document.getElementById("right-text");
+      content.innerHTML = "<audio src='${req.query.id}' controls>";
+      content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
+      content.innerHTML += "${contri}";
+    }
+    </script>
+    </html>
     `;
-  res.send(page4);
+
+    res.send(html);
+  });
 });
 
-app.get("/page5", function (req, res) {
+app.get("/waitingCollaboration", function (req, res) {
   var files = fs.readdirSync("Follow"); //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
   var list = "<tr>";
   var i = 0;
@@ -540,7 +756,7 @@ app.get("/page5", function (req, res) {
     
     <head>
         <meta charset="UTF-8">
-        <title>Document</title>
+        <title>Wating Collaboration</title>
     </head>
     
     <body>
@@ -553,6 +769,38 @@ app.get("/page5", function (req, res) {
                 background-size: cover;
             }
 
+            .nav-container {
+              display: flex;
+              flex-direction: row;
+              width: 100%;
+              margin: 0;
+              padding: 0;
+              background-color: darkslategray;
+              list-style-type: none;
+              position: fixed;
+              top: 0;
+              z-index: 1;
+          }
+  
+          .nav-item {
+              padding: 15px;
+              cursor: pointer;
+          }
+  
+          .nav-item a {
+              text-align: center;
+              text-decoration: none;
+              color: white;
+          }
+  
+          .nav-item:nth-child(3) {
+              background-color: lightseagreen;
+          }
+  
+          .nav-item:hover {
+              background-color: grey;
+          }
+
             .audio {
                 border-right: none;
                 border-left: none;
@@ -561,15 +809,26 @@ app.get("/page5", function (req, res) {
             }
     
             .left-box{
+              position: relative;
+              top: 100px;
                 float: left;
                 width: 50%;
             }
     
-            .left-box{
+            .right-box{
+              position: relative;
+              top: 100px;
                 float: right;
                 width: 50%;
             }
         </style>
+        <nav>
+            <ul class="nav-container">
+                <li class="nav-item"><a href="portfolio">Portfolio</a></li>
+                <li class="nav-item"><a href="collaborating">Collaborating</a></li>
+                <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
+            </ul>
+        </nav>
         <div class="left-box">
             <table class="audio">
                 <tr>
@@ -593,6 +852,20 @@ app.get("/page5", function (req, res) {
     </html>
     `;
   res.send(page5);
+});
+
+
+
+app.get("/create1", (req, res) => {
+  var title = req.query.id;
+  var create = `
+  <a href="/create">create</a> <a href="/update?id=${req.query.id}">update</a>
+  <form action="/delete_process" method="post">
+    <input type="hidden" name="id" value="${title}">
+    <input type="submit" value="delete">
+  </form>
+    `;
+  res.send(create);
 });
 
 app.get("/create", function (req, res) {
