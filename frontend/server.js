@@ -13,8 +13,8 @@ app.use(express.static("Unfollow"));
 var db = mysql.createConnection({
     host:'localhost',
     user:'root',
-    password:'Password123!',
-    database:'collusic'
+    password:'123456', 
+    database:'pagenew'
 });
 db.connect();
 
