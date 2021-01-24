@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 var bodyParser = require("body-parser");
-var DB = require("./db");
+var mysql = require("./mysql");
 var portfolioRouter = require('./routes/portfolio');
 var collaboratingRouter = require('./routes/collaborating');
 var waitingCollaborationRouter = require('./routes/waitingCollaboration');
 
-DB.db.connect();
+mysql.db.connect();
 
 app.use('/', portfolioRouter);
 app.use('/', collaboratingRouter);
@@ -354,7 +354,7 @@ app.get("/create1", (req, res) => {
 });
 
 app.get("/create", function (req, res) {
-  DB.db.query(`SELECT * FROM project;`, function (error, projects) {
+  mysql.db.query(`SELECT * FROM project;`, function (error, projects) {
     if (error) {
       throw error;
     }
@@ -376,7 +376,7 @@ app.get("/create", function (req, res) {
 app.post("/create_process", function (req, res) {
   //   var title = req.body.title;
   //   var description = req.body.description;
-  DB.db.query(
+  mysql.db.query(
     `
             INSERT INTO project (key, u_key, path, title, description) 
               VALUES(1, 2, dfdfdf, ?, ?)`,

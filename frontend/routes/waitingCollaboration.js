@@ -1,6 +1,6 @@
 const express = require("express");
 var router = express.Router();
-var DB = require("../db");
+var mysql = require("../mysql");
 var css = require('../css');
 const fs = require("fs");
 

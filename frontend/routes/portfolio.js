@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var DB = require("../db");
+var mysql = require("../mysql");
 var css = require('../css');
 
 router.get("/portfolio", (req, res) => {
@@ -8,11 +8,11 @@ router.get("/portfolio", (req, res) => {
     var navCss = css.navBar;
     var id = 'egoing';
 
-    DB.db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error1, result1) => {
+    mysql.db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error1, result1) => {
         if(error1){
             throw error;
         }
-    DB.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error2, result2)=> {
+        mysql.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error2, result2)=> {
         if(error2){
             throw error;
         }

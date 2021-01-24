@@ -1,6 +1,6 @@
 const express = require("express");
 var router = express.Router();
-var DB = require("../db");
+var mysql = require("../mysql");
 var css = require('../css');
 
 router.get("/collaborating", (req, res)  => {
@@ -8,7 +8,7 @@ router.get("/collaborating", (req, res)  => {
 
     var id = 'egoing';
   
-    DB.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
+    mysql.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
       if(error){
           throw error;
       }
