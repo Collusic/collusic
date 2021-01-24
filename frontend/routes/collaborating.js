@@ -98,7 +98,7 @@ router.get("/collaborating", (req, res)  => {
                 <h3>진행 중인 프로젝트</h3>
                   ${active}
                 
-                <button>create</button>
+                <a href="/create"><button>create</button></a>
               
           </div>
           <div class="right-box">
