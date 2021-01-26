@@ -407,7 +407,7 @@ app.get("/update", function (req, res) {
   );
 });
 
-app.post("/update_process", function (req, res) {
+app.post("/update_process", upload.single("userfile"), function (req, res) {
   var title = req.body.title;
   var description = req.body.description;
   var audioPath = req.body.audioPath;
