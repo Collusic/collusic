@@ -65,6 +65,7 @@ INSERT INTO `active` VALUES (3,'taeho','2021-01-15','매니저 인턴');
 CREATE TABLE `project` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
   `u_id` varchar(20) NOT NULL,
+  `project_key` int(11) NOT NULL,
   `audioPath` varchar(50) NOT NULL,
   `title` varchar(20) NOT NULL,
   `description` text,
@@ -75,6 +76,7 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
  
+<<<<<<< HEAD
 INSERT INTO `project` VALUES (1,'egoing','학선_우리만남이.mp3','우리만남이','1절은 완성했는데 2절을 못하겠어요 좋은 아이디어 부탁드려요');
 INSERT INTO `project` VALUES (2,'taeho','music1.mp3','내가 살아있는 건','곡이 너무 무난해서 악기 추천해 주세요');
 INSERT INTO `project` VALUES (3,'duru','music2.mp3','falling','edm 쪽으로 멜로디 추천 부탁드려요');
@@ -86,14 +88,38 @@ CREATE TABLE `Follow` (
   `f_id` varchar(20) NOT NULL,
   `audioPath` varchar(50) NOT NULL,
   `title` varchar(20) NOT NULL,
+=======
+INSERT INTO `project` VALUES (1,'egoing',1,'학선_우리만남이.mp3','우리만남이','1절은 완성했는데 2절을 못하겠어요 좋은 아이디어 부탁드려요');
+INSERT INTO `project` VALUES (2,'egoing',2,'musicismylife.mp3','우리만남이','1절은 완성했는데 2절을 못하겠어요 좋은 아이디어 부탁드려요');
+INSERT INTO `project` VALUES (3,'taeho',1,'music1.mp3','내가 살아있는 건','곡이 너무 무난해서 악기 추천해 주세요');
+
+--
+-- Table structure for table `commit`
+--
+ 
+CREATE TABLE `commit` (
+  `key` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` varchar(20) NOT NULL,
+  `c_id` varchar(20) NOT NULL,
+  `p_key` int(11) NOT NULL,
+  `audioPath` varchar(50) NOT NULL,
+>>>>>>> 1283e78e18c0f29fa7b0b8fd6cf0b46a985c0c33
   `description` text,
   PRIMARY KEY (`key`)
 );
  
 --
+<<<<<<< HEAD
 -- Dumping data for table `project`
 --
  
 INSERT INTO `Follow` VALUES (1,'egoing','학선_우리만남이.mp3','우리만남이','1절은 완성했는데 2절을 못하겠어요 좋은 아이디어 부탁드려요');
 INSERT INTO `Follow` VALUES (2,'taeho','music1.mp3','내가 살아있는 건','곡이 너무 무난해서 악기 추천해 주세요');
 INSERT INTO `Follow` VALUES (3,'duru','music2.mp3','falling','edm 쪽으로 멜로디 추천 부탁드려요');
+=======
+-- Dumping data for table `commit`
+--
+ 
+INSERT INTO `commit` VALUES (1,'egoing','daae',1,'기여내용1.mp3','기타소리를 추가해봤어요 이건 어떠세요??');
+INSERT INTO `commit` VALUES (2,'taeho',`jeahyun`,2,'sindisizer.mp3','edm 느낌으로 추가해봤습니다');
+>>>>>>> 1283e78e18c0f29fa7b0b8fd6cf0b46a985c0c33
