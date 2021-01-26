@@ -21,7 +21,7 @@ router.get("/collaborating", (req, res) => {
       var i = 0;
 
       while (i < result.length) {
-        active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`;
+        active += `<p class="audioPath"><a href="/collaborating?audioPath=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`;
         i++;
       }
 
@@ -32,7 +32,7 @@ router.get("/collaborating", (req, res) => {
         j++;
       }
 
-      var title = req.query.id; // update, delete, create 버튼 가져오면서 생성한 변수 --다애가 넣음! 106번째 줄-112번째 줄
+      var audioPath = req.query.audioPath; // update, delete, create 버튼 가져오면서 생성한 변수 --다애가 넣음! 106번째 줄-112번째 줄
 
       var html = `
       <!DOCTYPE html>
@@ -103,11 +103,12 @@ router.get("/collaborating", (req, res) => {
                 <h3>진행 중인 프로젝트</h3>
                   ${active}
                 
-                <a href="/create">create</a> <a href="/update?id=${
-                  req.query.id
+                <a href="/create">create</a> <a href="/update?audioPath=${
+                  req.query.audioPath
                 }">update</a>
   <form action="/delete_process" method="post">
-    <input type="hidden" name="id" value="${title}">
+    <input type="hidden" name="audioPath" value="${audioPath}">
+    <input type="hidden" name="id" value="${id}">
     <input type="submit" value="delete">
   </form>
               
@@ -121,7 +122,7 @@ router.get("/collaborating", (req, res) => {
       <script>
       function project(){
         var content = document.getElementById("right-text");
-        content.innerHTML = "<audio src='${req.query.id}' controls>";
+        content.innerHTML = "<audio src='${req.query.audioPath}' controls>";
         content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
         content.innerHTML += "${contri}";
       }
