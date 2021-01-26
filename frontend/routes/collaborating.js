@@ -1,23 +1,31 @@
 const express = require("express");
 var router = express.Router();
 var mysql = require("../mysql");
+<<<<<<< HEAD
 var css = require('../css');
 const { query } = require("express");
 const { db } = require("../mysql");
+=======
+var css = require("../css");
+>>>>>>> 7e84952da587819cf4728fde23286507999f29a4
 
-router.get("/collaborating", (req, res)  => {
-    var navCss = css.navBar;
+router.get("/collaborating", (req, res) => {
+  var navCss = css.navBar;
 
-    var id = 'egoing';
-  
-    mysql.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
-      if(error){
-          throw error;
+  var id = "egoing";
+
+  mysql.db.query(
+    `select * from project as p join user as u on p.u_id=u.id where u.id=?;`,
+    [id],
+    (error, result) => {
+      if (error) {
+        throw error;
       }
-  
-      var active = ''
-        
+
+      var active = "";
+
       var i = 0;
+<<<<<<< HEAD
       
         while(i < result.length){
           active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
@@ -35,6 +43,23 @@ router.get("/collaborating", (req, res)  => {
           j++;
         }
   
+=======
+
+      while (i < result.length) {
+        active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`;
+        i++;
+      }
+
+      var j = 0;
+      var contri = ``;
+      while (j < 5) {
+        contri += `<audio src=${j + 1} controls>`;
+        j++;
+      }
+
+      var title = req.query.id; // update, delete, create 버튼 가져오면서 생성한 변수 --다애가 넣음! 106번째 줄-112번째 줄
+
+>>>>>>> 7e84952da587819cf4728fde23286507999f29a4
       var html = `
       <!DOCTYPE html>
       <html lang="ko">
@@ -104,7 +129,13 @@ router.get("/collaborating", (req, res)  => {
                 <h3>진행 중인 프로젝트</h3>
                   ${active}
                 
-                <a href="/create"><button>create</button></a>
+                <a href="/create">create</a> <a href="/update?id=${
+                  req.query.id
+                }">update</a>
+  <form action="/delete_process" method="post">
+    <input type="hidden" name="id" value="${title}">
+    <input type="submit" value="delete">
+  </form>
               
           </div>
           <div class="right-box">
@@ -123,8 +154,9 @@ router.get("/collaborating", (req, res)  => {
       </script>
       </html>
       `;
-  
+
       res.send(html);
-    });
-  });
-  module.exports = router;
+    }
+  );
+});
+module.exports = router;
