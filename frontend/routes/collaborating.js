@@ -1,13 +1,7 @@
 const express = require("express");
 var router = express.Router();
 var mysql = require("../mysql");
-<<<<<<< HEAD
-var css = require('../css');
-const { query } = require("express");
-const { db } = require("../mysql");
-=======
 var css = require("../css");
->>>>>>> 7e84952da587819cf4728fde23286507999f29a4
 
 router.get("/collaborating", (req, res) => {
   var navCss = css.navBar;
@@ -25,25 +19,6 @@ router.get("/collaborating", (req, res) => {
       var active = "";
 
       var i = 0;
-<<<<<<< HEAD
-      
-        while(i < result.length){
-          active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
-          i++;
-        }
-        // create_process 페이지에서 db.query(project id= egoing (err, result)=>{
-        //   var num = result.length + 1;
-        // })
-        // db.query(`insert 뭐시기 뭐시기 뭐시기 p_key values(뭐시기 뭐시기 뭐시기 ?)`, [num]);
-
-        var j = 0;
-        var contri=``;
-        while(j < 5){
-          contri += `<audio src=${j+1} controls>`;
-          j++;
-        }
-  
-=======
 
       while (i < result.length) {
         active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`;
@@ -59,7 +34,6 @@ router.get("/collaborating", (req, res) => {
 
       var title = req.query.id; // update, delete, create 버튼 가져오면서 생성한 변수 --다애가 넣음! 106번째 줄-112번째 줄
 
->>>>>>> 7e84952da587819cf4728fde23286507999f29a4
       var html = `
       <!DOCTYPE html>
       <html lang="ko">
