@@ -1,10 +1,10 @@
 const express = require("express");
-var bodyParser = require('body-parser')
+var bodyParser = require("body-parser");
 const app = express();
 const fs = require("fs");
 var mysql = require("./mysql");
-var authRouter = require('./routes/auth');
-var chooseRouter = require('./routes/choose');
+var authRouter = require("./routes/auth");
+var chooseRouter = require("./routes/choose");
 var portfolioRouter = require("./routes/portfolio");
 var collaboratingRouter = require("./routes/collaborating");
 var waitingCollaborationRouter = require("./routes/waitingCollaboration");
@@ -20,19 +20,18 @@ var _storage = multer.diskStorage({
 var upload = multer({ storage: _storage }); //업로드파일 어디에 지정할지-->uploads에 위치
 const { response } = require("express");
 
-
 mysql.db.connect();
 
-app.use('/', authRouter);
-app.use('/', chooseRouter);
-app.use('/', portfolioRouter);
-app.use('/', collaboratingRouter);
-app.use('/', waitingCollaborationRouter);
+app.use("/", authRouter);
+app.use("/", chooseRouter);
+app.use("/", portfolioRouter);
+app.use("/", collaboratingRouter);
+app.use("/", waitingCollaborationRouter);
 
 const port = 3000;
 
-app.use(express.json()); 
-app.use(express.urlencoded( {extended : false } ));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("Follow"));
 app.use(express.static("image"));
 app.use(express.static("Unfollow"));
@@ -41,7 +40,6 @@ app.use(express.static("project"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", "./views_file");
 app.set("view engine", "jade");
-
 
 app.get("/create", function (req, res) {
   res.render("upload");
@@ -106,19 +104,11 @@ app.post("/update_process", upload.single("userfile"), function (req, res) {
 
   mysql.db.query(
     `UPDATE project SET audioPath=?, title=?, description=? WHERE audioPath=? `,
-    [audioPath, title, description, audioPath],
+    [req.file.filename, title, description, audioPath],
     function (error, result) {
-      res.writeHead(302, { Location: `/?id=${audioPath}` });
-      res.end();
+      res.redirect("/collaborating");
     }
   );
-
-  // fs.rename(`Active/${id}`, `Active/${title}`, function (err) {
-  //   fs.writeFile(`Active/${title}`, description, "utf-8", function (err) {
-  //     res.writeHead(302, { Location: `/?id=${title}` });
-  //     res.end();
-  //   });
-  // });
 });
 
 app.post("/delete_process", function (req, res) {
@@ -131,8 +121,7 @@ app.post("/delete_process", function (req, res) {
       if (error) {
         throw error;
       }
-      res.writeHead(302, { Location: `/` });
-      res.end();
+      res.redirect("/collaborating");
     }
   );
 });
