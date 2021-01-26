@@ -2,7 +2,27 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 var bodyParser = require("body-parser");
-const mysql = require("mysql");
+var mysql = require("./mysql");
+var portfolioRouter = require("./routes/portfolio");
+var collaboratingRouter = require("./routes/collaborating");
+var waitingCollaborationRouter = require("./routes/waitingCollaboration");
+var multer = require("multer");
+var _storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "project/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); //파일이름
+  },
+}); //객체 표현 des,filename둘다 함수로 해야한다
+var upload = multer({ storage: _storage }); //업로드파일 어디에 지정할지-->uploads에 위치
+const { response } = require("express");
+
+mysql.db.connect();
+
+app.use("/", portfolioRouter);
+app.use("/", collaboratingRouter);
+app.use("/", waitingCollaborationRouter);
 
 const port = 3000;
 
@@ -10,14 +30,9 @@ app.use(express.static("Follow"));
 app.use(express.static("image"));
 app.use(express.static("Unfollow"));
 app.use(express.static("project"));
-
-var db = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'123456', 
-    database:'pagenew'
-});
-db.connect();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.set("views", "./views_file");
+app.set("view engine", "jade");
 
 app.get("/", (req, res) => {
   var page1 = `
@@ -337,609 +352,98 @@ app.get("/choose", (req, res) => {
   res.send(html);
 });
 
-app.get("/portfolio", (req, res) => {
-    
-    var id = 'egoing';
-
-    db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error1, result1) => {
-        if(error1){
-            throw error;
-        }
-    db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error2, result2)=> {
-        if(error2){
-            throw error;
-        }
-        var photoPath = result1[0].photoPath;
-        var introduction = result1[0].introduction;
-        var phone = result1[0].phone;
-        var audioPath = result2[0].audioPath;
-
-        var contribute = 15;
-        var selection = 10;
-
-        console.log(result2.length);
-
-        var active = '<table>'
-        
-
-        var i = 0;
-        if(result2.legnth % 2 + 1) // 활동프로젝트 수가 짝수면
-        {
-          while(i*2 < result2.length){
-            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
-            i++;
-          }
-          active += '</table>'
-        }
-
-        else if(result2.length % 2) // 활동프로젝트 수가 홀수면
-        {
-          while(i*2 < result2.length - 1){
-            active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th><th><audio src="${result2[i*2+1].audioPath}" width="100px" controls></th></tr>`;
-            i++;
-          }
-          active += `<tr><th><audio src="${result2[i*2].audioPath}" width="100px" controls></th></tr></table>`
-        }
-        
-
-        var html = `
-        <!DOCTYPE html>
-        <html lang="ko">
-        
-        <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Portfolio</title>
-        
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-            <link href="css/bootstrap.min.css" rel="stylesheet">
-        
-            <style>
-                body {
-                  background-image: url("sky-clouds-summer.jpg");
-                  background-size: cover;
-                }
-        
-                .nav-container {
-                    display: flex;
-                    flex-direction: row;
-                    width: 100%;
-                    margin: 0;
-                    padding: 0;
-                    background-color: darkslategray;
-                    list-style-type: none;
-                    position: fixed;
-                    top: 0;
-                    z-index: 1;
-                }
-        
-                .nav-item {
-                    padding: 15px;
-                    cursor: pointer;
-                }
-        
-                .nav-item a {
-                    text-align: center;
-                    text-decoration: none;
-                    color: white;
-                }
-        
-                .nav-item:nth-child(1) {
-                    background-color: lightseagreen;
-                }
-        
-                .nav-item:hover {
-                    background-color: grey;
-                }
-        
-                section{
-                    position: absolute;
-                    display: block;
-                    top: 60px;
-                    width: 100%;
-                    height: 100%;
-                }
-        
-                .left-box {
-                    position: relative;
-                    top: 20px;
-                    display: inline;
-                    height: 100%;
-                    float: left;
-                    width: 28%;
-                    border-right-style: dashed;
-                    border-right-width: 3px;
-                }
-        
-                .right-box {
-                    position: relative;
-                    top: 20px;
-                    display: inline;
-                    height: 100%;
-                    float: right;
-                    width: 68%;
-                }
-        
-                div.profile > img{
-                    margin-top: 50px;
-                    width: 300px;
-                    display: block;
-                    margin-left:auto;
-                    margin-right: auto;
-                }
-      
-                .btn-follow{
-                    position: relative;
-                    top: 10px;
-                    right: 30px;
-                    display: inline-block;
-                    margin-left: 70%;
-                    width: 70px;
-                }
-      
-                h3{
-                  text-align: center;
-                }
-      
-                .intro{
-                    text-align: center;
-                    margin: 30px;
-                }
-      
-                .phone{
-                    margin-top: 30px;
-                    text-align: center;
-                }
-
-                .most{
-                  position: relative;
-                  top: 30px;
-                  width: 100%;
-                  height: 100px;
-                }
-
-                .most audio{
-                  position: absolute;
-                  left: 50%;
-                  transform: translateX(-50%);
-                }
-
-                .status p{
-                  position: relative;
-                  top: 30px;
-                  margin-left: 28%;
-                  display: inline;
-                }
-
-                .active-log{
-                  position: relative;
-                  top: 100px;
-                  width: 100%;
-                  text-align: center;
-                }
-
-                .active{
-                  position: relative;
-                  left: 20%;
-                  top: 100px;
-                }
-            </style>
-        </head>
-        
-        <body>
-            <nav>
-                <ul class="nav-container">
-                    <li class="nav-item"><a href="portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a href="collaborating">Collaborating</a></li>
-                    <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
-                </ul>
-            </nav>
-            <section>
-                <div class="left-box">
-                    <div class="profile">
-                        <img src="${photoPath}">
-                    </div>
-                    <div>
-                        <button type="button" class="btn-follow">팔로우</button>
-                    </div>
-                    <div class="phone">
-                      phone : ${phone}
-                    </div>
-                    <h3>자신을 소개합니다!</h3>
-                    <div class="intro">
-                      ${introduction}
-                    </div>
-                </div>
-                <div class="right-box">
-                  <h3>대표작품</h3>
-                    <div class="most">
-                      <audio src="${audioPath}" width="300px" controls>
-                    </div>
-                    <div class="status">
-                      <p id="contribute">기여 수 ${contribute}</p><p id="selection">채택 수 ${selection}</p>
-                    </div>
-                    <h3 class="active-log">
-                      활동기록
-                    </h3>
-                    <div class="active">
-                    ${active}
-                    </div>
-                </div>
-            </section>
-            
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-        </body>
-        </html>
-          `;
-        res.send(html);
-    });
-  })
-});
-
-app.get("/collaborating", (req, res)  => {
-
-
-  var id = 'egoing';
-
-  db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error, result)=> {
-    if(error){
-        throw error;
-    }
-
-    var active = ''
-      
-    var i = 0;
-    
-      while(i < result.length){
-        active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
-        i++;
-      }
-
-      var j = 0;
-      var contri=``;
-      while(j < 5){
-        contri += `<audio src=${j+1} controls>`;
-        j++;
-      }
-
-    var html = `
-    <!DOCTYPE html>
-    <html lang="ko">
-    
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Collaborating</title>
-  
-      <style>
-        body {
-          background-image: url("sky-clouds-summer.jpg");
-          background-size: cover;
-        }
-  
-        .nav-container {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: darkslategray;
-            list-style-type: none;
-            position: fixed;
-            top: 0;
-            z-index: 1;
-        }
-  
-        .nav-item {
-            padding: 15px;
-            cursor: pointer;
-        }
-  
-        .nav-item a {
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-  
-        .nav-item:nth-child(2) {
-            background-color: lightseagreen;
-        }
-  
-        .nav-item:hover {
-            background-color: grey;
-        }
-  
-        section{
-          position: absolute;
-          display: block;
-          top: 60px;
-          width: 100%;
-          height: 100%;
-        }
-  
-        .left-box {
-            position: relative;
-            top: 20px;
-            display: block;
-            height: 100%;
-            float: left;
-            width: 28%;
-            border-right-width: 3px;
-            border-right-style: dashed;
-        }
-  
-        .right-box {
-            position: relative;
-            top: 20px;
-            display: block;
-            height: 100%;
-            float: right;
-            width: 68%;
-        }
-
-        .audioPath{
-          float: left;
-        }
-
-        #contri{
-          position: relative;
-          top: 100px;
-        }
-      </style>
-    </head>
-    <body>
-      <nav>
-          <ul class="nav-container">
-              <li class="nav-item"><a href="portfolio">Portfolio</a></li>
-              <li class="nav-item"><a href="collaborating">Collaborating</a></li>
-              <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
-          </ul>
-      </nav>
-      <section>
-        <div class="left-box">
-              <h3>진행 중인 프로젝트</h3>
-                ${active}
-              
-              <button>create</button>
-            
-        </div>
-        <div class="right-box">
-          <h3>현재 선택된 프로젝트 </h3>
-          <div id="right-text">
-          </div>
-        </div>
-    </body>
-    <script>
-    function project(){
-      var content = document.getElementById("right-text");
-      content.innerHTML = "<audio src='${req.query.id}' controls>";
-      content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
-      content.innerHTML += "${contri}";
-    }
-    </script>
-    </html>
-    `;
-
-    res.send(html);
-  });
-});
-
-app.get("/waitingCollaboration", function (req, res) {
-  var files = fs.readdirSync("Follow"); //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
-  var list = "<tr>";
-  var i = 0;
-  while (i < files.length) {
-    list =
-      list +
-      `<th><p>${files[i]}<audio src="./Follow/${files[i]}" controls></audio></p></th>`;
-    list = list + `</tr>`;
-    i++;
-  }
-
-  var files2 = fs.readdirSync("Unfollow"); //Unfollow파일 -->사용자가 팔로우하지 않은 사람들의 곡이 들어있는 파일.
-  var list2 = "<tr>";
-  var s = 0;
-  while (s < files2.length) {
-    list2 =
-      list2 +
-      `<th><p>${files2[s]}<audio src="./Unfollow/${files2[s]}" controls></audio></p></th>`;
-    list2 = list2 + `</tr>`;
-    s++;
-  }
-
-  var page5 = `
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <title>Wating Collaboration</title>
-    </head>
-    
-    <body>
-    
-        <style>
-            body{
-                background-image: linear-gradient(.25turn, white, 10%, blue);
-                background-image: url("sky-clouds-summer.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-
-            .nav-container {
-              display: flex;
-              flex-direction: row;
-              width: 100%;
-              margin: 0;
-              padding: 0;
-              background-color: darkslategray;
-              list-style-type: none;
-              position: fixed;
-              top: 0;
-              z-index: 1;
-          }
-  
-          .nav-item {
-              padding: 15px;
-              cursor: pointer;
-          }
-  
-          .nav-item a {
-              text-align: center;
-              text-decoration: none;
-              color: white;
-          }
-  
-          .nav-item:nth-child(3) {
-              background-color: lightseagreen;
-          }
-  
-          .nav-item:hover {
-              background-color: grey;
-          }
-
-            .audio {
-                border-right: none;
-                border-left: none;
-                border-top: none;
-                border-bottom: none;
-            }
-    
-            .left-box{
-              position: relative;
-              top: 100px;
-                float: left;
-                width: 50%;
-            }
-    
-            .right-box{
-              position: relative;
-              top: 100px;
-                float: right;
-                width: 50%;
-            }
-        </style>
-        <nav>
-            <ul class="nav-container">
-                <li class="nav-item"><a href="portfolio">Portfolio</a></li>
-                <li class="nav-item"><a href="collaborating">Collaborating</a></li>
-                <li class="nav-item"><a href="waitingCollaboration">Waiting Collaboration</a></li>
-            </ul>
-        </nav>
-        <div class="left-box">
-            <table class="audio">
-                <tr>
-                    <th>팔로우한 프로젝트</th>
-                </tr>
-                ${list}
-            </table>
-        </div>
-    
-        <div class="right-box">
-            <table class="audio">
-                <tr>
-                    <th>팔로우 하지 않은 프로젝트</th>
-                </tr>
-                ${list2}
-            </table>
-    
-        </div>
-    </body>
-    
-    </html>
-    `;
-  res.send(page5);
-});
-
-
-
-app.get("/create1", (req, res) => {
-  var title = req.query.id;
-  var create = `
-  <a href="/create">create</a> <a href="/update?id=${req.query.id}">update</a>
-  <form action="/delete_process" method="post">
-    <input type="hidden" name="id" value="${title}">
-    <input type="submit" value="delete">
-  </form>
-    `;
-  res.send(create);
-});
-
 app.get("/create", function (req, res) {
-  db.query(`SELECT * FROM project;`, function (error, projects) {
-    if (error) {
-      throw error;
-    }
-    var template = `
-  <form action="/create_process" method="post">
-    <p><input type="text" name="title" placeholder="title"></p>
-    <p>
-      <textarea name="description" placeholder="description"></textarea>
-      </p>
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-    `;
-    res.writeHead(200);
-    res.send(template);
-  });
+  res.render("upload");
 });
-app.post("/create_process", function (req, res) {
-  //   var title = req.body.title;
-  //   var description = req.body.description;
-  db.query(
+
+app.post("/create_process", upload.single("userfile"), function (req, res) {
+  var title = req.body.title;
+  var description = req.body.description;
+  //var path = havetoreset; //! multer 후 작업 audioPath
+  //var id = "egoing";
+  mysql.db.query(
     `
-            INSERT INTO project (key, u_key, path, title, description) 
-              VALUES(1, 2, dfdfdf, ?, ?)`,
-    [post.title, post.description],
+            INSERT INTO project (u_id, audioPath, title, description) 
+              VALUES(?, ?, ?, ?)`,
+    ["egoing", req.file.filename, title, description],
     function (error, result) {
-      res.writeHead(302, { Location: `/?id=${result.insertId}` });
-      res.end();
+      if (error) {
+        throw error;
+      }
+    }
+  );
+  //res.send("Uploaded : " + req.file.filename);
+  //삭제함.
+  res.writeHead(302, { Location: `/?id=${req.file.filename}` });
+  res.end();
+});
+
+app.get("/update", function (req, res) {
+  mysql.db.query(
+    `SELECT * FROM project WHERE audioPath=?`,
+    [req.query.id],
+    function (error2, project) {
+      if (error2) {
+        throw error2;
+      }
+
+      var updatepage = `
+      <form action="update_process" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="${project[0].title}" />
+        <input type="hidden" name="audioPath" value="${req.query.id}" />
+        <p>
+            <input type="text" name="title" placeholder="title" value="${project[0].title}" />
+        </p>
+        <p>
+            <textarea name="description" placeholder="description">${project[0].description}</textarea>
+        </p>
+        <input type="file" name="userfile" />
+        <input type="submit" />
+      </form>`;
+
+      console.log(req.query.id);
+      res.send(updatepage);
     }
   );
 });
 
-app.get("/update", function (req, res) {
-  fs.readFile(`Active/${req.query.id}`, "utf-8", function (err, description) {
-    var jaemook = req.query.id;
-    var template = `
-      <form action="/update_process" method="post">
-        <input type="hidden" name="id" value="${jaemook}">
-        <p><input type="text" name="title" placeholder="title" value="${jaemook}"></p>
-        <p>
-          <textarea name="description" placeholder="description">${description}</textarea>
-          </p>
-          <p>
-            <input type="submit">
-          </p>
-        </form>
-        <a href="/create">create</a> <a href="/update?id=${jaemook}">update</a>`;
-    res.send(template);
-  });
-});
 app.post("/update_process", function (req, res) {
-  var id = req.body.id;
   var title = req.body.title;
   var description = req.body.description;
+  var audioPath = req.body.audioPath;
+  console.log(audioPath);
 
-  fs.rename(`Active/${id}`, `Active/${title}`, function (err) {
-    fs.writeFile(`Active/${title}`, description, "utf-8", function (err) {
-      res.writeHead(302, { Location: `/?id=${title}` });
+  mysql.db.query(
+    `UPDATE project SET audioPath=?, title=?, description=? WHERE audioPath=? `,
+    [audioPath, title, description, audioPath],
+    function (error, result) {
+      res.writeHead(302, { Location: `/?id=${audioPath}` });
       res.end();
-    });
-  });
+    }
+  );
+
+  // fs.rename(`Active/${id}`, `Active/${title}`, function (err) {
+  //   fs.writeFile(`Active/${title}`, description, "utf-8", function (err) {
+  //     res.writeHead(302, { Location: `/?id=${title}` });
+  //     res.end();
+  //   });
+  // });
 });
 
 app.post("/delete_process", function (req, res) {
   var id = req.body.id;
-  fs.unlink(`Active/${id}`, function (err) {
-    res.writeHead(302, { Location: `/` });
-    res.end();
-  });
+  console.log(id);
+  mysql.db.query(
+    `DELETE FROM project WHERE audioPath = ?`,
+    [id],
+    function (error, result) {
+      if (error) {
+        throw error;
+      }
+      res.writeHead(302, { Location: `/` });
+      res.end();
+    }
+  );
 });
 
 app.listen(3000, function () {
