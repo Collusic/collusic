@@ -2,6 +2,8 @@ const express = require("express");
 var router = express.Router();
 var mysql = require("../mysql");
 var css = require('../css');
+const { query } = require("express");
+const { db } = require("../mysql");
 
 router.get("/collaborating", (req, res)  => {
     var navCss = css.navBar;
@@ -21,7 +23,11 @@ router.get("/collaborating", (req, res)  => {
           active += `<p class="audioPath"><a href="/collaborating?id=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`
           i++;
         }
-  
+        // create_process 페이지에서 db.query(project id= egoing (err, result)=>{
+        //   var num = result.length + 1;
+        // })
+        // db.query(`insert 뭐시기 뭐시기 뭐시기 p_key values(뭐시기 뭐시기 뭐시기 ?)`, [num]);
+
         var j = 0;
         var contri=``;
         while(j < 5){
