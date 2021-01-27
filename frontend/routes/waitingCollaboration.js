@@ -1,36 +1,44 @@
 const express = require("express");
 var router = express.Router();
 var mysql = require("../mysql");
-var css = require('../css');
+var css = require("../css");
 const fs = require("fs");
 
 router.get("/waitingCollaboration", function (req, res) {
+  var navCss = css.navBar;
 
-    var navCss = css.navBar;
+  var id = "duru"; //id는 팔로우하는 사람의 아이디
 
-    var files = fs.readdirSync("Follow"); //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
-    var list = "<tr>";
-    var i = 0;
-    while (i < files.length) {
-      list =
-        list +
-        `<th><p>${files[i]}<audio src="./Follow/${files[i]}" controls></audio></p></th>`;
-      list = list + `</tr>`;
-      i++;
-    }
-  
-    var files2 = fs.readdirSync("Unfollow"); //Unfollow파일 -->사용자가 팔로우하지 않은 사람들의 곡이 들어있는 파일.
-    var list2 = "<tr>";
-    var s = 0;
-    while (s < files2.length) {
-      list2 =
-        list2 +
-        `<th><p>${files2[s]}<audio src="./Unfollow/${files2[s]}" controls></audio></p></th>`;
-      list2 = list2 + `</tr>`;
-      s++;
-    }
-  
-    var page5 = `
+  mysql.db.query(
+    `select * from Follow where f_id = ?`,
+    [id],
+    function (error, result) {
+      if (error) {
+        throw error;
+      }
+      var list = "<tr>";
+      var i = 0;
+      while (i < result.length) {
+        list =
+          list +
+          `<th><p>${result[i].title}<audio src="./Follow/${result[i].audioPath}" controls></audio></p></th>`;
+        list = list + `</tr>`;
+        i++;
+      }
+
+      //Follow파일 -->사용자가 팔로우한 사람들의 곡이 들어있는 파일.
+      var files2 = fs.readdirSync("Unfollow"); //Unfollow파일 -->사용자가 팔로우하지 않은 사람들의 곡이 들어있는 파일.
+      var list2 = "<tr>";
+      var s = 0;
+      while (s < files2.length) {
+        list2 =
+          list2 +
+          `<th><p>${files2[s]}<audio src="./Unfollow/${files2[s]}" controls></audio></p></th>`;
+        list2 = list2 + `</tr>`;
+        s++;
+      }
+
+      var page5 = `
       <!DOCTYPE html>
       <html lang="en">
       
@@ -101,6 +109,9 @@ router.get("/waitingCollaboration", function (req, res) {
       
       </html>
       `;
-    res.send(page5);
-  });
-  module.exports = router;
+
+      res.send(page5);
+    }
+  );
+});
+module.exports = router;

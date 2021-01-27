@@ -89,7 +89,7 @@ CREATE TABLE `commit` (
   `u_id` varchar(20) NOT NULL,
   `c_id` varchar(20) NOT NULL,
   `p_key` int(11) NOT NULL,
-  `audioPath` varchar(50) NOT NULL,
+  `audioPath` varchar(50),
   `description` text,
   PRIMARY KEY (`key`)
 );
@@ -99,4 +99,4 @@ CREATE TABLE `commit` (
 --
  
 INSERT INTO `commit` VALUES (1,'egoing','daae',1,'기여내용1.mp3','기타소리를 추가해봤어요 이건 어떠세요??');
-INSERT INTO `commit` VALUES (2,'taeho',`jeahyun`,2,'sindisizer.mp3','edm 느낌으로 추가해봤습니다');
+INSERT INTO `commit` VALUES (2,'taeho','jeahyun',2,'sindisizer.mp3','edm 느낌으로 추가해봤습니다');
