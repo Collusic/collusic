@@ -2,6 +2,13 @@ const express = require("express");
 var router = express.Router();
 
 router.get("/", (req, res) => {
+
+  var fmsg = request.flash();
+  var feedback = '';
+  if (fmsg.error) {
+    feedback = fmsg.error[0];
+  }
+
     var page1 = `
     <!DOCTYPE html>
     <html>
@@ -57,10 +64,83 @@ router.get("/", (req, res) => {
                       <input type='reset' value='google'> 
                       <input type='reset' value='Facebook'>
                   </form>
+                  <a href="/legister"><button>회원가입</button></a>
           </fieldset>
+          <div style="color:red;">${feedback}</div>
     </body>
     </html>
     `;
     res.send(page1);
+});
+
+// 회원가입 UI
+router.get('/register', function (req, res) {
+  
+  var html = `
+      
+      <form action="/auth/register_process" method="post">
+        <p><input type="text" name="email" placeholder="email" value="egoing7777@gmail.com"></p>
+        <p><input type="password" name="pwd" placeholder="password" value="111111"></p>
+        <p><input type="password" name="pwd2" placeholder="password" value="111111"></p>
+        <p><input type="text" name="displayName" placeholder="display name" value="egoing"></p>
+        <p>
+          <input type="submit" value="register">
+        </p>
+      </form>
+    `;
+  response.send(html);
+});
+
+// 회원가입 정보 lowdb에 저장
+router.post('/register_process', function (req, res, next) {
+  hasher(
+    { password: req.body.password },
+    function (err, pass, salt, hash) {
+      var user = {
+        authId: 'local:' + req.body.username,
+        username: req.body.username,
+        password: hash,
+        salt: salt
+      };
+      db.query(
+        'INSERT INTO users SET ?',
+        user, 
+        function (err, result) {
+          if (error) throw error;
+          res.redirect('/');
+      });
+    }
+  );
+  var post = request.body;
+  var email = post.email;
+  var pwd = post.pwd;
+  var pwd2 = post.pwd2;
+  var displayName = post.displayName;
+  if (pwd !== pwd2) {
+    req.flash('error', 'Password must same!');
+    res.redirect('/');
+  } else {
+    bcrypt.hash(pwd, 10, function (err, hash) {
+      // db.json에 저장할 사용자 회원가입 내용
+      var user = {
+        id: shortid.generate(),
+        email: email,
+        password: hash,
+        displayName: displayName
+      };
+      db.get('users').push(user).write();
+      req.login(user, function (err) {
+        console.log('redirect');
+        return res.redirect('/choose');
+      })
+    });
+  }
+});
+
+router.get('/logout', function (req, res) {
+  req.logout();
+  req.session.save(function () {
+    res.redirect('/');
+  });
 });
 module.exports = router;

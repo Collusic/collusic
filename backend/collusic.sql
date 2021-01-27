@@ -3,19 +3,23 @@
 --
  
  
-CREATE TABLE `user` (
-  `id` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-);
+CREATE TABLE `users` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `authId` VARCHAR(50) NOT NULL ,
+    `username` VARCHAR(30) NOT NULL, 
+    `password` VARCHAR(255) NOT NULL, 
+    `salt` VARCHAR(255),
+    PRIMARY KEY (id), 
+    UNIQUE (authId)
+) ENGINE = InnoDB;
  
 --
 -- Dumping data for table `user`
 --
  
-INSERT INTO `user` VALUES ('egoing','egoing@gmail.com');
-INSERT INTO `user` VALUES ('duru','duru@gmail.com');
-INSERT INTO `user` VALUES ('taeho','taeho@gmail.com');
+-- INSERT INTO `user` VALUES ('egoing','egoing@gmail.com');
+-- INSERT INTO `user` VALUES ('duru','duru@gmail.com');
+-- INSERT INTO `user` VALUES ('taeho','taeho@gmail.com');
  
 --
 -- Table structure for table `portfolio`
