@@ -71,7 +71,7 @@ CREATE TABLE `commit` (
   `u_name` varchar(20) NOT NULL,
   `c_name` varchar(20) NOT NULL,
   `p_key` int(11) NOT NULL,
-  `audioPath` varchar(50),
+  `c_audioPath` varchar(50),
   `description` text,
   PRIMARY KEY (`key`)
 );
