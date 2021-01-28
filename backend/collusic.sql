@@ -4,11 +4,11 @@
  
  
 CREATE TABLE `user` ( 
-    `id` VARCHAR(50) NOT NULL, 
+    `email` VARCHAR(50) NOT NULL, 
     `password` VARCHAR(255) NOT NULL,
-    `userid` VARCHAR(30) NOT NULL, 
+    `username` VARCHAR(30) NOT NULL, 
     `photoPath` VARCHAR(255),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`email`)
 );
  
 --
@@ -25,7 +25,7 @@ INSERT INTO `user` VALUES ('taeho@gmail.com','111111','taeho','');
  
 CREATE TABLE `portfolio` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` varchar(20) NOT NULL,
+  `u_name` varchar(20) NOT NULL,
   `photoPath` varchar(20),
   `introduction` text,
   `phone`  varchar(15),
@@ -41,32 +41,12 @@ INSERT INTO `portfolio` VALUES (2,'duru','그림2.png', 'Oracle is ...','010-342
 INSERT INTO `portfolio` VALUES (3,'taeho','', 'SQL Server is ...','010-1223-1125');
 
 --
--- Table structure for table `active`
---
- 
-CREATE TABLE `active` (
-  `key` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` varchar(20) NOT NULL,
-  `date` varchar(20) NOT NULL,
-  `contents` text,
-  PRIMARY KEY (`key`)
-);
- 
---
--- Dumping data for table `active`
---
- 
-INSERT INTO `active` VALUES (1,'egoing','2020-02-18','JYP 아이돌 연습생');
-INSERT INTO `active` VALUES (2,'duru','2020-03-20','JYP 작곡 커뮤니티');
-INSERT INTO `active` VALUES (3,'taeho','2021-01-15','매니저 인턴');
-
---
 -- Table structure for table `project`
 --
  
 CREATE TABLE `project` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` varchar(20) NOT NULL,
+  `u_name` varchar(20) NOT NULL,
   `project_key` int(11) NOT NULL,
   `audioPath` varchar(50) NOT NULL,
   `title` varchar(20) NOT NULL,
@@ -88,8 +68,8 @@ INSERT INTO `project` VALUES (3,'taeho',1,'music1.mp3','내가 살아있는 건'
  
 CREATE TABLE `commit` (
   `key` int(11) NOT NULL AUTO_INCREMENT,
-  `u_id` varchar(20) NOT NULL,
-  `c_id` varchar(20) NOT NULL,
+  `u_name` varchar(20) NOT NULL,
+  `c_name` varchar(20) NOT NULL,
   `p_key` int(11) NOT NULL,
   `audioPath` varchar(50),
   `description` text,

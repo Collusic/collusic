@@ -10,12 +10,12 @@ module.exports = function (app) {
 
     passport.serializeUser(function (user, done) {
         console.log('serializeUser', user);
-        done(null, user.id);
+        done(null, user.email);
     });
 
     passport.deserializeUser(function (id, done) {
         mysql.db.query(
-            `SELECT * FROM user WHERE id=?`,
+            `SELECT * FROM user WHERE email=?`,
             [id],
             function (error2, result) {
               if (error2) {
@@ -34,7 +34,7 @@ module.exports = function (app) {
         function (email, password, done) {
             console.log('LocalStrategy', email, password);
             mysql.db.query(
-                `SELECT * FROM user WHERE id=?`,
+                `SELECT * FROM user WHERE email=?`,
                 [email],
                 function (error2, result) {
                 if (error2) {

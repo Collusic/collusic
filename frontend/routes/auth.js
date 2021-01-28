@@ -96,7 +96,7 @@ router.get('/register', function (req, res) {
         <p><input type="text" name="email" placeholder="email"></p>
         <p><input type="password" name="pwd" placeholder="password"></p>
         <p><input type="password" name="pwd2" placeholder="password"></p>
-        <p><input type="text" name="userid" placeholder="userid"></p>
+        <p><input type="text" name="username" placeholder="userid"></p>
         <p><input type="submit" value="register"></p>
       </form>
       <div>${feedback}</div>
@@ -109,16 +109,16 @@ router.post('/register_process', (req, res)=>{
   var email = post.email;
   var pwd = post.pwd;
   var pwd2 = post.pwd2;
-  var userid = post.userid;
+  var username = post.username;
   if(pwd !== pwd2){
     req.flash('error', 'Password must same!');
     res.redirect('/register');
   }else{
-  mysql.db.query(`insert into user (id, password, userid) values (?, ?, ?)`,
-  [email, pwd, userid], (err, result)=>{
+  mysql.db.query(`insert into user (email, password, username) values (?, ?, ?)`,
+  [email, pwd, username], (err, result)=>{
     if(err) throw err;
   })
-  mysql.db.query(`select * from user where id = ?`,
+  mysql.db.query(`select * from user where email = ?`,
   [email], (err, user)=>{
     if(err) throw err;
     req.login(user[0], (err)=>{

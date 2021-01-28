@@ -32,9 +32,9 @@ router.post("/create_process", upload.single("userfile"), function (req, res) {
   //var id = "egoing";
   mysql.db.query(
     `
-            INSERT INTO project (u_id, audioPath, title, description) 
+            INSERT INTO project (u_name, audioPath, title, description) 
               VALUES(?, ?, ?, ?)`,
-    ["egoing@gmail.com", req.file.filename, title, description],
+    [req.user.email, req.file.filename, title, description],
     function (error, result) {
       if (error) {
         throw error;
@@ -61,7 +61,6 @@ router.get("/update", function (req, res) {
 
       var updatepage = `
       <form action="update_process" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="${project[0].title}" />
         <input type="hidden" name="audioPath" value="${req.query.audioPath}" />
         <p>
             <input type="text" name="title" placeholder="title" value="${project[0].title}" />
@@ -101,11 +100,11 @@ router.post("/delete_process", function (req, res) {
 }
     console.log(req.body);
   var audioPath = req.body.audioPath;
-  var id = req.body.id;
+  var username = req.body.username;
   
   mysql.db.query(
-    `DELETE FROM project WHERE audioPath = ? and u_id = ?`,
-    [audioPath, id],
+    `DELETE FROM project WHERE audioPath = ? and u_name = ?`,
+    [audioPath, username],
     function (error, result) {
       if (error) {
         throw error;

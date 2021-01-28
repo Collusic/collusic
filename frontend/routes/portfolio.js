@@ -11,11 +11,11 @@ router.get("/portfolio", (req, res) => {
 }
     var navCss = css.navBar;
 
-    mysql.db.query(`select * from portfolio as p join user as u on p.u_id=u.userid where u.userid=?;`,[req.user.userid] , (error1, result1) => {
+    mysql.db.query(`select * from portfolio as p join user as u on p.u_name=u.username where u.username=?;`,[req.user.username] , (error1, result1) => {
         if(error1){
             throw error1;
         }
-        mysql.db.query(`select * from project as p join user as u on p.u_id=u.userid where u.userid=? and p.project_key = ?;`, [req.user.userid, 1], (error2, result2)=> {
+        mysql.db.query(`select * from project as p join user as u on p.u_name=u.username where u.username=? and p.project_key = ?;`, [req.user.username, 1], (error2, result2)=> {
         if(error2){
             throw error2;
         }

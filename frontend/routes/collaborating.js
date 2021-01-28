@@ -11,11 +11,9 @@ router.get("/collaborating", (req, res) => {
 }
   var navCss = css.navBar;
 
-  var id = "egoing";
-
   mysql.db.query(
-    `select * from project as p join user as u on p.u_id=u.userid where u.userid=?;`,
-    [id],
+    `select * from project as p join user as u on p.u_name=u.username where u.username=?;`,
+    [req.user.username],
     (error, result) => {
       if (error) {
         throw error;
@@ -114,7 +112,7 @@ router.get("/collaborating", (req, res) => {
                 }">update</a>
   <form action="/delete_process" method="post">
     <input type="hidden" name="audioPath" value="${audioPath}">
-    <input type="hidden" name="id" value="${id}">
+    <input type="hidden" name="username" value="${req.user.username}">
     <input type="submit" value="delete">
   </form>
               

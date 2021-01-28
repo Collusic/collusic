@@ -29,13 +29,6 @@ app.use(flash());
 
 var passport = require('./lib/passport')(app);
 
-var authData = {
-  email: 'egoing777@gmail.com',
-  password: '111111',
-  nickname: 'egoing'
-};
-
-
 var mysqlRouter = require("./routes/mysql");
 var authRouter = require("./routes/auth")(passport);
 var chooseRouter = require("./routes/choose");
