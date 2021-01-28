@@ -200,17 +200,15 @@ router.post(
     //var path = havetoreset; //! multer 후 작업 audioPath
     //var id = "egoing";
     mysql.db.query(
-      `SELECT * FROM commit WHERE u_id = ?, p_key=?, c_audioPath = ?`,
+      `SELECT * FROM commit WHERE u_id = ? and p_key=? and c_audioPath = ?`,
       [u_id, p_key, "NULL"],
       function (error, result) {
         if (error) {
           throw error;
         }
-
+        //UPDATE project SET audioPath=?, title=?, description=? WHERE audioPath=?
         mysql.db.query(
-          `
-                  INSERT INTO commit (c_audioPath, description) 
-                    VALUES(?, ?)`,
+          `UPDATE commit SET c_audioPath=?, description=?`,
           [req.file.filename, description],
           function (error, result2) {
             if (error) {
