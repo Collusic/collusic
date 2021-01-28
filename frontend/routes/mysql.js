@@ -120,17 +120,6 @@ router.post("/update_process", upload.single("userfile"), function (req, res) {
   );
 });
 
-<<<<<<< HEAD
-router.post("/delete_process", function (req, res) {
-  if(!auth.isOwner(req, res)){
-    res.redirect('/');
-    return false;
-}
-    console.log(req.body);
-  var audioPath = req.body.audioPath;
-  var username = req.body.username;
-  
-=======
 router.post("/deleteProject_process", function (req, res) {
   if(!auth.isOwner(req, res)){
     res.redirect('/');
@@ -204,13 +193,11 @@ router.get("/create_contri", function (req, res) {
   var u_name = req.query.u_name;
   var p_key = req.query.p_key;
   //check
-  var id = req.query.p_key;
   var c_audioPath = req.query.c_audioPath;
   var commitform = `
           <form action="create_contriprocess" method="post" enctype="multipart/form-data">
               <input type="hidden" name="u_id" value="${u_name}" />
               <input type="hidden" name="p_key" value="${p_key}" />
-              <input type="hidden" name="id" value="${id}" />
               <input type="hidden" name="c_audioPath" value="${c_audioPath}" />
               <p>
                   <textarea name="description" placeholder="description"></textarea>
@@ -219,7 +206,7 @@ router.get("/create_contri", function (req, res) {
               <input type="submit" />
           </form>`;
           //check
-  console.log(u_name, p_key, id, c_audioPath);
+  console.log(u_name, p_key, c_audioPath);
   res.send(commitform);
 });
 
@@ -277,10 +264,10 @@ router.get("/update_contri", function (req, res) {
       if (error2) {
         throw error2;
       }
-
+//check
       var updatepage = `
       <form action="update_process" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="${project[0].title}" />
+        <input type="hidden" name="title_before" value="${project[0].title}" />
         <input type="hidden" name="audioPath" value="${req.query.audioPath}" />
         <p>
             <input type="text" name="title" placeholder="title" value="${project[0].title}" />
@@ -328,9 +315,9 @@ router.post("/deletecontri_process", function (req, res) {
 }
   console.log("req body_P", req.body);
   var audioPath = req.body.audioPath;
+  //check
   var id = req.body.id;
 
->>>>>>> feature/Issue-10
   mysql.db.query(
     `DELETE FROM project WHERE audioPath = ? and u_name = ?`,
     [audioPath, username],
