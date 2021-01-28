@@ -5,12 +5,13 @@ var css = require("../css");
 var auth = require("../lib/auth");
 
 router.get("/collaborating", (req, res) => {
+  console.log('user : ',req.user.username);
   if(!auth.isOwner(req, res)){
     res.redirect('/');
     return false;
 }
   var navCss = css.navBar;
-
+console.log('user : ',req.user.username);
   mysql.db.query(
     `select * from project as p join user as u on p.u_name=u.username where u.username=?;`,
     [req.user.username],
@@ -35,10 +36,10 @@ router.get("/collaborating", (req, res) => {
         contri += `<audio src=${j + 1} controls>`;
         j++;
       }
-      //select * from project as p join commit as c on p.project_key = c.p_key and c.u_id=p.u_id and c.p_key =p.project_key where  c_id = "egoing";
+      //select * from project as p join commit as c on p.project_key = c.p_key and c.u_name=p.u_name and c.p_key =p.project_key where  c_name = "egoing";
       mysql.db.query(
-        `select * from commit as c join project as p on c.u_id=p.u_id and c.p_key=p.project_key where c.c_id= ?;`,
-        [id],
+        `select * from commit as c join project as p on c.u_name=p.u_name and c.p_key=p.project_key where c.c_name= ?;`,
+        [req.user.username],
         (error, result2) => {
           if (error) {
             throw error;
@@ -49,7 +50,7 @@ router.get("/collaborating", (req, res) => {
           var s = 0;
 
           while (s < result2.length) {
-            active2 += `<p class="audioPath"><a href="/collaborating?u_id=${result2[s].u_id}&p_key=${result2[s].p_key}&audioPath=${result2[s].audioPath}&c_audioPath=${result2[s].c_audioPath}">${result2[s].audioPath}</a><button onclick="project2()">보기</button></p>`;
+            active2 += `<p class="audioPath"><a href="/collaborating?u_name=${result2[s].u_name}&p_key=${result2[s].p_key}&audioPath=${result2[s].audioPath}&c_audioPath=${result2[s].c_audioPath}">${result2[s].audioPath}</a><button onclick="project2()">보기</button></p>`;
             s++;
           }
 
@@ -61,7 +62,7 @@ router.get("/collaborating", (req, res) => {
           }
 
           var audioPath = req.query.audioPath; // update, delete, create 버튼 가져오면서 생성한 변수 --다애가 넣음! 106번째 줄-112번째 줄
-          var u_id = req.query.u_id;
+          var u_name = req.query.u_name;
           var p_key = req.query.p_key;
           var c_audioPath = req.query.c_audioPath;
 
@@ -134,35 +135,29 @@ router.get("/collaborating", (req, res) => {
                 <h3>협업요청 중인 프로젝트</h3>
                   ${active}
                 
-                <div><a href="/create">create</a> <a href="/update?audioPath=${
-                  req.query.audioPath
-                }">update</a></div>
+                <div><a href="/create">create</a> <a href="/update?audioPath=${req.query.audioPath}">update</a></div>
   <form action="/deleteProject_process" method="post">
     <input type="hidden" name="audioPath" value="${audioPath}">
     <input type="hidden" name="username" value="${req.user.username}">
     <input type="submit" value="delete">
   </form>
-                <p><h3>기여중인 프로젝트</h3></p>
-                  ${active2}
-                  <form action="/deleteCommit_process" method="post">
-    <input type="hidden" name="u_id" value="${u_id}">
-    <input type="hidden" name="p_key" value="${p_key}">
-    <input type="hidden" name="id" value="${id}">
-    <input type="hidden" name="c_audioPath" value="${c_audioPath}">
-    <input type="submit" value="delete">
-  </form>
-  
+    <p><h3>기여중인 프로젝트</h3></p>
+      ${active2}
+      <form action="/deleteCommit_process" method="post">
+        <input type="hidden" name="u_name" value="${u_name}">
+        <input type="hidden" name="p_key" value="${p_key}">
+        <input type="submit" value="delete">
+      </form>
           </div>
+
           <div class="right-box">
             <h3>현재 선택된 프로젝트 </h3>
-            <div><a href="/create_contri?u_id=${u_id}&p_key=${p_key}&c_audioPath=${c_audioPath}">create</a> <a href="/update_contri?audioPath=${
-            req.query.audioPath
-          }">update</a></div>
-<form action="/deletecontri_process" method="post">
-<input type="hidden" name="audioPath" value="${audioPath}">
-<input type="hidden" name="id" value="${id}">
-<input type="submit" value="delete">
-</form>
+            <div><a href="/create_contri?u_name=${u_name}&p_key=${p_key}&c_audioPath=${c_audioPath}">create</a> 
+            <a href="/update_contri?audioPath=${req.query.audioPath}">update</a></div>
+            <form action="/deletecontri_process" method="post">
+              <input type="hidden" name="audioPath" value="${audioPath}">
+              <input type="submit" value="delete">
+            </form>
             <div id="right-text">
             </div>
           </div>

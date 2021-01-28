@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 var auth = require("../lib/auth");
 
 router.use(bodyParser.urlencoded({ extended: false }));
-var id = "egoing";
 var multer = require("multer");
 var _storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -47,8 +46,8 @@ router.post("/create_process", upload.single("userfile"), function (req, res) {
   //var path = havetoreset; //! multer 후 작업 audioPath
   //var id = "egoing";
   mysql.db.query(
-    `SELECT * FROM project WHERE u_id = ?`,
-    [id],
+    `SELECT * FROM project WHERE u_username = ?`,
+    [req.user.username],
     function (error, project) {
       if (error) {
         throw error;
@@ -127,11 +126,10 @@ router.post("/deleteProject_process", function (req, res) {
 }
   console.log("req body_P", req.body);
   var audioPath = req.body.audioPath;
-  var username = req.body.username;
 
   mysql.db.query(
     `DELETE FROM project WHERE audioPath = ? and u_name = ?`,
-    [audioPath, username],
+    [audioPath, req.user.username],
     function (error, result) {
       if (error) {
         throw error;
@@ -149,12 +147,10 @@ router.post("/deleteCommit_process", function (req, res) {
   console.log("req.body_C", req.body);
   var u_name = req.body.u_name;
   var p_key = req.body.p_key;
-  var username = req.body.username;
-  var c_audioPath = req.body.c_audioPath;
   //select * from commit as c join project as p on c.u_id=p.u_id where c.c_id= ?;
   mysql.db.query(
     `DELETE FROM commit where u_name = ? and c_name=? and p_key=?`,
-    [u_name, username, p_key],
+    [u_name, req.user.username, p_key],
     function (error, result) {
       if (error) {
         throw error;
@@ -196,7 +192,7 @@ router.get("/create_contri", function (req, res) {
   var c_audioPath = req.query.c_audioPath;
   var commitform = `
           <form action="create_contriprocess" method="post" enctype="multipart/form-data">
-              <input type="hidden" name="u_id" value="${u_name}" />
+              <input type="hidden" name="u_name" value="${u_name}" />
               <input type="hidden" name="p_key" value="${p_key}" />
               <input type="hidden" name="c_audioPath" value="${c_audioPath}" />
               <p>
@@ -227,7 +223,7 @@ router.post(
     //var path = havetoreset; //! multer 후 작업 audioPath
     //var id = "egoing";
     mysql.db.query(
-      `SELECT * FROM commit WHERE u_id = ? and p_key=? and c_audioPath = ?`,
+      `SELECT * FROM commit WHERE u_name = ? and p_key=? and c_audioPath = ?`,
       [u_name, p_key, "NULL"],
       function (error, result) {
         if (error) {
@@ -316,11 +312,10 @@ router.post("/deletecontri_process", function (req, res) {
   console.log("req body_P", req.body);
   var audioPath = req.body.audioPath;
   //check
-  var id = req.body.id;
 
   mysql.db.query(
     `DELETE FROM project WHERE audioPath = ? and u_name = ?`,
-    [audioPath, username],
+    [audioPath, req.user.username],
     function (error, result) {
       if (error) {
         throw error;
