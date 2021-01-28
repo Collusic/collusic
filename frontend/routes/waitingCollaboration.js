@@ -1,12 +1,7 @@
 const express = require("express");
 var router = express.Router();
-<<<<<<< HEAD
 var mysql = require("../lib/mysql");
 var css = require('../css');
-=======
-var mysql = require("../mysql");
-var css = require("../css");
->>>>>>> feature/Issue-10
 const fs = require("fs");
 var auth = require("../lib/auth");
 
