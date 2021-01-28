@@ -151,6 +151,14 @@ router.get("/collaborating", (req, res) => {
           </div>
           <div class="right-box">
             <h3>현재 선택된 프로젝트 </h3>
+            <div><a href="/create_contri?u_id=${u_id}&p_key=${p_key}&c_audioPath=${c_audioPath}">create</a> <a href="/update_contri?audioPath=${
+            req.query.audioPath
+          }">update</a></div>
+<form action="/deletecontri_process" method="post">
+<input type="hidden" name="audioPath" value="${audioPath}">
+<input type="hidden" name="id" value="${id}">
+<input type="submit" value="delete">
+</form>
             <div id="right-text">
             </div>
           </div>
@@ -161,6 +169,7 @@ router.get("/collaborating", (req, res) => {
         content.innerHTML = "<audio src='${req.query.audioPath}' controls>";
         content.innerHTML += "<div>기여한 사람들의 멜로디</div>";
         content.innerHTML += "${contri}";
+        
       }
       </script>
       <script>
