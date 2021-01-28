@@ -3,3 +3,4 @@ node_modules/**/package.json
 package.json
 project/
 node_modules/
+*.json
