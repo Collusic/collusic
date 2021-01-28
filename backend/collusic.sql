@@ -3,23 +3,21 @@
 --
  
  
-CREATE TABLE `users` ( 
-    `id` INT NOT NULL AUTO_INCREMENT , 
-    `authId` VARCHAR(50) NOT NULL ,
-    `username` VARCHAR(30) NOT NULL, 
-    `password` VARCHAR(255) NOT NULL, 
-    `salt` VARCHAR(255),
-    PRIMARY KEY (id), 
-    UNIQUE (authId)
-) ENGINE = InnoDB;
+CREATE TABLE `user` ( 
+    `id` VARCHAR(50) NOT NULL, 
+    `password` VARCHAR(255) NOT NULL,
+    `userid` VARCHAR(30) NOT NULL, 
+    `photoPath` VARCHAR(255),
+    PRIMARY KEY (`id`)
+);
  
 --
 -- Dumping data for table `user`
 --
  
--- INSERT INTO `user` VALUES ('egoing','egoing@gmail.com');
--- INSERT INTO `user` VALUES ('duru','duru@gmail.com');
--- INSERT INTO `user` VALUES ('taeho','taeho@gmail.com');
+INSERT INTO `user` VALUES ('egoing@gmail.com','111111','egoing','그림1.png');
+INSERT INTO `user` VALUES ('duru@gmail.com','111111','duru','그림2.png');
+INSERT INTO `user` VALUES ('taeho@gmail.com','111111','taeho','');
  
 --
 -- Table structure for table `portfolio`

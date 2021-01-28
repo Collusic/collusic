@@ -1,8 +1,9 @@
 const express = require("express");
 var router = express.Router();
-var mysql = require("../mysql");
+var mysql = require("../lib/mysql");
 var css = require('../css');
 const fs = require("fs");
+var auth = require("../lib/auth");
 
 router.get("/waitingCollaboration", function (req, res) {
 

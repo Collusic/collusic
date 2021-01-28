@@ -1,9 +1,15 @@
 const express = require("express");
 const app = express();
-var mysql = require("./mysql");
+var mysql = require("./lib/mysql");
 var bodyParser = require("body-parser");
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
+var flash = require('connect-flash');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.set("views", "./views_file");
+app.set("view engine", "jade");
+const port = 3000;
 
 
 app.use(session({
@@ -12,20 +18,26 @@ app.use(session({
   saveUninitialized: true,
   store: new MySQLStore({
     host:'localhost',
+    port:3306,
     user:'root',
     password:'Password123!',
     database:'collusic'
   })
 }));
-app.use(passport.initialize()); // passport 사용 하도록 세팅
-app.use(passport.session()); // passport 사용 시 session을 활용
+// 미들웨어의 실행순서 중요. falsh는 session 다음 
 app.use(flash());
 
-var bkfd2Password = require("pbkdf2-password");
-var hasher = bkfd2Password();
+var passport = require('./lib/passport')(app);
+
+var authData = {
+  email: 'egoing777@gmail.com',
+  password: '111111',
+  nickname: 'egoing'
+};
+
 
 var mysqlRouter = require("./routes/mysql");
-var authRouter = require("./routes/auth");
+var authRouter = require("./routes/auth")(passport);
 var chooseRouter = require("./routes/choose");
 var portfolioRouter = require("./routes/portfolio");
 var collaboratingRouter = require("./routes/collaborating");
@@ -39,12 +51,6 @@ app.use("/", chooseRouter);
 app.use("/", portfolioRouter);
 app.use("/", collaboratingRouter);
 app.use("/", waitingCollaborationRouter);
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.set("views", "./views_file");
-app.set("view engine", "jade");
-
-const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

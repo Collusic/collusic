@@ -1,7 +1,13 @@
 const express = require("express");
 var router = express.Router();
+var auth = require("../lib/auth");
 
 router.get("/choose", (req, res) => {
+    if(!auth.isOwner(req, res)){
+        res.redirect('/');
+        return false;
+    }
+
   var html = `
     <!DOCTYPE html>
     <html lang="ko">
@@ -182,6 +188,7 @@ router.get("/choose", (req, res) => {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
         <script src="js/bootstrap.min.js"></script>
+        <div>${auth.statusUI(req, res)}</div>
         <div class="row">
         <a href="/portfolio">
             <div class="col-md-4 left">

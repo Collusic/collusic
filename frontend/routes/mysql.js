@@ -1,7 +1,8 @@
 const express = require("express");
 var router = express.Router();
-var mysql = require("../mysql");
+var mysql = require("../lib/mysql");
 var bodyParser = require("body-parser");
+var auth = require("../lib/auth");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
@@ -17,6 +18,10 @@ var _storage = multer.diskStorage({
 var upload = multer({ storage: _storage }); //업로드파일 어디에 지정할지-->uploads에 위치
 
 router.get("/create", function (req, res) {
+  if(!auth.isOwner(req, res)){
+    res.redirect('/');
+    return false;
+}
   res.render("upload");
 });
 
@@ -29,7 +34,7 @@ router.post("/create_process", upload.single("userfile"), function (req, res) {
     `
             INSERT INTO project (u_id, audioPath, title, description) 
               VALUES(?, ?, ?, ?)`,
-    ["egoing", req.file.filename, title, description],
+    ["egoing@gmail.com", req.file.filename, title, description],
     function (error, result) {
       if (error) {
         throw error;
@@ -42,6 +47,10 @@ router.post("/create_process", upload.single("userfile"), function (req, res) {
 });
 
 router.get("/update", function (req, res) {
+  if(!auth.isOwner(req, res)){
+    res.redirect('/');
+    return false;
+}
   mysql.db.query(
     `SELECT * FROM project WHERE audioPath=?`,
     [req.query.audioPath],
@@ -86,6 +95,10 @@ router.post("/update_process", upload.single("userfile"), function (req, res) {
 });
 
 router.post("/delete_process", function (req, res) {
+  if(!auth.isOwner(req, res)){
+    res.redirect('/');
+    return false;
+}
     console.log(req.body);
   var audioPath = req.body.audioPath;
   var id = req.body.id;

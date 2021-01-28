@@ -1,22 +1,28 @@
 var express = require("express");
 var router = express.Router();
-var mysql = require("../mysql");
+var mysql = require("../lib/mysql");
 var css = require('../css');
+var auth = require("../lib/auth");
 
 router.get("/portfolio", (req, res) => {
-    
+  if(!auth.isOwner(req, res)){
+    res.redirect('/');
+    return false;
+}
     var navCss = css.navBar;
-    var id = 'egoing';
 
-    mysql.db.query(`select * from portfolio as p join user as u on p.u_id=u.id where u.id=?;`,[id] , (error1, result1) => {
+    mysql.db.query(`select * from portfolio as p join user as u on p.u_id=u.userid where u.userid=?;`,[req.user.userid] , (error1, result1) => {
         if(error1){
-            throw error;
+            throw error1;
         }
-        mysql.db.query(`select * from project as p join user as u on p.u_id=u.id where u.id=?;`, [id], (error2, result2)=> {
+        mysql.db.query(`select * from project as p join user as u on p.u_id=u.userid where u.userid=? and p.project_key = ?;`, [req.user.userid, 1], (error2, result2)=> {
         if(error2){
-            throw error;
+            throw error2;
         }
-        var photoPath = result1[0].photoPath;
+        var photoPath = ``;
+        if(result1[0].photoPath){
+          photoPath = result1[0].photoPath;
+        }
         var introduction = result1[0].introduction;
         var phone = result1[0].phone;
         var audioPath = result2[0].audioPath;

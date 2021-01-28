@@ -1,15 +1,20 @@
 const express = require("express");
 var router = express.Router();
-var mysql = require("../mysql");
+var mysql = require("../lib/mysql");
 var css = require("../css");
+var auth = require("../lib/auth");
 
 router.get("/collaborating", (req, res) => {
+  if(!auth.isOwner(req, res)){
+    res.redirect('/');
+    return false;
+}
   var navCss = css.navBar;
 
   var id = "egoing";
 
   mysql.db.query(
-    `select * from project as p join user as u on p.u_id=u.id where u.id=?;`,
+    `select * from project as p join user as u on p.u_id=u.userid where u.userid=?;`,
     [id],
     (error, result) => {
       if (error) {
@@ -20,6 +25,7 @@ router.get("/collaborating", (req, res) => {
 
       var i = 0;
 
+      console.log(result);
       while (i < result.length) {
         active += `<p class="audioPath"><a href="/collaborating?audioPath=${result[i].audioPath}">${result[i].audioPath}</a><button onclick="project()">보기</button></p>`;
         i++;

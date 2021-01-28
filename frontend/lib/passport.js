@@ -1,5 +1,4 @@
-var db = require('./mysql');
-var bcrypt = require('bcrypt');
+var mysql = require('./mysql');
 
 module.exports = function (app) {
 
@@ -15,12 +14,17 @@ module.exports = function (app) {
     });
 
     passport.deserializeUser(function (id, done) {
-        // db에서 id값이 일치하는 객체 정보를 찾아와
-        var user = db.get('users').find({
-            id: id
-        }).value();
-        console.log('deserializeUser', id, user);
-        done(null, user);
+        mysql.db.query(
+            `SELECT * FROM user WHERE id=?`,
+            [id],
+            function (error2, result) {
+              if (error2) {
+                throw error2;
+              }
+                console.log('deserializeUser', id, result[0]);
+                done(null, result[0]);
+            });
+        
     });
 
     passport.use(new LocalStrategy({
@@ -29,13 +33,17 @@ module.exports = function (app) {
         },
         function (email, password, done) {
             console.log('LocalStrategy', email, password);
-            var user = db.get('users').find({
-                email: email
-            }).value();
-            if (user) {
-                bcrypt.compare(password, user.password, function(err,result){
-                    if(result){
-                        return done(null, user, {
+            mysql.db.query(
+                `SELECT * FROM user WHERE id=?`,
+                [email],
+                function (error2, result) {
+                if (error2) {
+                    throw error2;
+                }
+                if (result[0]) {
+                    console.log('user1:',result[0]);
+                    if(password === result[0].password){
+                        return done(null, result[0], {
                             message: 'Welcome.'
                         });
                     } else {
@@ -43,12 +51,12 @@ module.exports = function (app) {
                             message: 'Password is not correct.'
                         });
                     }
+                } else {
+                    return done(null, false, {
+                        message: 'There is no email.'
+                    });
+                }
                 });
-            } else {
-                return done(null, false, {
-                    message: 'There is no email.'
-                });
-            }
         }
     ));
     return passport;
