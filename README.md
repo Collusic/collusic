@@ -47,3 +47,9 @@ else 사용을 최대한 자제합니다.
 클래스는 50줄 이하, 패키지 10개 이하로 제한합니다.
 
 게터/세터 속성 사용을 금지합니다.
+
+
+
+규칙1, 2, 3, 5, 6, 9
+
+https://developerfarm.wordpress.com/2012/02/03/object_calisthenics_summary/
