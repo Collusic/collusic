@@ -69,7 +69,7 @@ https://developerfarm.wordpress.com/2012/02/03/object_calisthenics_summary/
 
 2. 브랜치 생성
 
-- master 브랜치에서 생성해와야 한다.
+- main 브랜치에서 생성해와야 한다.
 - 브랜치 이름은 한 눈에 어떤 작업을 위한 브랜치인지 알 수 있는 이름을 가져간다.
 - feature/Issue-(Issue번호) 형식의 해당 Issue에 맞는 단위 개발 브랜치를 생성해 작업한다.
 
