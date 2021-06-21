@@ -26,7 +26,7 @@ Collusic 프로젝트를 처음 접하시는 같이 개발하는 개발자에게
 6. class 나 함수형 컴포넌트의 이름은 **"CamelCase"** 을 따릅니다.
 7. enum에 선언되는 값들은 **"CAPITAL_UNDER_SCORE"** 를 따릅니다.
 8. 컴포넌트를 제외한 함수의 이름은 동작의 의미가 담겨 있어야 합니다.
-9. 컴포넌트 코드가 들어간 파일의 확장자는 tsx를 사용합니다.
+9. 컴포넌트 코드가 들어간 파일의 확장자는 jsx를 사용합니다.
 
 
 
@@ -53,3 +53,35 @@ else 사용을 최대한 자제합니다.
 규칙1, 2, 3, 5, 6, 9
 
 https://developerfarm.wordpress.com/2012/02/03/object_calisthenics_summary/
+
+##### Issue 컨벤션
+
+수정이 필요한 Issue는 Icebox에 보관합니다.
+
+수정이 끝난 Issue는 client, server 분야에 따라 Frontend Backlog, Backend Backlog에 각각 보관합니다.
+
+##### 브랜치 전략 : Github Flow
+
+1. main 브랜치 => product에 배포되는 브랜치
+
+- main 브랜치는 언제든지 배포 가능해야 한다.
+- 무조건 PR을 날려 검토받는다. (PR은 최대한 자세히)
+
+2. 브랜치 생성
+
+- main 브랜치에서 생성해와야 한다.
+- 브랜치 이름은 한 눈에 어떤 작업을 위한 브랜치인지 알 수 있는 이름을 가져간다.
+- feature/Issue-(Issue번호) 형식의 해당 Issue에 맞는 단위 개발 브랜치를 생성해 작업한다.
+
+3. 커밋
+
+- 파일을 추가, 수정, 삭제할 때 마다 커밋하여 작업 히스토리를 남긴다.
+- 작업을 진행한 이유를 다른 사람이 알 수 있도록 커밋 메세지를 남긴다.
+
+4. Pull Request
+
+- 피드백이나 도움이 필요할 때, merge 준비가 완료된 경우 PR을 생성한다.
+- 요청을 수락하면 변경 내용을 브랜치에 merge한다.
+
+5. main으로 merge, push 되었을 때는 즉시 배포되어야 한다.
+6. main으로 merge가 일어나면 자동으로 배포가 되도록 설정
