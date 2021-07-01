@@ -1,6 +1,8 @@
-export default Color {
-  MAIN_COLOR = "",
-  DISABLED_MAIN_COLOR = "",
-  DISABLED_COLOR = "",
-  WARNING_COLOR = "",
-}
+const Color = {
+  MAIN_COLOR: "#ed8c1b",
+  DISABLED_MAIN_COLOR: "",
+  DISABLED_COLOR: "",
+  WARNING_COLOR: "",
+};
+
+export default Color;

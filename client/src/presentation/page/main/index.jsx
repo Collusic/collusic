@@ -1,10 +1,26 @@
 import React from "react";
-import styled from "./styled";
+import { Header, Section, Title, ProjectBox, Project } from "./styled";
 
 function Main() {
   return (
-    <div>HI</div>
-  )
+    <>
+      <Header>
+        <Title>PROJECTS</Title>
+      </Header>
+      <Section>
+        <ProjectBox>
+          <Project />
+          <Project />
+          <Project />
+          <Project />
+          <Project />
+          <Project />
+          <Project />
+          <Project />
+        </ProjectBox>
+      </Section>
+    </>
+  );
 }
 
 export default Main;
