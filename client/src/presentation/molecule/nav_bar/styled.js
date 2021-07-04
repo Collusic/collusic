@@ -23,32 +23,39 @@ const Title = styled.div`
   width: 20rem;
   height: ${ElementSizeByHeight.LARGE};
   padding: 0 72px;
-  font-family: KronaOne;
-  font-size: ${FontSize.EXTRA_LARGE};
+  font-family: "Krona One", sans-serif;
+  font-size: ${FontSize.LARGE};
   font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   text-align: left;
   color: ${Color.MAIN_COLOR};
+`;
+const Box = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 20rem;
+  height: ${ElementSizeByHeight.LARGE};
+  padding: 0 72px;
 `;
 
 const Alarm = styled.image`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  src: "assets/alarm.png";
   width: 40px;
   height: 40px;
   padding: 0 2px;
-  text-align: right;
 `;
 
-// const User = styled.img`
-//   width: 40px;
-//   height: 40px;
-//   margin: 1px 0 0 20px;
-//   padding: 0 1px;
-// `;
+const Profile = styled.image`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0 2px;
+`;
 
-export { StyledNavBar, Title, Alarm };
+export { StyledNavBar, Title, Box, Alarm, Profile };
