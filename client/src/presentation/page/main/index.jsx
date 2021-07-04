@@ -67,8 +67,8 @@ function Main() {
           </Project>
         </ProjectBox>
       </Section>
-      <CreateProjectButton />
       <CreateProjectButtonText>Create Project</CreateProjectButtonText>
+      <CreateProjectButton />
     </>
   );
 }

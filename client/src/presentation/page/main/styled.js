@@ -128,6 +128,47 @@ const ProjectField = styled.div`
   color: #c1c1c1;
 `;
 
+const animate = keyframes`
+  from {
+    width: 90px;
+  }
+  to {
+    width: 350px;
+  }
+`;
+
+const animateBefore = keyframes`
+  from {
+    width: 350px;
+  }
+  to {
+    width: 90px;
+  }
+`;
+
+const CreateProjectButtonText = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90px;
+  padding: 0 0 0 20px;
+  position: absolute;
+  right: 90px;
+  bottom: 90px;
+  height: 80px;
+  font-family: "Krona One", sans-serif;
+  font-size: ${FontSize.MEDIUM};
+  color: #202020;
+  border-radius: 40px;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  z-index: 1;
+
+  &:hover::before {
+    animation: ${animateBefore} 1s forwards;
+  }
+`;
+
 const CreateProjectButton = styled.div`
   position: absolute;
   right: 72px;
@@ -139,32 +180,9 @@ const CreateProjectButton = styled.div`
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.3);
   background-color: #ed8c1b;
   z-index: 2;
-`;
-
-const animate = keyframes`
-  from {
-    margin-left: 100%;
-    width: 300%;
+  &:hover ${CreateProjectButtonText} {
+    background: #012012;
   }
-
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-`;
-
-const CreateProjectButtonText = styled.div`
-  position: absolute;
-  right: 72px;
-  bottom: 72px;
-  width: 100px;
-  height: 80px;
-  border-radius: 40px;
-  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
-  z-index: 1;
-  animation-duration: 3s;
-  animation: ${animate};
 `;
 
 export {
