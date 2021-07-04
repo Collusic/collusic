@@ -14,7 +14,6 @@ const StyledNavBar = styled.nav`
   width: 100%;
   height: ${ElementSizeByHeight.LARGE};
   padding: ${ElementDistanceEachOthers.MEDIUM_SMALL} 0;
-  box-shadow: 0 1px 3px 2px #00000020;
 `;
 
 const Title = styled.div`

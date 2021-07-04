@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   ElementDistanceEachOthers,
   ElementSizeByHeight,
@@ -21,7 +21,6 @@ const Header = styled.header`
 
 const Description = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 600px;
@@ -32,32 +31,43 @@ const Description = styled.div`
   color: #505050;
 `;
 
+const Page = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 3rem;
+  padding: 40px;
+  font-size: ${FontSize.EXTRA_SMALL};
+`;
+
 const Section = styled.section`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 85vw;
+  width: 100%;
   height: 50vh;
-  padding: 40px 130px 130px 130px;
+  margin: 20px 0;
+  padding: 40px 0;
 `;
+
 const Title = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 10rem;
   height: ${ElementSizeByHeight.MEDIUM};
-  padding: ${ElementDistanceEachOthers.MEDIUM} 0;
+  padding: ${ElementDistanceEachOthers.LARGE} 0
+    ${ElementDistanceEachOthers.MEDIUM};
   font-family: "Krona One", sans-serif;
   font-size: ${FontSize.EXTRA_LARGE};
   text-align: center;
   color: ${Color.MAIN_COLOR};
 `;
+
 const ProjectBox = styled.div`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -66,8 +76,11 @@ const ProjectBox = styled.div`
 `;
 
 const Project = styled.div`
-  width: 15rem;
-  height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 18rem;
+  height: 14rem;
   margin: 10px 10px 10px 10px;
   padding: 40px 40px 16px;
   border-radius: 10px;
@@ -77,4 +90,94 @@ const Project = styled.div`
   background-color: #ffffff;
 `;
 
-export { Header, Description, Section, Title, ProjectBox, Project };
+const ProjectProfile = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 10rem;
+  height: ${ElementSizeByHeight.SMALL};
+  font-size: ${FontSize.SMALL_MEDIUM};
+  font-weight: 600;
+  font-family: NotoSansKR;
+  color: #202020;
+`;
+
+const ProjectTitle = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 10rem;
+  height: ${ElementSizeByHeight.MEDIUM_SMALL};
+  padding: 20px 0 0 0;
+  font-size: ${FontSize.MEDIUM};
+  font-weight: 600;
+  font-family: NotoSansKR;
+  color: #202020;
+`;
+
+const ProjectField = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 20rem;
+  height: ${ElementSizeByHeight.TWO_EXTRA_SMALL};
+  padding: 0 0 20px 0;
+  font-size: ${FontSize.MEDIUM_SMALL};
+  font-weight: 500;
+  font-family: NotoSansKR;
+  color: #c1c1c1;
+`;
+
+const CreateProjectButton = styled.div`
+  position: absolute;
+  right: 72px;
+  bottom: 72px;
+  width: 120px;
+  height: 120px;
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ed8c1b;
+  z-index: 2;
+`;
+
+const animate = keyframes`
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+`;
+
+const CreateProjectButtonText = styled.div`
+  position: absolute;
+  right: 72px;
+  bottom: 72px;
+  width: 100px;
+  height: 80px;
+  border-radius: 40px;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+  z-index: 1;
+  animation-duration: 3s;
+  animation: ${animate};
+`;
+
+export {
+  Header,
+  Description,
+  Page,
+  Section,
+  Title,
+  ProjectBox,
+  Project,
+  ProjectProfile,
+  ProjectTitle,
+  ProjectField,
+  CreateProjectButton,
+  CreateProjectButtonText,
+};
