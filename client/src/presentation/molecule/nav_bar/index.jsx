@@ -1,11 +1,14 @@
 import React from "react";
-import { StyledNavBar, Title, Alarm } from "./styled";
+import { StyledNavBar, Title, Box, Alarm, Profile } from "./styled";
 
 function NavBar() {
   return (
     <StyledNavBar>
       <Title>collusic</Title>
-      <Alarm>🔔</Alarm>
+      <Box>
+        <Alarm>🔔</Alarm>
+        <Profile>👨‍🎓</Profile>
+      </Box>
     </StyledNavBar>
   );
 }
