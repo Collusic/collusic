@@ -1,74 +1,31 @@
 import React from "react";
-import {
-  Header,
-  Description,
-  Page,
-  Section,
-  Title,
-  ProjectBox,
-  Project,
-  ProjectProfile,
-  ProjectTitle,
-  ProjectField,
-  CreateProjectButton,
-  CreateProjectButtonText,
-} from "./styled";
+import styled from "./styled";
+import Project from "./Project";
 
 function Main() {
   return (
     <>
-      <Header>
-        <Title>PROJECTS</Title>
-        <Description> hello collusic family </Description>
-        <Page>🟠 🟠 🟠 🟠</Page>
-      </Header>
+      <styled.Header>
+        <styled.Title>PROJECTS</styled.Title>
+        <styled.Description> hello collusic family </styled.Description>
+        <styled.Page>🟠 🟠 🟠 🟠</styled.Page>
+      </styled.Header>
 
-      <Section>
-        <ProjectBox>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-          <Project>
-            <ProjectProfile>👨‍🎓 Username</ProjectProfile>
-            <ProjectTitle>Project Title</ProjectTitle>
-            <ProjectField>Genre | Field | Mood</ProjectField>
-          </Project>
-        </ProjectBox>
-      </Section>
-      <CreateProjectButtonText>Create Project</CreateProjectButtonText>
-      <CreateProjectButton />
+      <styled.Section>
+        <Project
+          profileSrc="Singco"
+          userName="Singco"
+          title="분위기 굳! 재즈 멜로디"
+          genre="Jazz"
+          field="intrument"
+          mood="groove"
+          projectSrc=""
+        />
+      </styled.Section>
+      <styled.CreateProjectButtonText>
+        Create Project
+      </styled.CreateProjectButtonText>
+      <styled.CreateProjectButton />
     </>
   );
 }

@@ -185,7 +185,7 @@ const CreateProjectButton = styled.div`
   }
 `;
 
-export {
+export default {
   Header,
   Description,
   Page,

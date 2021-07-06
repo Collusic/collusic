@@ -12,6 +12,9 @@ function App() {
         <Route path="/">
           <Main></Main>
         </Route>
+        <Route path="/project">
+          <Main></Main>
+        </Route>
       </Switch>
     </Router>
   );
