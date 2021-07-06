@@ -146,16 +146,29 @@ const animateBefore = keyframes`
   }
 `;
 
-const CreateProjectButtonText = styled.div`
+const CreateProject = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 90px;
-  padding: 0 0 0 20px;
+  width: 250px;
+  height: 250px;
   position: absolute;
-  right: 90px;
-  bottom: 90px;
+  right: 30px;
+  bottom: 30px;
+  font-family: "Krona One", sans-serif;
+  z-index: 1;
+`;
+
+const CreateProjectButtonText = styled.div`
+  position: absolute;
+  right: 50px;
+  bottom: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 170px;
   height: 80px;
+  padding: 0 0 0 30px;
   font-family: "Krona One", sans-serif;
   font-size: ${FontSize.MEDIUM};
   color: #202020;
@@ -163,26 +176,20 @@ const CreateProjectButtonText = styled.div`
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   z-index: 1;
-
-  &:hover::before {
-    animation: ${animateBefore} 1s forwards;
-  }
 `;
 
 const CreateProjectButton = styled.div`
-  position: absolute;
-  right: 72px;
-  bottom: 72px;
-  width: 120px;
-  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.3);
   background-color: #ed8c1b;
   z-index: 2;
-  &:hover ${CreateProjectButtonText} {
-    background: #012012;
-  }
 `;
 
 export default {
@@ -196,6 +203,7 @@ export default {
   ProjectProfile,
   ProjectTitle,
   ProjectField,
+  CreateProject,
   CreateProjectButton,
   CreateProjectButtonText,
 };

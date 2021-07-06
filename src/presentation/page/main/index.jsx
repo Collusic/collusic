@@ -10,7 +10,6 @@ function Main() {
         <styled.Description> hello collusic family </styled.Description>
         <styled.Page>🟠 🟠 🟠 🟠</styled.Page>
       </styled.Header>
-
       <styled.Section>
         <Project
           profileSrc="Singco"
@@ -22,10 +21,12 @@ function Main() {
           projectSrc=""
         />
       </styled.Section>
-      <styled.CreateProjectButtonText>
-        Create Project
-      </styled.CreateProjectButtonText>
-      <styled.CreateProjectButton />
+      <styled.CreateProject>
+        <styled.CreateProjectButton />
+        <styled.CreateProjectButtonText>
+          Create Project
+        </styled.CreateProjectButtonText>
+      </styled.CreateProject>
     </>
   );
 }
