@@ -6,6 +6,9 @@ function Project(props) {
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(8);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -29,6 +32,19 @@ function Project(props) {
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!projects) return null;
+
+  const handleChangeIndexUp = () => {
+    setPage(page + 1);
+    setStart(start + 4);
+    setEnd(end + 4);
+  };
+
+  const handleChangeIndexDown = () => {
+    if (start === 0) return;
+    setPage(page - 1);
+    setStart(start - 4);
+    setEnd(end - 4);
+  };
 
   return (
     <>
