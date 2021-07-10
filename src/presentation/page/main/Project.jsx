@@ -35,7 +35,9 @@ function Project(props) {
       {projects.map((project) => (
         <styled.ProjectBox>
           <styled.Project>
-            <styled.ProjectProfile>👨‍🎓 {project.username}</styled.ProjectProfile>
+            <styled.ProjectProfile key={project.id}>
+              👨‍🎓 {project.username}
+            </styled.ProjectProfile>
             <styled.ProjectTitle>{project.email}</styled.ProjectTitle>
             <styled.ProjectField>
               {project.address.geo.lat} | {project.address.geo.lng} |{" "}

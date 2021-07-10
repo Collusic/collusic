@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import {
   ElementDistanceEachOthers,
   ElementSizeByHeight,
@@ -128,23 +128,23 @@ const ProjectField = styled.div`
   color: #c1c1c1;
 `;
 
-const animate = keyframes`
-  from {
-    width: 90px;
-  }
-  to {
-    width: 350px;
-  }
+const after = keyframes`
+from {
+  width: 170px;
+}
+to {
+  width: 450px;
+}
 `;
 
-const animateBefore = keyframes`
+const before = keyframes`
   from {
-    width: 350px;
-  }
-  to {
-    width: 90px;
-  }
-`;
+  width: 450px;
+}
+to {
+  width: 170px;
+}
+  `;
 
 const CreateProject = styled.div`
   display: flex;
@@ -176,6 +176,18 @@ const CreateProjectButtonText = styled.div`
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   z-index: 1;
+
+  ${(props) => {
+    if (props.isLong === true) {
+      return css`
+        animation: ${after} 1s forwards;
+      `;
+    } else {
+      return css`
+        animation: ${before} 1s forwards;
+      `;
+    }
+  }}
 `;
 
 const CreateProjectButton = styled.div`

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "./styled";
 import Project from "./Project";
 
 function Main() {
+  const [isLong, setIsLong] = useState(false);
+
+  const mouseOverHandler = (event) => {
+    setIsLong(true);
+  };
+  const mouseOutHandler = (event) => {
+    setIsLong(false);
+  };
+
   return (
     <>
       <styled.Header>
@@ -11,19 +20,14 @@ function Main() {
         <styled.Page>🟠 🟠 🟠 🟠</styled.Page>
       </styled.Header>
       <styled.Section>
-        <Project
-          profileSrc="Singco"
-          userName="Singco"
-          title="분위기 굳! 재즈 멜로디"
-          genre="Jazz"
-          field="intrument"
-          mood="groove"
-          projectSrc=""
-        />
+        <Project />
       </styled.Section>
       <styled.CreateProject>
-        <styled.CreateProjectButton />
-        <styled.CreateProjectButtonText>
+        <styled.CreateProjectButton
+          onMouseOver={mouseOverHandler}
+          onMouseOut={mouseOutHandler}
+        />
+        <styled.CreateProjectButtonText isLong={isLong}>
           Create Project
         </styled.CreateProjectButtonText>
       </styled.CreateProject>
