@@ -9,13 +9,13 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/home">
+        <Route path="/">
           <Home></Home>
         </Route>
         <NavBar path="/"></NavBar>
       </Switch>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/main">
           <Main></Main>
         </Route>
         <Route path="/project">
