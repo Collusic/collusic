@@ -38,23 +38,23 @@ const Box = styled.div`
   padding: 0 72px;
 `;
 
-const Alarm = styled.image`
+const Alarm = styled.img`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   padding: 0 2px;
 `;
 
-const Profile = styled.image`
+const Profile = styled.img`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   padding: 0 2px;
 `;
 
