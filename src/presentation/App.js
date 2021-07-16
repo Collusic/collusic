@@ -8,11 +8,13 @@ import NavBar from "./page/nav_bar";
 function App() {
   return (
     <Router>
-      <NavBar></NavBar>
       <Switch>
         <Route exact path="/">
           <Home></Home>
         </Route>
+      </Switch>
+      <NavBar></NavBar>
+      <Switch>
         <Route exact path="/main">
           <Main></Main>
         </Route>
