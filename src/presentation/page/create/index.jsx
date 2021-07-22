@@ -18,6 +18,10 @@ const Create = () => {
     mood: "",
     file: {},
   });
+  const [title, setTitle] = useState({
+    title: "",
+    content: "",
+  });
   const [errors, setErrors] = useState([]);
   const fields = ["멜로디", "악기", "가사"];
   const moods = [
@@ -108,82 +112,98 @@ const Create = () => {
   const cancelFile = (e) => {
     setForm({ ...form, file: {} });
   };
+  const textTyping = (e) => {
+    setTitle({
+      ...title,
+      [e.target.name]: e.target.value,
+    });
+    console.log(title);
+  };
+  const submitProject = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
-      <CreateContainer>
-        <Index index="1"></Index>
+      <form onSubmit={submitProject}>
+        <CreateContainer>
+          <Index index="1"></Index>
 
-        <div>
-          <TitleInput
-            placeholder="제목을 입력해주세요."
-            type="text"
-            style={{ display: "block" }}
-          />
-          <ContentTextArea
-            rows="5"
-            placeholder="내용을 입력해주세요 (최대300자)"
-          ></ContentTextArea>
-        </div>
-        <Index index="2"></Index>
-        <div>
-          <ContentTextArea
-            rows="10"
-            placeholder="가사를 입력해주세요."
-          ></ContentTextArea>
-          <FileUpload
-            files={form.file}
-            errors={errors}
-            setFiles={fileChoice}
-            setErrors={occurredError}
-            cancelFile={cancelFile}
-          ></FileUpload>
-        </div>
-        <Index index="3"></Index>
-        <div style={{ width: "60%" }}>
-          <ButtonTitle>요청 분야</ButtonTitle>
           <div>
-            {fields.map((field, i) => {
-              return (
-                <SelectButton
-                  onClick={fieldChoice}
-                  arr={form.fieldList}
-                  value={field}
-                  key={i}
-                />
-              );
-            })}
+            <TitleInput
+              name="title"
+              placeholder="제목을 입력해주세요."
+              type="text"
+              style={{ display: "block" }}
+              onChange={textTyping}
+            />
+            <ContentTextArea
+              name="content"
+              rows="5"
+              placeholder="내용을 입력해주세요 (최대300자)"
+              onChange={textTyping}
+            ></ContentTextArea>
           </div>
+          <Index index="2"></Index>
           <div>
-            <ButtonTitle>장르</ButtonTitle>
-            {genres.map((genre, i) => {
-              return (
-                <RadioButton
-                  title="genre"
-                  onClick={choiceRadio}
-                  keyword={form.genre}
-                  value={genre}
-                  key={i}
-                />
-              );
-            })}
+            <ContentTextArea
+              rows="10"
+              placeholder="가사를 입력해주세요."
+            ></ContentTextArea>
+            <FileUpload
+              files={form.file}
+              errors={errors}
+              setFiles={fileChoice}
+              setErrors={occurredError}
+              cancelFile={cancelFile}
+            ></FileUpload>
           </div>
-          <div>
-            <ButtonTitle>분위기</ButtonTitle>
-            {moods.map((mood, i) => {
-              return (
-                <RadioButton
-                  title="mood"
-                  onClick={choiceRadio}
-                  keyword={form.mood}
-                  value={mood}
-                  key={i}
-                />
-              );
-            })}
+          <Index index="3"></Index>
+          <div style={{ width: "60%" }}>
+            <ButtonTitle>요청 분야</ButtonTitle>
+            <div>
+              {fields.map((field, i) => {
+                return (
+                  <SelectButton
+                    onClick={fieldChoice}
+                    arr={form.fieldList}
+                    value={field}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              <ButtonTitle>장르</ButtonTitle>
+              {genres.map((genre, i) => {
+                return (
+                  <RadioButton
+                    title="genre"
+                    onClick={choiceRadio}
+                    keyword={form.genre}
+                    value={genre}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              <ButtonTitle>분위기</ButtonTitle>
+              {moods.map((mood, i) => {
+                return (
+                  <RadioButton
+                    title="mood"
+                    onClick={choiceRadio}
+                    keyword={form.mood}
+                    value={mood}
+                    key={i}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </CreateContainer>
-      <SubmitButton>요청하기</SubmitButton>
+        </CreateContainer>
+        <SubmitButton type="submit">요청하기</SubmitButton>
+      </form>
     </>
   );
 };
