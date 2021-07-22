@@ -117,7 +117,6 @@ const Create = () => {
       ...title,
       [e.target.name]: e.target.value,
     });
-    console.log(title);
   };
   const submitProject = (e) => {
     e.preventDefault();
