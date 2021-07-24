@@ -49,6 +49,11 @@ const ProjectList = styled.div`
   padding: 20px 50px 20px 160px;
 `;
 
+const Profile = styled.img`
+  width: 40px;
+  height: 40px;
+`;
+
 const RightBox = styled.div`
   display: flex;
   width: 40%;

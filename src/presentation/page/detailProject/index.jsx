@@ -10,6 +10,7 @@ function DetailProject() {
             <styled.HeaderName>Track list</styled.HeaderName>
             <styled.ContributeButton>기여하기</styled.ContributeButton>
           </styled.LeftHeader>
+          <styled.ProjectList></styled.ProjectList>
         </styled.LeftBox>
         <styled.RightBox></styled.RightBox>
       </styled.Window>
