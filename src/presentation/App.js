@@ -4,6 +4,7 @@ import "./App.css";
 import Main from "./page/main";
 import Home from "./page/home";
 import NavBar from "./page/nav_bar";
+import DetailProject from "./page/detailProject";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <Switch>
         <Route exact path="/main">
           <Main></Main>
+        </Route>
+        <Route exact path="/project">
+          <DetailProject></DetailProject>
         </Route>
       </Switch>
     </Router>
