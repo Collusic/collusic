@@ -42,8 +42,8 @@ const Alarm = styled.img`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   padding: 0 2px;
 `;
 
@@ -52,8 +52,8 @@ const Profile = styled.img`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
   padding: 0 2px;
 `;
 

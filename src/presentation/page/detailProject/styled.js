@@ -3,10 +3,13 @@ import Color from "utils/style/color";
 
 const Window = styled.div`
   display: flex;
+  width: 100%;
+  height: 100%;
 `;
 
 const LeftBox = styled.div`
   display: flex;
+  flex-direction: column;
   width: 60%;
   height: 100%;
   background-color: #fafafa;
@@ -15,18 +18,19 @@ const LeftBox = styled.div`
 const LeftHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
   height: 60px;
-  padding: 70px 50px 30px 160px;
+  padding: 70px 50px 50px 160px;
 `;
 
 const HeaderName = styled.div`
   display: flex;
   justify-content: center;
-  width: 109px;
+  width: 120px;
   height: 25px;
   color: ${Color.MAIN_COLOR};
   font-family: "Krona One";
+  font-size: 20px;
 `;
 
 const ContributeButton = styled.button`
@@ -42,16 +46,56 @@ const ContributeButton = styled.button`
 
 const ProjectList = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 80%;
   height: 40px;
   padding: 20px 50px 20px 160px;
+`;
+
+const Project = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 500px;
 `;
 
 const Profile = styled.img`
   width: 40px;
   height: 40px;
+`;
+
+const Email = styled.div`
+  width: 161px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const Genre = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: center;
+  color: ${Color.TEXT_MAIN_COLOR};
 `;
 
 const RightBox = styled.div`
@@ -67,5 +111,9 @@ export default {
   HeaderName,
   ContributeButton,
   ProjectList,
+  Project,
+  Profile,
+  Email,
+  Genre,
   RightBox,
 };
