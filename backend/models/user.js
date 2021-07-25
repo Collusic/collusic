@@ -16,10 +16,10 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
-      provider: {//로그인 제공자
+      provider: {//로그인 제공자 (2021collusic에서는 local)
         type: Sequelize.STRING(10),
         allowNull: false,
-        defaultValue: 'local',//local을 통해 로그인 한 상태 카카오면 kakao
+        defaultValue: 'local', 
       },
       introduce: {
         type: Sequelize.TEXT,
@@ -35,7 +35,7 @@ module.exports = class User extends Sequelize.Model {
       underscored: false,
       modelName: 'User',
       tableName: 'users',
-      paranoid: true, //deleted at 삭제한척하는
+      paranoid: true,
       charset: 'utf8',
       collate: 'utf8_general_ci', //한글 지원
     });
@@ -43,15 +43,15 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.Post);//user has many db.post
-    db.User.belongsToMany(db.User, {
-      foreignKey: 'followingId', //둘다 foreignkey가 userid이면 모르니까. 선언.
-      as: 'Followers',
-      through: 'Follow',
-    });//사용자와 사용자간의 관계: 팔로잉 팔로워 관계
-    db.User.belongsToMany(db.User, {
-      foreignKey: 'followerId',
-      as: 'Followings',
-      through: 'Follow',
-    });
+    // db.User.belongsToMany(db.User, {
+    //   foreignKey: 'followingId', //둘다 foreignkey가 userid이면 모르니까. 선언.
+    //   as: 'Followers',
+    //   through: 'Follow',
+   // });//사용자와 사용자간의 관계: 팔로잉 팔로워 관계
+    // db.User.belongsToMany(db.User, {
+    //   foreignKey: 'followerId',
+    //   as: 'Followings',
+    //   through: 'Follow',
+    // });
   }
 };
