@@ -3,22 +3,22 @@ import Color from "utils/style/color";
 
 const Window = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 88vh;
 `;
 
 const LeftBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
-  height: 100%;
+  width: 60vw;
+  height: 88vh;
   background-color: #fafafa;
 `;
 
 const LeftHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 45vw;
   height: 60px;
   padding: 70px 50px 50px 160px;
 `;
@@ -49,7 +49,7 @@ const ProjectList = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 45vw;
   height: 40px;
   padding: 20px 50px 20px 160px;
 `;
@@ -58,7 +58,7 @@ const Project = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
   height: 500px;
 `;
 
@@ -98,10 +98,15 @@ const Genre = styled.div`
   color: ${Color.TEXT_MAIN_COLOR};
 `;
 
+const LikeButton = styled.img`
+  width: 32px;
+  height: 32px;
+`;
 const RightBox = styled.div`
   display: flex;
-  width: 40%;
-  height: 100%;
+  flex-direction: column;
+  width: 40vw;
+  height: 88vh;
 `;
 
 export default {
@@ -115,5 +120,6 @@ export default {
   Profile,
   Email,
   Genre,
+  LikeButton,
   RightBox,
 };

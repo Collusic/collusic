@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import styled from "./styled";
 import axios from "axios";
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
+import InfiniteScroll from "react-infinite-scroll-component";
 import "react-h5-audio-player/lib/styles.css";
 import profileImage from "assets/profile.png";
 import audio from "assets/전상근_내방.mp3";
 import isSelectedImage from "assets/unselected.png";
-import playImage from "assets/play.png";
+import playImage from "assets/play.svg";
 import pauseImage from "assets/pause.png";
+import unselected from "assets/unselected.png";
+import selected from "assets/selected.png";
+import { Icon, InlineIcon } from "@iconify/react";
+import playCircle from "@iconify-icons/mdi/play-circle";
+import pauseCircle from "@iconify-icons/mdi/pause-circle";
 
-function ProjectList() {
+function ProjectList({ unselected }) {
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -46,7 +52,7 @@ function ProjectList() {
           <styled.Genre>{project.company.name}</styled.Genre>
           <AudioPlayer
             style={{
-              width: "400px",
+              width: "300px",
             }}
             src={audio}
             showJumpControls={false}
@@ -54,15 +60,22 @@ function ProjectList() {
             customAdditionalControls={[]}
             defaultCurrentTime="Loading"
             defaultDuration="Loading"
+            layout="horizontal-reverse"
             customIcons={{
-              play: { playImage },
-              pause: { pauseImage },
+              play: <Icon icon={playCircle} color="#FF8900" />,
+              pause: <Icon icon={pauseCircle} color="#ff8900" />,
             }}
           ></AudioPlayer>
+          <styled.LikeButton
+            src={selected ? selected : unselected}
+          ></styled.LikeButton>
         </styled.Project>
       ))}
     </styled.ProjectList>
   );
 }
 
+const defaultProps = {
+  unselected: { unselected },
+};
 export default ProjectList;

@@ -4,7 +4,7 @@ import ProjectList from "./ProjectList";
 
 function DetailProject() {
   return (
-    <div>
+    <>
       <styled.Window>
         <styled.LeftBox>
           <styled.LeftHeader>
@@ -15,7 +15,7 @@ function DetailProject() {
         </styled.LeftBox>
         <styled.RightBox></styled.RightBox>
       </styled.Window>
-    </div>
+    </>
   );
 }
 
