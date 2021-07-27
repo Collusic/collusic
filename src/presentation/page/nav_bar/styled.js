@@ -44,7 +44,7 @@ const Alarm = styled.img`
   align-items: center;
   width: 40px;
   height: 40px;
-  padding: 0 2px;
+  padding: 0 15px;
 `;
 
 const Profile = styled.img`
@@ -54,7 +54,7 @@ const Profile = styled.img`
   align-items: center;
   width: 40px;
   height: 40px;
-  padding: 0 2px;
+  padding: 0 15px;
 `;
 
 export { StyledNavBar, Title, Box, Alarm, Profile };

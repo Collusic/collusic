@@ -10,7 +10,7 @@ const Window = styled.div`
 const LeftBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60vw;
+  width: 58vw;
   height: 88vh;
   background-color: #fafafa;
 `;
@@ -79,7 +79,7 @@ const Email = styled.div`
   height: 20px;
   font-family: NotoSansKR;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.43;
@@ -96,7 +96,7 @@ const Genre = styled.div`
   height: 20px;
   font-family: NotoSansKR;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.43;
@@ -116,6 +116,173 @@ const RightBox = styled.div`
   height: 88vh;
 `;
 
+const Title = styled.div`
+  width: 30vw;
+  height: 88px;
+  font-family: NotoSansKR;
+  font-size: 30px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: -1.5px;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const ProjectStates = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 37vw;
+  height: 10vh;
+  padding: 20px;
+`;
+
+const RequestField = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 190px;
+  height: 90px;
+  border-radius: 10px;
+  background-color: #fffcf2;
+`;
+
+const RequestFieldTitle = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 70px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.MAIN_COLOR};
+`;
+
+const RequestFieldItems = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 39px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const RequestGenre = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 190px;
+  height: 90px;
+  border-radius: 10px;
+  background-color: #fffcf2;
+`;
+
+const RequestGenreTitle = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 55px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.MAIN_COLOR};
+`;
+
+const RequestGenreItems = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 39px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const RequestMood = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 190px;
+  height: 90px;
+  border-radius: 10px;
+  background-color: #fffcf2;
+`;
+
+const RequestMoodTitle = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 55px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.MAIN_COLOR};
+`;
+
+const RequestMoodItems = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 39px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const RequestText = styled.div`
+  width: 37vw;
+  height: 60vh;
+  padding: 20px 20px 0 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: -0.7px;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
 export default {
   Window,
   LeftBox,
@@ -129,4 +296,16 @@ export default {
   Genre,
   LikeButton,
   RightBox,
+  Title,
+  ProjectStates,
+  RequestField,
+  RequestFieldTitle,
+  RequestFieldItems,
+  RequestGenre,
+  RequestGenreTitle,
+  RequestGenreItems,
+  RequestMood,
+  RequestMoodTitle,
+  RequestMoodItems,
+  RequestText,
 };

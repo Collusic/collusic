@@ -52,7 +52,7 @@ function ProjectList({ unselected }) {
           <styled.Genre>{project.company.name}</styled.Genre>
           <AudioPlayer
             style={{
-              width: "300px",
+              width: "600px",
               backgroundColor: "#fafafa",
               boxShadow: "none",
             }}
