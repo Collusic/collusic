@@ -2,16 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "./styled";
 import axios from "axios";
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
-import InfiniteScroll from "react-infinite-scroll-component";
 import "react-h5-audio-player/lib/styles.css";
 import profileImage from "assets/profile.png";
 import audio from "assets/전상근_내방.mp3";
-import isSelectedImage from "assets/unselected.png";
-import playImage from "assets/play.svg";
-import pauseImage from "assets/pause.png";
 import unselected from "assets/unselected.png";
 import selected from "assets/selected.png";
-import { Icon, InlineIcon } from "@iconify/react";
+import { Icon } from "@iconify/react";
 import playCircle from "@iconify-icons/mdi/play-circle";
 import pauseCircle from "@iconify-icons/mdi/pause-circle";
 
