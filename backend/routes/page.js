@@ -13,7 +13,6 @@ router.use((req, res, next) => {
 });
 
 router.get("/mypage", isLoggedIn, async (req, res, next) => {
-  //console.log(req.user.email);
   try {
     const myinfo = await User.findOne({
       attributes: ["email", "introduce"],
