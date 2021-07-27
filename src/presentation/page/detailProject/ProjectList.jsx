@@ -54,8 +54,7 @@ function ProjectList({ unselected }) {
             style={{
               width: "300px",
               backgroundColor: "#fafafa",
-              border: "0",
-              boxShadow: null,
+              boxShadow: "none",
             }}
             src={audio}
             showJumpControls={false}

@@ -39,6 +39,7 @@ const ContributeButton = styled.button`
   align-items: center;
   width: 132px;
   height: 40px;
+  border: none;
   border-radius: 25px;
   color: #ffffff;
   background-color: ${Color.MAIN_COLOR};
@@ -60,6 +61,11 @@ const Project = styled.div`
   align-items: center;
   width: 100%;
   height: 500px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
 `;
 
 const Profile = styled.img`
