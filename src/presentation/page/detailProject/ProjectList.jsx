@@ -53,6 +53,9 @@ function ProjectList({ unselected }) {
           <AudioPlayer
             style={{
               width: "300px",
+              backgroundColor: "#fafafa",
+              border: "0",
+              boxShadow: null,
             }}
             src={audio}
             showJumpControls={false}
@@ -61,6 +64,10 @@ function ProjectList({ unselected }) {
             defaultCurrentTime="Loading"
             defaultDuration="Loading"
             layout="horizontal-reverse"
+            customProgressBarSection={[
+              RHAP_UI.PROGRESS_BAR,
+              RHAP_UI.CURRENT_LEFT_TIME,
+            ]}
             customIcons={{
               play: <Icon icon={playCircle} color="#FF8900" />,
               pause: <Icon icon={pauseCircle} color="#ff8900" />,
