@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "./styled";
+import axios from "axios";
+import "react-h5-audio-player/lib/styles.css";
+import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import audio from "assets/전상근_내방.mp3";
+import { Icon, InlineIcon } from "@iconify/react";
+import playCircle from "@iconify-icons/mdi/play-circle";
+import pauseCircle from "@iconify-icons/mdi/pause-circle";
 import ProjectList from "./ProjectList";
+import ProjectFieldItems from "./ProjectFieldItems";
+import imgProfile from "assets/profile.png";
 
 function DetailProject() {
+  const [requestProject, setRequestProject] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setError(null);
+        setRequestProject(null);
+        setLoading(true);
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        setRequestProject(response.data);
+      } catch (error) {
+        setError(error);
+      }
+      setLoading(false);
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
     <>
       <styled.Window>
@@ -15,10 +48,35 @@ function DetailProject() {
         </styled.LeftBox>
         <styled.RightBox>
           <styled.Title>The Great Escape</styled.Title>
+          <AudioPlayer
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              boxShadow: "none",
+              padding: "0 120px 30px 0",
+            }}
+            src={audio}
+            showJumpControls={false}
+            customVolumeControls={[]}
+            customAdditionalControls={[]}
+            defaultCurrentTime="Loading"
+            defaultDuration="Loading"
+            layout="horizontal-reverse"
+            customProgressBarSection={[
+              RHAP_UI.PROGRESS_BAR,
+              RHAP_UI.CURRENT_LEFT_TIME,
+            ]}
+            customIcons={{
+              play: <Icon icon={playCircle} color="#FF8900" />,
+              pause: <Icon icon={pauseCircle} color="#ff8900" />,
+            }}
+          ></AudioPlayer>
           <styled.ProjectStates>
             <styled.RequestField>
               <styled.RequestFieldTitle>요청 분야</styled.RequestFieldTitle>
-              <styled.RequestFieldItems></styled.RequestFieldItems>
+              <styled.RequestFieldItems>
+                <ProjectFieldItems></ProjectFieldItems>
+              </styled.RequestFieldItems>
             </styled.RequestField>
             <styled.RequestGenre>
               <styled.RequestGenreTitle>장르</styled.RequestGenreTitle>
@@ -39,6 +97,18 @@ function DetailProject() {
             시간이 많지 않았다고 합니다. 그러한 데이먼의 외로운 감정이 많은
             곡들에서 드러나곤 해요.
           </styled.RequestText>
+          <styled.LineBox>
+            <styled.Line></styled.Line>
+          </styled.LineBox>
+          <styled.RequestProfile>
+            <styled.ProfileImage src={imgProfile}></styled.ProfileImage>
+            <styled.RequestContext>
+              <styled.RequestEmail>Collusic123@email.com</styled.RequestEmail>
+              <styled.RequestIntroduce>
+                마이페이지에 있는 한줄 자기소개글이 들어가는 영역입니다.
+              </styled.RequestIntroduce>
+            </styled.RequestContext>
+          </styled.RequestProfile>
         </styled.RightBox>
       </styled.Window>
     </>

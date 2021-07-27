@@ -136,7 +136,7 @@ const ProjectStates = styled.div`
   align-items: center;
   width: 37vw;
   height: 10vh;
-  padding: 20px;
+  padding: 40px 20px;
 `;
 
 const RequestField = styled.div`
@@ -169,8 +169,16 @@ const RequestFieldTitle = styled.div`
 const RequestFieldItems = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width: 39px;
-  height: 20px;
+  width: 180px;
+  height: 25px;
+`;
+
+const RequestFieldItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 25px;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
@@ -270,8 +278,8 @@ const RequestMoodItems = styled.div`
 
 const RequestText = styled.div`
   width: 37vw;
-  height: 60vh;
-  padding: 20px 20px 0 20px;
+  height: 20vh;
+  padding: 20px 20px 100px 20px;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
@@ -281,6 +289,70 @@ const RequestText = styled.div`
   letter-spacing: -0.7px;
   text-align: left;
   color: ${Color.TEXT_MAIN_COLOR};
+`;
+const LineBox = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 37vw;
+  height: 1vh;
+`;
+const Line = styled.div`
+  width: 37vw;
+  height: 0;
+  margin: 0 0 0 50px;
+  border: solid 1px #f1f1f1;
+`;
+
+const RequestProfile = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 37vw;
+  height: 20vh;
+  padding: 20px;
+`;
+
+const ProfileImage = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+const RequestContext = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 30vw;
+  height: 10vh;
+  padding: 0 20px;
+`;
+
+const RequestEmail = styled.div`
+  width: 30vw;
+  height: 10vh;
+  font-family: NotoSansKR;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.45;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const RequestIntroduce = styled.div`
+  width: 35vw;
+  height: 10vh;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.57;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_SUB_COLOR};
 `;
 
 export default {
@@ -301,6 +373,7 @@ export default {
   RequestField,
   RequestFieldTitle,
   RequestFieldItems,
+  RequestFieldItem,
   RequestGenre,
   RequestGenreTitle,
   RequestGenreItems,
@@ -308,4 +381,11 @@ export default {
   RequestMoodTitle,
   RequestMoodItems,
   RequestText,
+  LineBox,
+  Line,
+  RequestProfile,
+  ProfileImage,
+  RequestContext,
+  RequestEmail,
+  RequestIntroduce,
 };
