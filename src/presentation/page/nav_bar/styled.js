@@ -21,7 +21,7 @@ const Title = styled.div`
   align-items: center;
   width: 20rem;
   height: ${ElementSizeByHeight.LARGE};
-  padding: 0 72px;
+  padding: 0 160px;
   font-family: "Krona One", sans-serif;
   font-size: ${FontSize.LARGE};
   font-weight: normal;
@@ -34,7 +34,7 @@ const Box = styled.div`
   align-items: center;
   width: 20rem;
   height: ${ElementSizeByHeight.LARGE};
-  padding: 0 72px;
+  padding: 0 160px;
 `;
 
 const Alarm = styled.img`

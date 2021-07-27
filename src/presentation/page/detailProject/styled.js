@@ -61,6 +61,7 @@ const Project = styled.div`
   align-items: center;
   width: 100%;
   height: 500px;
+  padding: 10px 0px;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 500;
