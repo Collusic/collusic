@@ -33,19 +33,6 @@ function Project() {
   if (error) return <div>에러가 발생했습니다</div>;
   if (!projects) return null;
 
-  const handleChangeIndexUp = () => {
-    setPage(page + 1);
-    setStart(start + 4);
-    setEnd(end + 4);
-  };
-
-  const handleChangeIndexDown = () => {
-    if (start === 0) return;
-    setPage(page - 1);
-    setStart(start - 4);
-    setEnd(end - 4);
-  };
-
   return (
     <>
       {projects.map((project) => (
