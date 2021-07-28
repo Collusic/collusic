@@ -12,6 +12,7 @@ const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
+const cors = require("cors");
 
 const app = express();
 passportConfig();
@@ -33,6 +34,7 @@ sequelize
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/img", express.static(path.join(__dirname, "uploads")));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

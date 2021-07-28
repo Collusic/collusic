@@ -1,30 +1,28 @@
-// const express = require("express");
-// const router = express.Router();
+const express = require("express");
+const router = express.Router();
+const { isLoggedIn, isNotLoggedIn } = require("../../routes/middlewares");
+const { Post, User } = require("../../models");
+//field값
+const readMyPageAPI = async (req, res, next) => {
+  try {
+    const myinfo = await User.findOne({
+      attributes: ["email", "introduce"],
+      where: {
+        email: req.user.email,
+      },
+    });
+    res.status(200).json({
+      email: myinfo,
+    });
+    // const postinfo = await Post.findAll({
+    //   attributes: ["title", "field"],
+    // });
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+};
+// isLoggedIn 미들웨어 어디다 넣지..?
 
-// const readMyPageAPI = (req, res) => {
-//   const User = await User.findOne({
-//     attributes: ["nickname", "imagePath", "introduce", "email"],
-//     where: {
-//       nickname: req.user.nickname,
-//       imagePath: req.user.imagePath,
-//       introduce: req.user.introduce,
-//       email: req.user.email,
-//     },
-//   });
-
-//   res.status(200).json({
-//     nickname: `${nickname}`,
-//     imagePath: `${imagePath}`,
-//     introduce: `${introduce}`,
-//     email: `${email}`,
-//   });
-// };
-
-// const updateUserInfoAPI = (req, res) => {};
-// const deleteUserInfoAPI = (req, res) => {};
-
-// module.exports = {
-//   readMyPageAPI,
-//   updateUserInfoAPI,
-//   deleteUserInfoAPI,
-// };
+module.exports = {
+  readMyPageAPI: readMyPageAPI,
+};

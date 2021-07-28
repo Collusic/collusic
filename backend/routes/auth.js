@@ -7,7 +7,7 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/join", isNotLoggedIn, async (req, res, next) => {
-  const { email, nick, password } = req.body;
+  const { email, password } = req.body;
   try {
     const exUser = await User.findOne({ where: { email } }); //기존이메일로 가입한 사람이 있나?
     if (exUser) {
@@ -19,14 +19,11 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
     const hash = await bcrypt.hash(password, 12); //기존이메일이 아니면 password를 해쉬화 해서 저장
     await User.create({
       email,
-      nick,
       password: hash,
     });
     return res.status(200).json({
       msg: "SignIn Success",
       success: true,
-      email: req.body.email,
-      nick: req.body.nick,
     });
   } catch (error) {
     console.error(error);
@@ -41,8 +38,11 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      //로그인 실패한 경우
-      return res.redirect(`/?loginError=${info.message}`);
+      //로그인 실패한 경우;
+      return res.status(200).json({
+        msg: `${info.message}`,
+        success: false,
+      });
     }
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -51,8 +51,8 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
       }
 
       return res.status(200).json({
-        user: user,
-        email: req.user,
+        msg: "Login Sucess!",
+        success: true,
       });
     });
   })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next) 꼭 붙여야함.
@@ -61,7 +61,10 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
 router.get("/logout", isLoggedIn, (req, res) => {
   req.logout();
   req.session.destroy();
-  res.redirect("/");
+  res.status(200).json({
+    msg: "Logout success",
+    success: true,
+  });
 });
 
 module.exports = router;

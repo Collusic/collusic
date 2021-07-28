@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const env = process.env.NODE_ENV || "development"; //config.json의 development 가져오기
+const env = "test" || "development"; //config.json의 development 가져오기
 const config = require("../config/config")[env]; //config.json의 development 가져오기
 const User = require("./user");
 const Post = require("./post");

@@ -1,12 +1,14 @@
 const express = require("express");
-const { isLoggedIn, isNotLoggedIn } = require("./middlewares");
+const {
+  isLoggedIn,
+  isNotLoggedIn,
+  uploadWithOriginalFilename,
+} = require("./middlewares");
 const { Post, User } = require("../models");
 const router = express.Router();
 
 const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
-const userController = require("../controllers/user");
-
 router.use((req, res, next) => {
   res.locals.user = req.user;
   res.locals.followerCount = 0;
@@ -15,7 +17,13 @@ router.use((req, res, next) => {
   next();
 });
 
-// router.get("/mypage/:id", mypageController.userInformationAPI);
+router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
+router.post(
+  "/requestProject",
+  isLoggedIn,
+  uploadWithOriginalFilename.single("data"),
+  requestProjectController.createProjectAPI
+);
 // router.put("/mypage/:id", mypageController.createContributeProjectAPI);
 // router.delete("/mypage/:id", mypageController.deleteUserInfoAPI);
 
