@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "./styled";
+import upload from "assets/uploadButton.png";
 
 function Uploadfiles() {
   const [file, setFile] = useState();
@@ -28,8 +29,14 @@ function Uploadfiles() {
 
   return (
     <styled.UploadMidi>
-      <input type="file" onChange={saveFile} />
-      <button onClick={uploadFile}>Upload</button>
+      <styled.UploadButton
+        onClick={uploadFile}
+        src={upload}
+      ></styled.UploadButton>
+      <styled.InputMidi type="file" onChange={saveFile}></styled.InputMidi>
+      <styled.PlaceHolder>
+        MIDI파일을 드래그하여 업로드 해주세요(최대1GB)
+      </styled.PlaceHolder>
     </styled.UploadMidi>
   );
 }
