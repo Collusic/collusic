@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "./styled";
 import axios from "axios";
 
-function Project(props) {
+function Project() {
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyledNavBar, Title, Box, Alarm, Profile } from "./styled";
-import imgAlarm from "assets/alarm_3x.png";
-import imgProfile from "assets/profile_3x.png";
+import imgAlarm from "assets/alarm.png";
+import imgProfile from "assets/profile.png";
 import useLastLocationHistory from "lib/history";
 
 function NavBar() {
