@@ -6,14 +6,21 @@ import {
 } from "utils/style/size";
 import Color from "utils/style/color";
 
+const Window = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95vw;
+  height: 90vh;
+`;
+
 const Section = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 95vw;
-  height: 40vh;
-  padding: 80px 20px 40px 20px;
+  width: 80vw;
+  height: 80vh;
 `;
 
 const Title = styled.div`
@@ -33,19 +40,20 @@ const Title = styled.div`
 const ProjectBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  width: 23vw;
-  height: 25vh;
+  width: 20vw;
+  height: 20vh;
+  margin-bottom: 50px;
 `;
 
 const Project = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-evenly;
-  width: 18rem;
-  height: 14rem;
-  padding: 40px 40px 16px;
+  width: 30rem;
+  height: 20rem;
+  padding: 30px;
   border-radius: 10px;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
@@ -53,12 +61,18 @@ const Project = styled.div`
   background-color: #ffffff;
 `;
 
-const ProjectProfile = styled.div`
+const ProjectUserImg = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+
+const ProjectUserId = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 10rem;
   height: ${ElementSizeByHeight.SMALL};
+  padding-left: 6px;
   font-size: ${FontSize.SMALL_MEDIUM};
   font-weight: 600;
   font-family: NotoSansKR;
@@ -68,9 +82,9 @@ const ProjectProfile = styled.div`
 const ProjectTitle = styled.div`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 20rem;
-  height: ${ElementSizeByHeight.MEDIUM_SMALL};
+  height: 5rem;
   padding: 20px 0 0 0;
   font-size: ${FontSize.MEDIUM};
   font-weight: 600;
@@ -82,13 +96,31 @@ const ProjectField = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 20rem;
+  width: 40px;
   height: ${ElementSizeByHeight.TWO_EXTRA_SMALL};
   padding: 0 0 20px 0;
   font-size: ${FontSize.MEDIUM_SMALL};
   font-weight: 500;
   font-family: NotoSansKR;
   color: #c1c1c1;
+`;
+
+const FieldMelody = styled.img`
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+`;
+
+const FieldInstrument = styled.img`
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+`;
+
+const FieldLyric = styled.img`
+  width: 32px;
+  height: 32px;
+  padding: 5px;
 `;
 
 const after = keyframes`
@@ -168,13 +200,18 @@ const CreateProjectButton = styled.img`
 `;
 
 export default {
+  Window,
   Section,
   Title,
   ProjectBox,
   Project,
-  ProjectProfile,
+  ProjectUserImg,
+  ProjectUserId,
   ProjectTitle,
   ProjectField,
+  FieldInstrument,
+  FieldMelody,
+  FieldLyric,
   CreateProject,
   CreateProjectButton,
   CreateProjectButtonText,

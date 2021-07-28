@@ -17,7 +17,7 @@ function Main() {
   };
 
   return (
-    <>
+    <styled.Window>
       <styled.Section>
         <Project />
       </styled.Section>
@@ -32,7 +32,7 @@ function Main() {
           Create Project
         </styled.CreateProjectButtonText>
       </styled.CreateProject>
-    </>
+    </styled.Window>
   );
 }
 

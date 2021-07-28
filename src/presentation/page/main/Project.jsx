@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "./styled";
 import axios from "axios";
+import UserImg from "assets/profile.png";
+import fieldMelody from "assets/fieldMelody.png";
+import fieldInstrument from "assets/fieldInstrument.png";
+import fieldLyric from "assets/fieldLyric.png";
 
 // const readRequestProjects = async () => {
 //   try {
@@ -43,13 +47,23 @@ function Project() {
       {projects.map((project) => (
         <styled.ProjectBox>
           <styled.Project>
-            <styled.ProjectProfile key={project.id}>
-              👨‍🎓 {project.username}
-            </styled.ProjectProfile>
+            <styled.ProjectUserId key={project.id}>
+              <styled.ProjectUserImg src={UserImg}></styled.ProjectUserImg>{" "}
+              {project.username}
+            </styled.ProjectUserId>
             <styled.ProjectTitle>{project.email}</styled.ProjectTitle>
             <styled.ProjectField>
-              {project.address.geo.lat} | {project.address.geo.lng} |{" "}
-              {project.company.name}
+              {true ? (
+                <styled.FieldMelody src={fieldMelody}></styled.FieldMelody>
+              ) : null}
+              {true ? (
+                <styled.FieldInstrument
+                  src={fieldInstrument}
+                ></styled.FieldInstrument>
+              ) : null}
+              {true ? (
+                <styled.FieldLyric src={fieldLyric}></styled.FieldLyric>
+              ) : null}
             </styled.ProjectField>
           </styled.Project>
         </styled.ProjectBox>
