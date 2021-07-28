@@ -35,7 +35,7 @@ function Uploadfiles() {
       ></styled.UploadButton>
       <styled.InputMidi type="file" onChange={saveFile}></styled.InputMidi>
       <styled.PlaceHolder>
-        MIDI파일을 드래그하여 업로드 해주세요(최대1GB)
+        {file ? fileName : "MIDI파일을 드래그하여 업로드 해주세요(최대1GB)"}
       </styled.PlaceHolder>
     </styled.UploadMidi>
   );
