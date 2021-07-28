@@ -125,13 +125,9 @@ const RadioButton = ({ title, onClick, keyword, value }) => {
   return (
     <>
       {keyword === value ? (
-        <CheckedButton name={title} onClick={onClick}>
-          {value}
-        </CheckedButton>
+        <CheckedButton onClick={onClick}>{value}</CheckedButton>
       ) : (
-        <NotCheckedButton name={title} onClick={onClick}>
-          {value}
-        </NotCheckedButton>
+        <NotCheckedButton onClick={onClick}>{value}</NotCheckedButton>
       )}
     </>
   );
