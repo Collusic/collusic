@@ -71,8 +71,8 @@ const ProjectBox = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 85%;
-  height: 100%;
+  width: 85vw;
+  height: 100vh;
 `;
 
 const Project = styled.div`

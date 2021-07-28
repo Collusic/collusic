@@ -15,6 +15,10 @@ function RightBox() {
       <styled.Title>The Great Escape</styled.Title>
       <AudioPlayer
         style={{
+          position: "absolute",
+          right: "4.5vw",
+          top: "200px",
+          width: "1000px",
           display: "flex",
           justifyContent: "flex-start",
           boxShadow: "none",

@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import styled from "./styled";
 import axios from "axios";
 
+// const readRequestProjects = async () => {
+//   try {
+//     const { data } = await API.get("/req-projects");
+//     return data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 function Project() {
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(8);
 
   useEffect(() => {
     const fetchProjects = async () => {
