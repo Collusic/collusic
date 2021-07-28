@@ -6,6 +6,7 @@ import Home from "./page/home";
 import CreateProject from "./page/create";
 import NavBar from "./page/nav_bar";
 import DetailProject from "./page/detailProject";
+import CreateContributeProject from "./page/createContributeProject";
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
         <Route exact path="/project">
           <DetailProject></DetailProject>
         </Route>
-        <Route exact path="/create">
-          <CreateProject></CreateProject>
+        <Route exact path="/project/ContributeProject">
+          <CreateContributeProject></CreateContributeProject>
         </Route>
       </Switch>
     </Router>
