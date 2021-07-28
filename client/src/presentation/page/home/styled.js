@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import Color from "utils/style/color";
+import { FontFamily } from "utils/style/default";
 
 const customStyles = {
   content: {
@@ -12,8 +13,11 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     border: "0.5px solid white",
-    borderRadius: "20px",
-    boxShadow: "3px 3px 3px 3px gray",
+    borderRadius: "10px",
+    boxShadow: "0 4px 4px 0 rgba(0,0,0,0.3)",
+  },
+  overlay: {
+    backgroundColor: "rgb(0,0,0,0.5)",
   },
 };
 
@@ -29,7 +33,7 @@ const HomeNav = styled.div`
   width: 100%;
   justify-content: space-between;
   position: absolute;
-  color: ${Color.MAIN_COLOR};
+  color: white;
   top: 2em;
   button {
     border: none;
@@ -41,19 +45,19 @@ const HomeNav = styled.div`
     font-weight: 700;
     background-color: inherit;
     font-family: "Krona One";
-    color: ${Color.MAIN_COLOR};
+    color: white;
   }
   & button:last-child {
     width: 7em;
     height: 2.2em;
     margin-right: 2em;
-    background-color: #ed8c1b;
-    color: white;
+    background-color: white;
+    color: ${Color.MAIN_COLOR};
     border: 1px solid inherit;
-    font-family: "Krona One";
+    font-family: ${FontFamily.KoreanFont};
     border-radius: 20px;
     font-size: 19px;
-    font-weight: 300;
+    font-weight: 700;
   }
 `;
 
@@ -80,29 +84,29 @@ const ModalButton = css`
   margin: 0.5em 0.5em;
   width: 25rem;
   height: 3.7rem;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: ${FontFamily.EnglishFont}, ${FontFamily.KoreanFont};
 `;
 const ModalInput = css`
   ${ModalButton}
-  border: solid 2px #c1c1c1;
-  padding-left: 2rem;
 `;
 
 const LoginModalContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  background-color: white;
-  position: relative;
-  & > h2 {
+  & > form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+  }
+  & > form > h2 {
     color: ${Color.MAIN_COLOR};
     font-family: "Krona One";
-    font-size: 2.7em;
+    font-size: 32px;
     cursor: default;
+    margin-top: 10px;
   }
-  & .Modal__Button--Cancel {
+  & > form > .Modal__Button--Cancel {
     background-color: inherit;
     position: absolute;
     right: 0;
@@ -112,34 +116,39 @@ const LoginModalContainer = styled.div`
     font-size: 2em;
     opacity: 0.5;
   }
-  & > input {
+  & > form > input {
     ${ModalInput};
     font-size: 1.3em;
+    border: none;
+    border-bottom: solid 1px #909090;
+    border-radius: 0;
+    font-family: ${FontFamily.KoreanFont};
     &:focus {
       outline: none;
     }
   }
-  & > input::placeholder {
+  & > form > input::placeholder {
     color: #c1c1c1;
   }
-  & #LoginModal__LoginButton {
+  & > form > #LoginModal__LoginButton {
     ${ModalButton}
-    width:27rem;
+    width:10rem;
     border: 1px solid ${Color.MAIN_COLOR};
     background-color: ${Color.MAIN_COLOR};
     color: white;
-    font-family: "Krona One";
+    font-family: ${FontFamily.KoreanFont};
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 2rem;
   }
-  & #LoginModal__SignInButton {
+  & > form > #LoginModal__SignInButton {
     background-color: inherit;
     border: none;
     cursor: pointer;
     text-decoration: underline;
     font-family: "Noto Sans KR";
-    color: #909090;
+    color: #505050;
     margin-top: 2rem;
   }
 `;
@@ -169,14 +178,18 @@ const SignInModalContainer = styled.div`
     font-size: 2em;
     opacity: 0.5;
   }
-  & > input {
+  & input {
     ${ModalInput};
     font-size: 1.3em;
+    border: none;
+    border-bottom: solid 1px #909090;
+    border-radius: 0;
+    font-family: ${FontFamily.KoreanFont};
     &:focus {
       outline: none;
     }
   }
-  & > input::placeholder {
+  & input::placeholder {
     color: #c1c1c1;
   }
   & > .SingInModal__SignUpButton {
@@ -190,6 +203,45 @@ const SignInModalContainer = styled.div`
     font-size: 1.5rem;
     margin-top: 2rem;
   }
+  & > div {
+    position: relative;
+    & > img {
+      position: absolute;
+      right: 0;
+      top: 25%;
+      display: none;
+    }
+  }
+`;
+
+/////////////////////////////////////////
+const ErrorModalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: ${FontFamily.KoreanFont};
+  & > button {
+    cursor: pointer;
+  }
+  & > button:first-child {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background-color: inherit;
+    font-size: 20px;
+  }
+  & > h2 {
+    margin-top: 40px;
+  }
+  & > button:last-child {
+    border: none;
+    background-color: inherit;
+    font-size: 10px;
+    margin-top: 20px;
+  }
 `;
 export {
   StyledContainer,
@@ -199,4 +251,5 @@ export {
   customStyles,
   LoginModalContainer,
   SignInModalContainer,
+  ErrorModalContainer,
 };
