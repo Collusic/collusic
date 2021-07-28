@@ -24,11 +24,8 @@ function App() {
         <Route exact path="/project">
           <DetailProject></DetailProject>
         </Route>
-        <Route exact path="/project/creteContibuteProject">
+        <Route exact path="/project/ContributeProject">
           <CreateContributeProject></CreateContributeProject>
-        </Route>
-        <Route exact path="/create">
-          <CreateProject></CreateProject>
         </Route>
       </Switch>
     </Router>
