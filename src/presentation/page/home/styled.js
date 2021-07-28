@@ -13,7 +13,10 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     border: "0.5px solid white",
     borderRadius: "20px",
-    boxShadow: "3px 3px 3px 3px gray",
+    boxShadow: "0 4px 4px 0 rgba(0,0,0,0.3)",
+  },
+  overlay: {
+    backgroundColor: "rgb(0,0,0,0.5)",
   },
 };
 
@@ -89,20 +92,21 @@ const ModalInput = css`
 `;
 
 const LoginModalContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  background-color: white;
-  position: relative;
-  & > h2 {
+  & > form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+  }
+  & > form > h2 {
     color: ${Color.MAIN_COLOR};
     font-family: "Krona One";
     font-size: 2.7em;
     cursor: default;
   }
-  & .Modal__Button--Cancel {
+  & > form > .Modal__Button--Cancel {
     background-color: inherit;
     position: absolute;
     right: 0;
@@ -112,17 +116,17 @@ const LoginModalContainer = styled.div`
     font-size: 2em;
     opacity: 0.5;
   }
-  & > input {
+  & > form > input {
     ${ModalInput};
     font-size: 1.3em;
     &:focus {
       outline: none;
     }
   }
-  & > input::placeholder {
+  & > form > input::placeholder {
     color: #c1c1c1;
   }
-  & #LoginModal__LoginButton {
+  & > form > #LoginModal__LoginButton {
     ${ModalButton}
     width:27rem;
     border: 1px solid ${Color.MAIN_COLOR};
@@ -133,7 +137,7 @@ const LoginModalContainer = styled.div`
     font-size: 1.5rem;
     margin-top: 2rem;
   }
-  & #LoginModal__SignInButton {
+  & > form > #LoginModal__SignInButton {
     background-color: inherit;
     border: none;
     cursor: pointer;
