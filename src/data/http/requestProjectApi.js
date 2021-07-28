@@ -19,6 +19,14 @@ export default class requestProjectApiProvider {
     }
   }
 
+  async createContributeProject() {
+    try {
+      const { data } = await API.post("/req-projects/contributeproject");
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async updateRequestProject() {
     try {
       const { data } = await API.put("/req-projects:{request_id}");
