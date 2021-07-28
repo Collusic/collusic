@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import styled from "./styled";
-import Upload from "./Upload";
+import Uploadfiles from "./UploadFiles";
 
 function LeftBox() {
   return (
     <styled.LeftBox>
-      <styled.InputContext></styled.InputContext>
-      <styled.InputLyrics></styled.InputLyrics>
-      <styled.UploadMidi>
-        <Upload></Upload>
-      </styled.UploadMidi>
+      <styled.InputContext placeholder="내용을 입력해 주세요 (최대 150자)"></styled.InputContext>
+      <styled.InputLyrics placeholder="가사를 입력해 주세요."></styled.InputLyrics>
+      <Uploadfiles></Uploadfiles>
     </styled.LeftBox>
   );
 }
