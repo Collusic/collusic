@@ -17,10 +17,11 @@ const Window = styled.div`
 const Section = styled.section`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 80vw;
-  height: 80vh;
+  height: 70vh;
+  padding: 0 0 10vh 9vw;
 `;
 
 const Title = styled.div`
@@ -40,10 +41,10 @@ const Title = styled.div`
 const ProjectBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 20vw;
-  height: 20vh;
+  height: 18vh;
   margin-bottom: 50px;
   z-index: 2;
 `;
@@ -52,9 +53,10 @@ const Project = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-evenly;
-  width: 30rem;
+  flex-wrap: wrap;
+  width: 22rem;
   height: 20rem;
-  padding: 30px;
+  padding: 0 10px 0 20px;
   border-radius: 10px;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
@@ -66,6 +68,7 @@ const Project = styled.div`
 const ProjectUserImg = styled.img`
   width: 32px;
   height: 32px;
+  padding-right: 20px;
 `;
 
 const ProjectUserId = styled.div`
@@ -74,11 +77,11 @@ const ProjectUserId = styled.div`
   align-items: center;
   width: 10rem;
   height: ${ElementSizeByHeight.SMALL};
-  padding-left: 6px;
+  padding: 10px 10px 0 0;
   font-size: ${FontSize.SMALL_MEDIUM};
   font-weight: 600;
   font-family: NotoSansKR;
-  color: #202020;
+  color: #505050;
 `;
 
 const ProjectTitle = styled.div`
@@ -97,6 +100,7 @@ const ProjectTitle = styled.div`
 const ProjectField = styled.div`
   display: flex;
   justify-content: flex-start;
+
   align-items: center;
   width: 40px;
   height: ${ElementSizeByHeight.TWO_EXTRA_SMALL};

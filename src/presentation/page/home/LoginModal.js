@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { LoginModalContainer } from "./styled";
-import axios from "axios";
+import API from "data/http/axios/api";
 import useLastLocationHistory from "lib/history";
 
 const LoginModal = ({
@@ -29,8 +29,7 @@ const LoginModal = ({
       email: loginForm.email,
       password: loginForm.password,
     };
-    axios
-      .post("http://localhost:8001/auth/login", article)
+    API.post("/auth/login", article)
       .then((response) => {
         const { data } = response;
         if (data.success) {

@@ -106,6 +106,20 @@ const Genre = styled.div`
   color: ${Color.TEXT_MAIN_COLOR};
 `;
 
+const Lyric = styled.div`
+  width: 10vw;
+  height: 2vh;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
 const LikeButton = styled.img`
   width: 32px;
   height: 32px;
@@ -170,6 +184,20 @@ const RequestFieldTitle = styled.div`
   color: ${Color.MAIN_COLOR};
 `;
 
+const RequestLyric = styled.div`
+  width: 30vw;
+  height: 15vh;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
 const RequestFieldItems = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -181,7 +209,7 @@ const RequestFieldItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
+  width: 45px;
   height: 25px;
   font-family: NotoSansKR;
   font-size: 14px;
@@ -208,7 +236,7 @@ const RequestGenre = styled.div`
 const RequestGenreTitle = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width: 55px;
+  width: 50px;
   height: 20px;
   padding-left: 20px;
   font-family: NotoSansKR;
@@ -375,12 +403,14 @@ export default {
   Profile,
   Email,
   Genre,
+  Lyric,
   LikeButton,
   RightBox,
   Title,
   ProjectStates,
   RequestField,
   RequestFieldTitle,
+  RequestLyric,
   RequestFieldItems,
   RequestFieldItem,
   RequestGenre,

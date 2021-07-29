@@ -10,6 +10,7 @@ import {
   SubmitButton,
 } from "./styled";
 import FileUpload from "./fileupload";
+import API from "data/http/axios/api";
 import axios from "axios";
 import useLastLocationHistory from "lib/history";
 
@@ -171,9 +172,8 @@ const Create = () => {
     requests.append("description", form.description);
     requests.append("genre", form.genre);
     requests.append("mood", form.mood);
-    if (!Object.keys(form.file).length === 0) {
-      requests.append("data", form.file[0].src.file);
-    }
+    requests.append("data", form.file[0].src.file);
+
     requests.append("lyrics_text", form.lyrics);
     requests.append("music_field", String(form.fieldList.includes("멜로디")));
     requests.append("lyrics_field", String(form.fieldList.includes("가사")));
@@ -181,10 +181,12 @@ const Create = () => {
       "instrument_field",
       String(form.fieldList.includes("악기"))
     );
+    console.log(form.file[0].src.file);
 
     axios
-      .post("http://localhost:8001/requestProjects", requests)
+      .post("http://168.131.157.14:8001/requestprojects", requests)
       .then((response) => {
+        console.log(response);
         const { data } = response;
         if (data.success) {
           alert("성공~");

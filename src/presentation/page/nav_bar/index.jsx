@@ -9,7 +9,7 @@ function NavBar() {
 
   return (
     <StyledNavBar>
-      <Title>collusic</Title>
+      <Title onClick={() => setHistory("/")}>collusic</Title>
       <Box>
         <Alarm src={imgAlarm} />
         <Profile

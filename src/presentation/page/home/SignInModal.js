@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SignInModalContainer } from "./styled";
-import axios from "axios";
+import API from "data/http/axios/api";
 import passwordCheck from "../../../assets/PasswordMatch.png";
 
 const SignInModal = ({ closeModal, setErrorModal, setError }) => {
@@ -45,8 +45,7 @@ const SignInModal = ({ closeModal, setErrorModal, setError }) => {
       email: signInForm.email,
       password: signInForm.password,
     };
-    axios
-      .post("http://localhost:8001/auth/join", article)
+    API.post("/auth/join", article)
       .then((response) => {
         const { data } = response;
         if (data.success) {

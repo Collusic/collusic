@@ -25,9 +25,12 @@ function Project() {
         setError(null);
         setProjects(null);
         setLoading(true);
-        const { data } = await API.get("/requestprojects");
-        setProjects(data);
+        const {
+          data: { maininfo: array },
+        } = await API.get("/requestprojects");
+        setProjects(array);
       } catch (error) {
+        console.log(error);
         setError(error);
       }
       setLoading(false);
@@ -39,7 +42,8 @@ function Project() {
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!projects) return null;
-
+  console.log(projects);
+  console.log(projects[0].instrument_field);
   return (
     <>
       {projects.map((project) => (
@@ -47,24 +51,24 @@ function Project() {
           <styled.Project>
             <div
               onClick={() => {
-                setHistory("/requestprojects/" + project.uid);
+                setHistory("/requestprojects/" + project.id);
               }}
             >
-              <styled.ProjectUserId key={project.uid}>
+              <styled.ProjectUserId key={project.id}>
                 <styled.ProjectUserImg src={UserImg}></styled.ProjectUserImg>{" "}
-                {project.email}
+                {project.User.email}
               </styled.ProjectUserId>
               <styled.ProjectTitle>{project.title}</styled.ProjectTitle>
               <styled.ProjectField>
-                {project.music_field === 1 ? (
+                {project.music_field === true ? (
                   <styled.FieldMelody src={fieldMelody}></styled.FieldMelody>
                 ) : null}
-                {project.insrument_field === 1 ? (
+                {project.instrument_field === true ? (
                   <styled.FieldInstrument
                     src={fieldInstrument}
                   ></styled.FieldInstrument>
                 ) : null}
-                {project.lyrics_field === 1 ? (
+                {project.lyrics_field === true ? (
                   <styled.FieldLyric src={fieldLyric}></styled.FieldLyric>
                 ) : null}
               </styled.ProjectField>
@@ -79,16 +83,17 @@ function Project() {
               <AudioPlayer
                 style={{
                   position: "relative",
-                  right: "70px",
-                  width: "550px",
+                  right: "20px",
+                  width: "350px",
                   display: "flex",
                   justifyContent: "flex-start",
                   boxShadow: "none",
                   marginTop: "20px",
-                  zIndex: "1",
+                  zIndex: "-1",
                   opacity: "1",
+                  backgroundColor: "inherit",
                 }}
-                src={project.audio}
+                src={project.audioFile}
                 showJumpControls={false}
                 customVolumeControls={[]}
                 customAdditionalControls={[]}

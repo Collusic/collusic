@@ -24,7 +24,7 @@ function App() {
         <Route exact path="/requestprojects/:id">
           <DetailProject></DetailProject>
         </Route>
-        <Route exact path="/project/ContributeProject">
+        <Route exact path="/requestprojects/:id/comments">
           <CreateContributeProject></CreateContributeProject>
         </Route>
         <Route exact path="/create">

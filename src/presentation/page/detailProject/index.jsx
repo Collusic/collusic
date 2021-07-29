@@ -6,11 +6,12 @@ import RightBox from "./RightBox";
 
 function DetailProject() {
   let { id } = useParams();
+  console.log(id);
   return (
     <>
       <styled.Window>
-        <LeftBox></LeftBox>
-        <RightBox></RightBox>
+        <LeftBox id={id}></LeftBox>
+        <RightBox id={id}></RightBox>
       </styled.Window>
     </>
   );

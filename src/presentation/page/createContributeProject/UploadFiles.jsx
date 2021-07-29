@@ -3,8 +3,7 @@ import axios from "axios";
 import styled from "./styled";
 import upload from "assets/uploadButton.png";
 
-function Uploadfiles() {
-  const [file, setFile] = useState();
+function Uploadfiles({ file, setFile }) {
   const [fileName, setFileName] = useState("");
 
   const saveFile = (e) => {
