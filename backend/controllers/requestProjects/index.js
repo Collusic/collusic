@@ -14,10 +14,10 @@ const createProjectAPI = async (req, res) => {
     genre: req.body.genre,
     mood: req.body.mood,
     lyrics_text: req.body.lyrics_text,
-    audioFile: req.file.originalname,
-    music_field: req.body.music_field,
-    lyrics_field: req.body.lyrics_field,
-    instrument_field: req.body.instrument_field,
+    audioFile: req.file.location,
+    music_field: Boolean(req.body.music_field),
+    lyrics_field: Boolean(req.body.lyrics_field),
+    instrument_field: Boolean(req.body.instrument_field),
   });
   if (!post) {
     res.status(400).json({
