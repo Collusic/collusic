@@ -9,6 +9,7 @@ const {
 const router = express.Router();
 const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
+const contributeProjectController = require("../controllers/contributeProjects");
 const { request } = require("express");
 router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
 router.post(
@@ -25,6 +26,11 @@ router.get(
   "/requestProjects/:id/comments",
   isLoggedIn,
   requestProjectController.commentsAPI
+);
+router.post(
+  "/requestProjects/:id/comments",
+  upload_commit.single("data"),
+  contributeProjectController.createContriProjectAPI
 );
 module.exports = router;
 // router.get("/", async (req, res, next) => {
