@@ -13,9 +13,9 @@ module.exports = () => {
       },
       async (email, password, done) => {
         try {
-          const exUser = await User.findOne({ where: { email } }); //그 email을 가진 사람이 있나 찾기
+          const exUser = await User.findOne({ where: { email } });
           if (exUser) {
-            const result = await bcrypt.compare(password, exUser.password); //brypt.compare로 비번이랑, 디비에 비번이랑 비교
+            const result = await bcrypt.compare(password, exUser.password);
             if (result) {
               done(null, exUser);
             } else {

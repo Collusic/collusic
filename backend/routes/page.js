@@ -11,6 +11,7 @@ const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
 const contributeProjectController = require("../controllers/contributeProjects");
 const { request } = require("express");
+const cors = require("cors");
 router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
 router.post(
   "/requestProjects",

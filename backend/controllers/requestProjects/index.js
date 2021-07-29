@@ -65,7 +65,7 @@ const mainInfoAPI = async (req, res) => {
       },
     ],
     attributes: [
-      "uid",
+      "id",
       "title",
       "music_field",
       "lyrics_field",
@@ -76,7 +76,7 @@ const mainInfoAPI = async (req, res) => {
       "lyrics_text",
     ],
   });
-
+  res.set({ "access-control-allow-origin": "*" });
   if (!maininfo) {
     res.status(400).json({
       success: false,
