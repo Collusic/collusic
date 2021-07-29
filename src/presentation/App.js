@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import Main from "./page/main";
+import RequestProjects from "./page/requestProject";
 import Home from "./page/home";
 import NavBar from "./page/nav_bar";
 import DetailProject from "./page/detailProject";
@@ -18,10 +18,10 @@ function App() {
         <NavBar></NavBar>
       </Switch>
       <Switch>
-        <Route exact path="/main">
-          <Main></Main>
+        <Route exact path="/requestProjects">
+          <RequestProjects></RequestProjects>
         </Route>
-        <Route exact path="/project">
+        <Route exact path="/requestProjects/:id">
           <DetailProject></DetailProject>
         </Route>
         <Route exact path="/project/ContributeProject">

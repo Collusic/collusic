@@ -28,7 +28,7 @@ function Project() {
         setError(null);
         setProjects(null);
         setLoading(true);
-        const { data } = await API.get("/users");
+        const { data } = await API.get("/requestprojects");
         setProjects(data);
       } catch (error) {
         setError(error);
@@ -50,7 +50,7 @@ function Project() {
           <styled.Project>
             <div
               onClick={() => {
-                setHistory("/project/" + project.id);
+                setHistory("/requestprojects/" + project.id);
               }}
             >
               <styled.ProjectUserId key={project.id}>

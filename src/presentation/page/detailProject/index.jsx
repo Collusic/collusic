@@ -3,7 +3,7 @@ import styled from "./styled";
 import LeftBox from "./LeftBox";
 import RightBox from "./RightBox";
 
-function DetailProject() {
+function DetailProject({ id }) {
   return (
     <>
       <styled.Window>

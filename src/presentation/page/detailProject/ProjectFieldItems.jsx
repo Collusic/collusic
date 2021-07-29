@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "data/http/axios/api";
 import styled from "./styled";
 
-function ProjectFieldItems() {
+function ProjectFieldItems({ id }) {
   const [requestProject, setRequestProject] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const readContributeProjects = async () => {
       try {
         setError(null);
         setRequestProject(null);
         setLoading(true);
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        setRequestProject(response.data);
+        const { data } = await API.get("/requestprojects/" + id);
+        setRequestProject(data);
       } catch (error) {
         setError(error);
       }
       setLoading(false);
     };
 
-    fetchProjects();
+    readContributeProjects();
   }, []);
 
   if (loading) return <div>로딩중...</div>;

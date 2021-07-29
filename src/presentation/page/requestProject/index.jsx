@@ -4,7 +4,7 @@ import Project from "./Project";
 import CreateButtonImage from "assets/createButton.svg";
 import useLastLocationHistory from "lib/history";
 
-function Main() {
+function RequestProjects() {
   const setHistory = useLastLocationHistory();
 
   const [isLong, setIsLong] = useState(false);
@@ -36,4 +36,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default RequestProjects;

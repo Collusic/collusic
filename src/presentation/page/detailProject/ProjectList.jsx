@@ -10,6 +10,7 @@ import selected from "assets/selected.png";
 import { Icon } from "@iconify/react";
 import playCircle from "@iconify-icons/mdi/play-circle";
 import pauseCircle from "@iconify-icons/mdi/pause-circle";
+import API from "data/http/axios/api";
 
 function ProjectList({ unselected }) {
   const [projects, setProjects] = useState(null);
@@ -22,10 +23,8 @@ function ProjectList({ unselected }) {
         setError(null);
         setProjects(null);
         setLoading(true);
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        setProjects(response.data);
+        const { data } = await API.get("/requestprojects");
+        setProjects(data);
       } catch (error) {
         setError(error);
       }
