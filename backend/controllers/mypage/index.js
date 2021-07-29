@@ -14,14 +14,10 @@ const readMyPageAPI = async (req, res, next) => {
     res.status(200).json({
       email: myinfo,
     });
-    // const postinfo = await Post.findAll({
-    //   attributes: ["title", "field"],
-    // });
   } catch (err) {
     res.status(400).json({ error: err });
   }
 };
-// isLoggedIn 미들웨어 어디다 넣지..?
 
 module.exports = {
   readMyPageAPI: readMyPageAPI,

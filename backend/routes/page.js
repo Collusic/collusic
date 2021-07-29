@@ -16,7 +16,16 @@ router.post(
   upload.single("data"),
   requestProjectController.createProjectAPI
 );
-router.get("/main", isLoggedIn, requestProjectController.mainInfoAPI);
+router.get(
+  "/requestProjects",
+  isLoggedIn,
+  requestProjectController.mainInfoAPI
+);
+router.get(
+  "/requestProjects/:id/comments",
+  isLoggedIn,
+  requestProjectController.commentsAPI
+);
 module.exports = router;
 // router.get("/", async (req, res, next) => {
 //   try {
