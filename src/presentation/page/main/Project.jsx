@@ -11,6 +11,7 @@ import "react-h5-audio-player/lib/styles.css";
 import { Icon } from "@iconify/react";
 import playCircle from "@iconify-icons/mdi/play-circle";
 import pauseCircle from "@iconify-icons/mdi/pause-circle";
+import useLastLocationHistory from "lib/history";
 
 const text = "Preview Lrics,";
 
@@ -22,7 +23,9 @@ const text = "Preview Lrics,";
 //     console.log(err);
 //   }
 // };
+
 function Project() {
+  const setHistory = useLastLocationHistory();
   const [projects, setProjects] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -55,30 +58,36 @@ function Project() {
       {projects.map((project) => (
         <styled.ProjectBox>
           <styled.Project>
-            <styled.ProjectUserId key={project.id}>
-              <styled.ProjectUserImg src={UserImg}></styled.ProjectUserImg>{" "}
-              {project.username}
-            </styled.ProjectUserId>
-            <styled.ProjectTitle>{project.email}</styled.ProjectTitle>
-            <styled.ProjectField>
-              {true ? (
-                <styled.FieldMelody src={fieldMelody}></styled.FieldMelody>
-              ) : null}
-              {true ? (
-                <styled.FieldInstrument
-                  src={fieldInstrument}
-                ></styled.FieldInstrument>
-              ) : null}
-              {true ? (
-                <styled.FieldLyric src={fieldLyric}></styled.FieldLyric>
-              ) : null}
-            </styled.ProjectField>
-            <styled.GenreMood>
-              <styled.Genre>장르</styled.Genre>
-              <styled.GenreContext>{"어쿠스틱"}</styled.GenreContext>
-              <styled.Mood>분위기</styled.Mood>
-              <styled.MoodContext>{"희망적인"}</styled.MoodContext>
-            </styled.GenreMood>
+            <div
+              onClick={() => {
+                setHistory("/project/" + project.id);
+              }}
+            >
+              <styled.ProjectUserId key={project.id}>
+                <styled.ProjectUserImg src={UserImg}></styled.ProjectUserImg>{" "}
+                {project.username}
+              </styled.ProjectUserId>
+              <styled.ProjectTitle>{project.email}</styled.ProjectTitle>
+              <styled.ProjectField>
+                {true ? (
+                  <styled.FieldMelody src={fieldMelody}></styled.FieldMelody>
+                ) : null}
+                {true ? (
+                  <styled.FieldInstrument
+                    src={fieldInstrument}
+                  ></styled.FieldInstrument>
+                ) : null}
+                {true ? (
+                  <styled.FieldLyric src={fieldLyric}></styled.FieldLyric>
+                ) : null}
+              </styled.ProjectField>
+              <styled.GenreMood>
+                <styled.Genre>장르</styled.Genre>
+                <styled.GenreContext>{"어쿠스틱"}</styled.GenreContext>
+                <styled.Mood>분위기</styled.Mood>
+                <styled.MoodContext>{"희망적인"}</styled.MoodContext>
+              </styled.GenreMood>
+            </div>
             {true ? (
               <AudioPlayer
                 style={{
@@ -89,7 +98,7 @@ function Project() {
                   justifyContent: "flex-start",
                   boxShadow: "none",
                   marginTop: "20px",
-                  zIndex: "-1",
+                  zIndex: "1",
                   opacity: "1",
                 }}
                 src={audio}
