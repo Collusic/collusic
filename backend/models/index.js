@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const env = "test" || "development"; //config.json의 development 가져오기
-const config = require("../config/config")[env]; //config.json의 development 가져오기
+const env = "test" || "development";
+const config = require("../config/config")[env];
 const User = require("./user");
 const Post = require("./post");
 const Comment = require("./comment");
@@ -17,7 +17,7 @@ db.sequelize = sequelize;
 db.User = User;
 db.Post = Post;
 db.Comment = Comment;
-//사람과 게시글은 1:1관계, 게시글과 해시태그는 1:N 관계
+
 User.init(sequelize);
 Post.init(sequelize);
 Comment.init(sequelize);
