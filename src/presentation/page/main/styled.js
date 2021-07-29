@@ -45,6 +45,7 @@ const ProjectBox = styled.div`
   width: 20vw;
   height: 20vh;
   margin-bottom: 50px;
+  z-index: 2;
 `;
 
 const Project = styled.div`
@@ -59,6 +60,7 @@ const Project = styled.div`
   backdrop-filter: blur(30px);
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
+  z-index: 2;
 `;
 
 const ProjectUserImg = styled.img`
@@ -121,6 +123,81 @@ const FieldLyric = styled.img`
   width: 32px;
   height: 32px;
   padding: 5px;
+`;
+
+const GenreMood = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  height: 20px;
+  padding-top: 20px;
+`;
+
+const Genre = styled.div`
+  display: flex;
+  jutify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.MAIN_COLOR};
+`;
+
+const GenreContext = styled.div`
+  display: flex;
+  jutify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
+`;
+
+const Mood = styled.div`
+  display: flex;
+  jutify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.MAIN_COLOR};
+`;
+
+const MoodContext = styled.div`
+  display: flex;
+  jutify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: ${Color.TEXT_MAIN_COLOR};
 `;
 
 const after = keyframes`
@@ -212,6 +289,11 @@ export default {
   FieldInstrument,
   FieldMelody,
   FieldLyric,
+  GenreMood,
+  Genre,
+  GenreContext,
+  Mood,
+  MoodContext,
   CreateProject,
   CreateProjectButton,
   CreateProjectButtonText,
