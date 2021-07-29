@@ -1,7 +1,14 @@
 import React, { useState, useCallback } from "react";
 import { LoginModalContainer } from "./styled";
+import axios from "axios";
+import useLastLocationHistory from "lib/history";
 
-const LoginModal = ({ closeModal, openSignInModal }) => {
+const LoginModal = ({
+  closeModal,
+  openSignInModal,
+  setErrorModal,
+  setError,
+}) => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -15,18 +22,29 @@ const LoginModal = ({ closeModal, openSignInModal }) => {
     },
     [loginForm]
   );
-  const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      var regExp =
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-      if (!regExp.test(loginForm.email)) {
-      } else {
-      }
-    },
-    [loginForm]
-  );
+  const setHistory = useLastLocationHistory();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const article = {
+      email: loginForm.email,
+      password: loginForm.password,
+    };
+    axios
+      .post("http://localhost:8001/auth/login", article)
+      .then((response) => {
+        const { data } = response;
+        if (data.success) {
+          closeModal();
+          setHistory("/requestprojects");
+        } else {
+          setErrorModal();
+          setError(`${data.msg}`);
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
   return (
     <LoginModalContainer>
       <form onSubmit={onSubmit} name="loginForm">
@@ -51,7 +69,7 @@ const LoginModal = ({ closeModal, openSignInModal }) => {
           onChange={onChange}
         />
         <button id="LoginModal__LoginButton" type="submit">
-          LOG IN
+          로그인
         </button>
         <button id="LoginModal__SignInButton" onClick={openSignInModal}>
           회원가입

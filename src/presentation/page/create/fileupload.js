@@ -8,7 +8,7 @@ const fileupload = ({ files, errors, setFiles, setErrors, cancelFile }) => {
       multiple={false}
       maxSize="10mb"
       multipleMaxSize="10mb"
-      accept={["application/pdf", "image/jpg", "image/jpeg"]}
+      accept={"audio/*"}
       onSuccess={(file) => setFiles(file)}
       onError={(error) => setErrors(error)}
     >
