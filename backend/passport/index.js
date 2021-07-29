@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    done(null, user.id); // 세션에 user 의 id 만 저장
+    done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
@@ -15,5 +15,3 @@ module.exports = () => {
 
   local();
 };
-
-//serializeuser는

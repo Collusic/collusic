@@ -39,6 +39,3 @@ module.exports = class Comment extends Sequelize.Model {
     db.Comment.belongsTo(db.User, { foreignKey: "uid", sourceKey: "id" });
   }
 };
-//requestid 외래키
-//uid 외래키
-//constraint uid foreign key uid references user.uid on delete cascade on update cascade

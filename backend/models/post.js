@@ -5,7 +5,6 @@ module.exports = class Post extends Sequelize.Model {
     return super.init(
       {
         title: {
-          //id 생략. -> sequlize에서는 id가 생략될 수 있음.
           type: Sequelize.STRING(140),
           allowNull: false,
         },
@@ -56,8 +55,8 @@ module.exports = class Post extends Sequelize.Model {
         underscored: false,
         modelName: "Post",
         tableName: "posts",
-        paranoid: false, //deleted at false -> 게시글 삭제시 완전 삭제
-        charset: "utf8mb4", //이모티콘
+        paranoid: false,
+        charset: "utf8mb4",
         collate: "utf8mb4_general_ci",
       }
     );

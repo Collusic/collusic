@@ -34,13 +34,13 @@ module.exports = class User extends Sequelize.Model {
       },
       {
         sequelize,
-        timestamps: true, //생성일 수정일 삭제일이 기록
+        timestamps: true,
         underscored: false,
         modelName: "User",
         tableName: "users",
         paranoid: true,
         charset: "utf8",
-        collate: "utf8_general_ci", //한글 지원
+        collate: "utf8_general_ci",
       }
     );
   }
