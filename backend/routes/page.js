@@ -7,7 +7,7 @@ const {
 } = require("./middlewares");
 //const { Post, User } = require("../models");
 const router = express.Router();
-//const mypageController = require("../controllers/mypage");
+// const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
 const contributeProjectController = require("../controllers/contributeProjects");
 // router.use((req, res, next) => {
@@ -17,7 +17,7 @@ const contributeProjectController = require("../controllers/contributeProjects")
 //   res.locals.followerIdList = [];
 //   next();
 // });
-//router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
+// router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
 router.post(
   "/requestProjects",
   upload.single("data"),
@@ -25,7 +25,7 @@ router.post(
 );
 
 router.post(
-  "/contributeProjects",
+  "/requestProjects/:id/comments",
   upload.single("data"),
   contributeProjectController.createContriProjectAPI
 );
