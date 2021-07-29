@@ -13,6 +13,7 @@ const LeftBox = styled.div`
   width: 58vw;
   height: 88vh;
   background-color: #fafafa;
+  z-index: 1;
 `;
 
 const LeftHeader = styled.header`
@@ -119,6 +120,7 @@ const RightBox = styled.div`
 const Title = styled.div`
   width: 30vw;
   height: 88px;
+  padding-left: 50px;
   font-family: NotoSansKR;
   font-size: 30px;
   font-weight: bold;
@@ -136,7 +138,7 @@ const ProjectStates = styled.div`
   align-items: center;
   width: 37vw;
   height: 10vh;
-  padding: 40px 20px;
+  padding: 160px 20px 40px 50px;
 `;
 
 const RequestField = styled.div`
@@ -144,8 +146,8 @@ const RequestField = styled.div`
   justify-content: space-evenly;
   flex-direction: column;
   align-items: flex-start;
-  width: 190px;
-  height: 90px;
+  width: 240px;
+  height: 120px;
   border-radius: 10px;
   background-color: #fffcf2;
 `;
@@ -155,6 +157,8 @@ const RequestFieldTitle = styled.div`
   justify-content: space-evenly;
   width: 70px;
   height: 20px;
+  padding-left: 20px;
+
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
@@ -195,8 +199,8 @@ const RequestGenre = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  width: 190px;
-  height: 90px;
+  width: 240px;
+  height: 120px;
   border-radius: 10px;
   background-color: #fffcf2;
 `;
@@ -206,6 +210,7 @@ const RequestGenreTitle = styled.div`
   justify-content: space-evenly;
   width: 55px;
   height: 20px;
+  padding-left: 20px;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
@@ -238,8 +243,10 @@ const RequestMood = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-  width: 190px;
-  height: 90px;
+  width: 240px;
+  height: 120px;
+  padding-left: 20px;
+
   border-radius: 10px;
   background-color: #fffcf2;
 `;
@@ -279,7 +286,7 @@ const RequestMoodItems = styled.div`
 const RequestText = styled.div`
   width: 37vw;
   height: 20vh;
-  padding: 20px 20px 100px 20px;
+  padding: 20px 20px 100px 50px;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
@@ -315,6 +322,7 @@ const RequestProfile = styled.div`
 const ProfileImage = styled.img`
   width: 100px;
   height: 100px;
+  padding-left: 50px;
 `;
 
 const RequestContext = styled.div`
@@ -330,6 +338,7 @@ const RequestContext = styled.div`
 const RequestEmail = styled.div`
   width: 30vw;
   height: 10vh;
+  padding-top: 30px;
   font-family: NotoSansKR;
   font-size: 20px;
   font-weight: 600;
@@ -343,7 +352,7 @@ const RequestEmail = styled.div`
 
 const RequestIntroduce = styled.div`
   width: 35vw;
-  height: 10vh;
+  height: 20vh;
   font-family: NotoSansKR;
   font-size: 14px;
   font-weight: 600;
