@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import Login from "./LoginModal";
 import Error from "./loginErrorModal";
-import BG from "assets/bg.png";
+import BG from "../../../assets/bg.png";
 import SignIn from "./SignInModal";
 import {
   StyledContainer,

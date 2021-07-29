@@ -66,12 +66,18 @@ const HomeImageContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   height: 100vh;
+
+  overflow: visible;
 `;
 
 const HomeImage = styled.img`
   width: 100%;
   height: auto;
   object-fit: cover;
+  @media screen and (max-width: 1200px) {
+    width: auto;
+    height: 100vh;
+  }
 `;
 HomeImage.defaultProps = {
   src: "https://images.unsplash.com/photo-1624541199114-d86774a7caa6?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxM3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
