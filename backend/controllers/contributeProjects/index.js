@@ -5,7 +5,6 @@ const {
   upload_commit,
 } = require("../../routes/middlewares");
 const { Post, User, Comment } = require("../../models");
-//field값
 
 const createContriProjectAPI = async (req, res) => {
   let id = req.params.id;

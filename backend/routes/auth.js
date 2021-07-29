@@ -9,14 +9,14 @@ const router = express.Router();
 router.post("/join", isNotLoggedIn, async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const exUser = await User.findOne({ where: { email } }); //기존이메일로 가입한 사람이 있나?
+    const exUser = await User.findOne({ where: { email } });
     if (exUser) {
       return res.status(401).json({
         msg: "User already exist",
         success: false,
-      }); //프론트에서 이미 가입한 메일이라고 알림
+      });
     }
-    const hash = await bcrypt.hash(password, 12); //기존이메일이 아니면 password를 해쉬화 해서 저장
+    const hash = await bcrypt.hash(password, 12);
     await User.create({
       email,
       password: hash,
@@ -38,7 +38,6 @@ router.post("/login", isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      //로그인 실패한 경우;
       return res.status(200).json({
         msg: `${info.message}`,
         success: false,

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require("../../routes/middlewares");
 const { Post, User } = require("../../models");
-//field값
+
 const readMyPageAPI = async (req, res, next) => {
   try {
     const myinfo = await User.findOne({

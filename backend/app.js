@@ -9,12 +9,13 @@ const passport = require("passport");
 dotenv.config();
 const pageRouter = require("./routes/page");
 const authRouter = require("./routes/auth");
-const postRouter = require("./routes/post");
 const { sequelize } = require("./models");
 const passportConfig = require("./passport");
 const cors = require("cors");
 
 const app = express();
+app.use(cors());
+
 passportConfig();
 app.set("port", process.env.PORT || 8001);
 app.set("view engine", "html");
@@ -23,7 +24,7 @@ nunjucks.configure("views", {
   watch: true,
 });
 sequelize
-  .sync({ force: false }) //sequelize가 초기화 될 때 DB에 필요한 테이블 생성
+  .sync({ force: false })
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
@@ -34,7 +35,6 @@ sequelize
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/img", express.static(path.join(__dirname, "uploads")));
-app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,7 +54,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/", pageRouter);
 app.use("/auth", authRouter);
-app.use("/post", postRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
