@@ -200,6 +200,21 @@ const MoodContext = styled.div`
   color: ${Color.TEXT_MAIN_COLOR};
 `;
 
+const LyricText = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  text-align: left;
+  color: #505050;
+`;
+
 const after = keyframes`
 0% {
   width: 250px;
@@ -294,6 +309,7 @@ export default {
   GenreContext,
   Mood,
   MoodContext,
+  LyricText,
   CreateProject,
   CreateProjectButton,
   CreateProjectButtonText,
