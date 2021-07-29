@@ -18,10 +18,10 @@ function App() {
         <NavBar></NavBar>
       </Switch>
       <Switch>
-        <Route exact path="/main">
+        <Route exact path="/requestprojects">
           <Main></Main>
         </Route>
-        <Route exact path="/project">
+        <Route exact path="/requestprojects/:id">
           <DetailProject></DetailProject>
         </Route>
         <Route exact path="/project/ContributeProject">

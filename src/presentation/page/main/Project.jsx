@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "./styled";
-import axios from "axios";
+import API from "data/http/axios/api";
 import UserImg from "assets/profile.png";
 import fieldMelody from "assets/fieldMelody.png";
 import fieldInstrument from "assets/fieldInstrument.png";
 import fieldLyric from "assets/fieldLyric.png";
-import audio from "assets/전상근_내방.mp3";
 import AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { Icon } from "@iconify/react";
 import playCircle from "@iconify-icons/mdi/play-circle";
 import pauseCircle from "@iconify-icons/mdi/pause-circle";
 import useLastLocationHistory from "lib/history";
-
-const text = "Preview Lrics,";
-
-// const readRequestProjects = async () => {
-//   try {
-//     const { data } = await API.get("/req-projects");
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+import Color from "utils/style/color";
 
 function Project() {
   const setHistory = useLastLocationHistory();
@@ -31,22 +20,20 @@ function Project() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const readRequestProjects = async () => {
       try {
         setError(null);
         setProjects(null);
         setLoading(true);
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        setProjects(response.data);
+        const { data } = await API.get("/requestprojects");
+        setProjects(data);
       } catch (error) {
         setError(error);
       }
       setLoading(false);
     };
 
-    fetchProjects();
+    readRequestProjects();
   }, []);
 
   if (loading) return <div>로딩중...</div>;
@@ -60,35 +47,35 @@ function Project() {
           <styled.Project>
             <div
               onClick={() => {
-                setHistory("/project/" + project.id);
+                setHistory("/requestprojects/" + project.uid);
               }}
             >
-              <styled.ProjectUserId key={project.id}>
+              <styled.ProjectUserId key={project.uid}>
                 <styled.ProjectUserImg src={UserImg}></styled.ProjectUserImg>{" "}
-                {project.username}
+                {project.email}
               </styled.ProjectUserId>
-              <styled.ProjectTitle>{project.email}</styled.ProjectTitle>
+              <styled.ProjectTitle>{project.title}</styled.ProjectTitle>
               <styled.ProjectField>
-                {true ? (
+                {project.music_field === 1 ? (
                   <styled.FieldMelody src={fieldMelody}></styled.FieldMelody>
                 ) : null}
-                {true ? (
+                {project.insrument_field === 1 ? (
                   <styled.FieldInstrument
                     src={fieldInstrument}
                   ></styled.FieldInstrument>
                 ) : null}
-                {true ? (
+                {project.lyrics_field === 1 ? (
                   <styled.FieldLyric src={fieldLyric}></styled.FieldLyric>
                 ) : null}
               </styled.ProjectField>
               <styled.GenreMood>
                 <styled.Genre>장르</styled.Genre>
-                <styled.GenreContext>{"어쿠스틱"}</styled.GenreContext>
+                <styled.GenreContext>{project.genre}</styled.GenreContext>
                 <styled.Mood>분위기</styled.Mood>
-                <styled.MoodContext>{"희망적인"}</styled.MoodContext>
+                <styled.MoodContext>{project.mood}</styled.MoodContext>
               </styled.GenreMood>
             </div>
-            {true ? (
+            {project.audioFile ? (
               <AudioPlayer
                 style={{
                   position: "relative",
@@ -101,7 +88,7 @@ function Project() {
                   zIndex: "1",
                   opacity: "1",
                 }}
-                src={audio}
+                src={project.audio}
                 showJumpControls={false}
                 customVolumeControls={[]}
                 customAdditionalControls={[]}
@@ -113,12 +100,14 @@ function Project() {
                   RHAP_UI.CURRENT_LEFT_TIME,
                 ]}
                 customIcons={{
-                  play: <Icon icon={playCircle} color="#FF8900" />,
-                  pause: <Icon icon={pauseCircle} color="#ff8900" />,
+                  play: <Icon icon={playCircle} color={Color.MAIN_COLOR} />,
+                  pause: <Icon icon={pauseCircle} color={Color.MAIN_COLOR} />,
                 }}
               ></AudioPlayer>
             ) : undefined}{" "}
-            {false ? text : undefined}
+            {project.lyrics_text ? (
+              <styled.LyricText>{project.lyrics_text}</styled.LyricText>
+            ) : undefined}
           </styled.Project>
         </styled.ProjectBox>
       ))}
