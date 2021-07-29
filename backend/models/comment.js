@@ -18,7 +18,7 @@ module.exports = class Comment extends Sequelize.Model {
         },
         selected_status: {
           type: Sequelize.BOOLEAN,
-          allowNull: false,
+          allowNull: true,
         },
       },
       {

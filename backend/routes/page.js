@@ -9,6 +9,7 @@ const {
 const router = express.Router();
 //const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
+const contributeProjectController = require("../controllers/contributeProjects");
 // router.use((req, res, next) => {
 //   res.locals.user = req.user;
 //   res.locals.followerCount = 0;
@@ -21,6 +22,12 @@ router.post(
   "/requestProjects",
   upload.single("data"),
   requestProjectController.createProjectAPI
+);
+
+router.post(
+  "/contributeProjects",
+  upload.single("data"),
+  contributeProjectController.createContriProjectAPI
 );
 
 module.exports = router;

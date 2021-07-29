@@ -8,6 +8,7 @@ var _storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
 exports.upload = multer({ storage: _storage });
 //commment
 var _storage2 = multer.diskStorage({
