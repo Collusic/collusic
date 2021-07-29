@@ -2,34 +2,47 @@ const express = require("express");
 const {
   isLoggedIn,
   isNotLoggedIn,
-  uploadWithOriginalFilename,
+  upload,
+  upload_commit,
 } = require("./middlewares");
-const { Post, User } = require("../models");
+//const { Post, User } = require("../models");
 const router = express.Router();
-
-const mypageController = require("../controllers/mypage");
+//const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
-router.use((req, res, next) => {
-  res.locals.user = req.user;
-  res.locals.followerCount = 0;
-  res.locals.followingCount = 0;
-  res.locals.followerIdList = [];
-  next();
-});
-
-router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
+// router.use((req, res, next) => {
+//   res.locals.user = req.user;
+//   res.locals.followerCount = 0;
+//   res.locals.followingCount = 0;
+//   res.locals.followerIdList = [];
+//   next();
+// });
+//router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
 router.post(
-  "/requestProject",
-  isLoggedIn,
-  uploadWithOriginalFilename.single("data"),
+  "/requestProjects",
+  upload.single("data"),
   requestProjectController.createProjectAPI
 );
-// router.put("/mypage/:id", mypageController.createContributeProjectAPI);
-// router.delete("/mypage/:id", mypageController.deleteUserInfoAPI);
 
-// router.get("/req-projects", requestProjectController.readAllRequestProjectAPI);
+module.exports = router;
+// router.get("/", async (req, res, next) => {
+//   try {
+//     const posts = await Post.findAll({
+//       include: {
+//         model: User,
+//         attributes: ["id"],
+//       },
+//       order: [["createdAt", "DESC"]],
+//     });
+//     res.render("main", {
+//       title: "collusic",
+//       twits: posts,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     next(err);
+//   }
+// });
 
-// router.get("/user/refresh", userController);
 // router.get("/mypage", isLoggedIn, async (req, res, next) => {
 //   try {
 //     const myinfo = await User.findOne({

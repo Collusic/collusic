@@ -19,11 +19,11 @@ module.exports = class Post extends Sequelize.Model {
         },
         state: {
           type: Sequelize.BOOLEAN,
-          allowNull: false,
+          allowNull: true,
         },
         field_free: {
           type: Sequelize.BOOLEAN,
-          allowNull: false,
+          allowNull: true,
         },
         lyrics_text: {
           type: Sequelize.TEXT,
