@@ -30,6 +30,30 @@ const createProjectAPI = async (req, res) => {
     });
   }
 };
+
+const mainInfoAPI = async (req, res) => {
+  try {
+    const maininfo = await Post.findAll({
+      attributes: [
+        "uid",
+        "title",
+        "field_free",
+        "music_field",
+        "lyrics_field",
+        "instrument_field",
+        "genre",
+        "mood",
+        "audioFile",
+      ],
+    });
+    res.status(200).json({
+      maininfo,
+    });
+  } catch (err) {
+    res.status(400).json({ error: err });
+  }
+};
 module.exports = {
   createProjectAPI: createProjectAPI,
+  mainInfoAPI: mainInfoAPI,
 };

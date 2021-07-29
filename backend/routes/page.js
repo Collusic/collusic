@@ -7,22 +7,16 @@ const {
 } = require("./middlewares");
 //const { Post, User } = require("../models");
 const router = express.Router();
-//const mypageController = require("../controllers/mypage");
+const mypageController = require("../controllers/mypage");
 const requestProjectController = require("../controllers/requestProjects");
-// router.use((req, res, next) => {
-//   res.locals.user = req.user;
-//   res.locals.followerCount = 0;
-//   res.locals.followingCount = 0;
-//   res.locals.followerIdList = [];
-//   next();
-// });
-//router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
+const { request } = require("express");
+router.get("/mypage", isLoggedIn, mypageController.readMyPageAPI);
 router.post(
   "/requestProjects",
   upload.single("data"),
   requestProjectController.createProjectAPI
 );
-
+router.get("/main", isLoggedIn, requestProjectController.mainInfoAPI);
 module.exports = router;
 // router.get("/", async (req, res, next) => {
 //   try {
@@ -83,5 +77,3 @@ module.exports = router;
 //     next(err);
 //   }
 // });
-
-module.exports = router;
