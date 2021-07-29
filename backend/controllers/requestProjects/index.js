@@ -54,15 +54,16 @@ const createProjectAPI = async (req, res) => {
 const mainInfoAPI = async (req, res) => {
   const maininfo = await Post.findAll({
     attributes: [
-      "uid",
+      "email",
+      "pid",
       "title",
-      "field_free",
       "music_field",
       "lyrics_field",
       "instrument_field",
       "genre",
       "mood",
       "audioFile",
+      "lyrics_text",
     ],
   });
   if (!maininfo) {
@@ -74,18 +75,19 @@ const mainInfoAPI = async (req, res) => {
   }
 };
 
-const commentsAPI = async (res, req, next) => {
+const commentsAPI = async (req, res, next) => {
+  let id = req.params.id;
   try {
     const comments = await Comment.findAll({
       include: {
         model: Post,
-        where: { id: req.params.id },
+        where: { id: id },
       },
     });
     const project = await Post.findAll({
-      where: { id: req.params.id },
+      where: { id: id },
     });
-    res.json(comments, project);
+    res.status(200).json({ comments, project });
   } catch (err) {
     next(err);
   }
