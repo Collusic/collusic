@@ -12,17 +12,9 @@ import { Icon } from "@iconify/react";
 import playCircle from "@iconify-icons/mdi/play-circle";
 import pauseCircle from "@iconify-icons/mdi/pause-circle";
 import useLastLocationHistory from "lib/history";
+import API from "data/http/axios/api";
 
 const text = "Preview Lrics,";
-
-// const readRequestProjects = async () => {
-//   try {
-//     const { data } = await API.get("/req-projects");
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 function Project() {
   const setHistory = useLastLocationHistory();
@@ -31,22 +23,20 @@ function Project() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const readRequestProjects = async () => {
       try {
         setError(null);
         setProjects(null);
         setLoading(true);
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        setProjects(response.data);
+        const { data } = await API.get("/users");
+        setProjects(data);
       } catch (error) {
         setError(error);
       }
       setLoading(false);
     };
 
-    fetchProjects();
+    readRequestProjects();
   }, []);
 
   if (loading) return <div>로딩중...</div>;
