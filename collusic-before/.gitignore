@@ -1,0 +1,8 @@
+package-lock.json
+node_modules/**/package.json
+package.json
+project/
+node_modules/
+node_modules/**/*.json
+*.json
+body-parser/
